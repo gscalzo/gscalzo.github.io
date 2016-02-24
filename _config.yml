@@ -9,7 +9,8 @@
 title: The Coding Life With Giordano Scalzo
 email: giordano.scalzo@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  Swift and Objective-C, rants, thoughts, and how to add magic into your apps, from a seasoned code wizard.
+  Swift and Objective-C code, rants, thoughts, and how to add magic into your apps, 
+  from the author of "Swift By Example" and "Swift 2 By Example".
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://giordanoscalzo.com" # the base hostname & protocol for your site
 twitter_username: giordanoscalzo
