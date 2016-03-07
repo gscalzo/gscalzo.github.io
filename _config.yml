@@ -1,20 +1,50 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely need to edit after that.
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'jekyll serve'. If you change this file, please restart the server process.
 
-# Site settings
-title: The Coding Life With Giordano Scalzo
-email: giordano.scalzo@gmail.com
+# Syntax highlighting
+markdown:            redcarpet
+highlighter:         pygments
+
+# Permalinks
+permalink:           /:title/
+relative_permalinks: false
+
+# Setup
+timezone:            Europe/London # eg. Asia/Kathmandu
+locale:              en_uk # eg. en_us
+name:                The Coding Life
+title:               The life and opinions of an Effective Software Developer
+tagline:             'The life and opinions of an Effective Software Developer'
 description: > # this means to ignore newlines until "baseurl:"
   Swift and Objective-C code, rants, thoughts, and how to add magic into your apps, 
   from the author of "Swift By Example" and "Swift 2 By Example".
-baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://giordanoscalzo.com" # the base hostname & protocol for your site
-twitter_username: giordanoscalzo
-github_username:  gscalzo
+rss:                 "http://giordanoscalzo.com/feed.xml"
+baseurl:             '/'
+baseurl_posts_img:   '/assets/images/posts/'
+baseurl_featured_img: '/assets/images/hero/'
+baseurl_featured_thumbnail: '/assets/images/thumbnail/'
+baseurl_javascripts: '/assets/javascripts/'
+icon:                your site icon path # /assets/img/icon.png [best 300px X 300px]
+disqus:              giordanoscalzocomblog # get it on https://disqus.com/admin/
 
-# Build settings
-markdown: kramdown
+author:
+  name:              Giordano
+  url:               "http://giordanoscalzo.com"
+  twitter:           giordanoscalzo
+  github:            gscalzo
+  linkedin:          giordanoscalzo
+
+fb_admins:           ''
+fb_appid:            ''
+
+# Server
+destination:         ./_site
+exclude:             [".editorconfig", ".gitignore", "bower.json", "composer.json", "CONTRIBUTING.md", "CNAME", "LICENSE", "Gruntfile.js", "package.json", "node_modules", "README.md", "sass", "haml"]
+port:                9001
+
+defaults:
+  -
+    scope:
+      path: "_posts"
+      type: "posts"
+    values:
+      layout: "default"

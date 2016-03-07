@@ -1,38 +1,19 @@
-<footer class="site-footer">
-
-  <div class="wrapper">
-
-    <h2 class="footer-heading">{{ site.title }}</h2>
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li>{{ site.title }}</li>
-          <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col footer-col-2">
-        <ul class="social-media-list">
-          {% if site.github_username %}
-          <li>
-            {% include icon-github.html username=site.github_username %}
-          </li>
-          {% endif %}
-
-          {% if site.twitter_username %}
-          <li>
-            {% include icon-twitter.html username=site.twitter_username %}
-          </li>
-          {% endif %}
-        </ul>
-      </div>
-
-      <div class="footer-col footer-col-3">
-        <p>{{ site.description }}</p>
-      </div>
+<footer class="section--footer">
+  <div class="container container--content">
+    <div>
+      <a href="{{ site.baseurl }}humans.txt">Hand-crafted</a> by <a href="{{ site.baseurl }}about/">Your Name</a>
     </div>
-
+    <ul class="socialAccountList">
+      <li><a href="http://twitter.com/{{ site.author.twitter }}" class="socialAccount socialAccount--twitter" target="_blank"></a></li>
+      <li><a href="http://facebook.com/{{ site.author.facebook }}" class="socialAccount socialAccount--facebook" target="_blank"></a></li>
+      <li><a href="http://www.linkedin.com/in/{{ site.author.linkedin }}" class="socialAccount socialAccount--linkedin" target="_blank"></a></li>
+      <li><a href="http://dribbble.com/{{ site.author.dribble }}" class="socialAccount socialAccount--dribbble" target="_blank"></a></li>
+      <li><a href="https://www.pinterest.com/{{ site.author.pinterest }}/" class="socialAccount socialAccount--pinterest" target="_blank"></a></li>
+      <li><a href="http://www.kiva.org/lender/{{ site.author.kiva }}" class="socialAccount socialAccount--kiva" target="_blank"></a></li>
+      <li><a href="{{ site.rss }}" class="socialAccount socialAccount--rss" target="_blank"></a></li>
+    </ul>
+    <div>
+      © 2016 All Rights Reserved. Powered by the <a href="https://github.com/vincentchan/mickey" target="_blank">Mickey theme</a> for Jekyll.
+    </div>
   </div>
-  {% include google_analytics.html %}
 </footer>
