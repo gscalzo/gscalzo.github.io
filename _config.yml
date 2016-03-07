@@ -10,7 +10,7 @@ relative_permalinks: false
 # Setup
 timezone:            Europe/London # eg. Asia/Kathmandu
 locale:              en_uk # eg. en_us
-name:                The Coding Life
+name:                Effective Coding Life
 title:               The life and opinions of an Effective Software Developer
 tagline:             'The life and opinions of an Effective Software Developer'
 description: > # this means to ignore newlines until "baseurl:"

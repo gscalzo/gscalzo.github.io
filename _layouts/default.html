@@ -17,6 +17,12 @@
     {% endif %}
 
     {% if page.url == '/index.html' %}
+      {% include subscribe.html %}
+      {% include footer.html %}
+    {% endif %}
+
+    {% if page.url == '/' %}
+      {% include subscribe.html %}
       {% include footer.html %}
     {% endif %}
 
