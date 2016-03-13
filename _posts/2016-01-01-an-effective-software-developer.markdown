@@ -7,7 +7,7 @@ excerpt: "Giordano Scalzo is a software developer with more than 20 years of exp
 categories: personal
 tags:  personal
 image:
-  feature: spinning-cover.jpg
+  feature: giordanoscalzo-cover.jpg
   topPosition: 0px
 bgContrast: dark
 bgGradientOpacity: darker

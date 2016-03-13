@@ -417,7 +417,7 @@ hr {
 }
 
 .container--content {
-  max-width: 700px;
+  max-width: 1000px;
 }
 
 .is-darkBackgrounded,
@@ -432,6 +432,15 @@ hr {
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+}
+
+.img--post {
+  margin-top: 1.5rem;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 75%;
+  background-size: contain;
+  border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .img--fullContainer img {
@@ -524,12 +533,11 @@ body {
   background-repeat: no-repeat;
   background-position: 0 0;
   padding: 0;
-  text-indent: -100em;
   overflow: hidden;
 }
 
 .textLogo--white {
-  background-image: url(../images/logo-text-white.svg);
+  color: white;
 }
 
 .textLogo--sidebar {
@@ -2892,4 +2900,11 @@ body {
   .hidden-print {
     display: none !important;
   }
+}
+
+.gist pre,
+.gist code {
+  font: inherit;
+  font-size: 20px;
+  white-space: pre;
 }
