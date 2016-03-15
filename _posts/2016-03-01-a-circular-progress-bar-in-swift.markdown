@@ -1,13 +1,13 @@
 ---
 layout: post
 title:  "Facebook Music Stories Spinning Artwork Teardown 1/2: circular progress bar"
-date:   2016-03-01 01:00:00
-last_modified_at:  2016-03-01 01:00:00
+date:   2016-03-15 01:00:00
+last_modified_at:  2016-03-15 01:00:00
 excerpt: "Facebook Music Stories has a nice spinning artwork effect when the song plays, let see how to implement it..."
 categories: tutorial
 tags:  swift tutorial teardown facebook
 image:
-  feature: circle_progress.jpg
+  feature: 02_circular_progress_bar.jpg
   topPosition: 0px
 bgContrast: dark
 bgGradientOpacity: darker
@@ -29,8 +29,6 @@ As said, we'll concentrate in this post to haves a basic app to host the animati
 <iframe width="853" height="480" src="https://www.youtube.com/embed/_m7gi1wOlgs" frameborder="0" allowfullscreen></iframe>
 As you can see in the video above, the play buttons becomes a pause button and a circular progress grows as the song plays.
 
-##Plan
-//GIO: define the steps we want to do
 ##Blueprint
 ###Project Setup
 Let's fire up Xcode and create a new project using the template #Single View Application#:
@@ -199,16 +197,227 @@ Now the artwork is visible in the storyboard as well.
 
 ### Play and Pause
 Let's move on and make the button changing when we tap on the view.
+First of all we add the _IBAction_ in the _SpinningArtwork_ class:
 
+{% highlight swift %}
+@IBDesignable
+class SpinnableArtwork: UIView {
+    //...    
+    private var playing = false {
+        didSet {
+            updateUI()
+        }
+    }
+    
+    @IBAction func artworkDidTap(sender: AnyObject) {
+        playing = !playing
+    }
+    //...
+}
+{% endhighlight %}
+Where the private function _updateUI()_  changes the image in the button:
+{% highlight swift %}
+private extension SpinnableArtwork {
+    func setup() {
+        //...
+        updateUI()
+    }
+    //...
+    func updateUI() {
+        if playing {
+            playerButton.image = UIImage(named: "large_pause")
+        } else {
+            playerButton.image = UIImage(named: "large_play")
+        }
+    }
+}
+{% endhighlight %}
 
+As you can see we have also added a call to _updateUI()_ during the setup, so that the player button is correctly initialized.
+Finally, we add a _TapGesture_ and we connect the action to the function _artworkDidTap_:
+<div class="img--post img--10xLeading" style="background-image: url({{ site.baseurl_posts_img }}/2016-03-01/21_TapGesture.png);">    
+</div>
 
+##Player
+A play/pause button is quite useless, so that let's implement a Fake Player that just update the progress every second.
+To be ready to use a real player, we define a protocol _Player_:
+{% highlight swift %}
+protocol Player {
+    func play()
+    func stop()
+}
+{% endhighlight %}
 
+We define also a protocol for every object interest in receiving the progress of the player:
+{% highlight swift %}
+protocol PlayerObserver: class {
+    func progress(progress: Int)
+}
+{% endhighlight %}
 
+Finally, let's implement a Fake Player:
+{% highlight swift %}
+class FakePlayer: Player {
+    private var timer: NSTimer!
+    private var progress = 0
+    weak var playerObserver: PlayerObserver?
 
+    func play() {
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.5,
+            target: self,
+            selector: Selector("timerDidFire"),
+            userInfo: nil,
+            repeats: true)
+        progress = 0
+    }
+    
+    func stop() {
+        timer.invalidate()
+    }
+    
+    @objc func timerDidFire() {
+        progress += 1
+        if progress > 100 {
+            timer.invalidate()
+            return
+        }
+        
+        playerObserver?.progress(progress)
+    }
+}
+{% endhighlight %}
 
+The _SpinnableArtwork_, being interested in the progress of the player, must implement the observer protocol:
+{% highlight swift %}
+extension SpinnableArtwork: PlayerObserver {
+    func progress(progress: Int){
+        print("Progress: \(progress)")
+    }
+}
+{% endhighlight %}
 
+To be able to play and stop the player, we add a player property, and we change the tap action:
+{% highlight swift %}
+@IBDesignable
+class SpinnableArtwork: UIView {
+    //...
+    var player: Player?
+    
+    @IBAction func artworkDidTap(sender: AnyObject) {
+        if playing {
+            player?.stop()
+        } else {
+            player?.play()
+        }
+        playing = !playing
+    }
+    //...
+}
+{% endhighlight %}
 
+In the _SpinningArtworkViewController_ we create a outlet to connect the view in the storyboard, and we set the player in it:
+{% highlight swift %}
+class SpinningArtworkViewController: UIViewController {
+    @IBOutlet var spinnableArtwork: SpinnableArtwork! {
+        didSet {
+            let player = FakePlayer()
+            player.playerObserver = spinnableArtwork
+            spinnableArtwork.player = player
+        }
+    }
+}
+{% endhighlight %}
 
+Running the app, we can see that tapping on the cover, the button changes and the progress appears in the Xcode console:
+<div class="img--post img--10xLeading" style="background-image: url({{ site.baseurl_posts_img }}/2016-03-01/22_ProgressConsole.png);">    
+</div>
 
+##Circular Progress Bar
+FInally, we are set everything for the grand finale.
+Most important class of this first part of the project is the _ProgressLayer_, which is a full circle Shape Layer, and it exposes a _progress()_ function that draws the percentage of the circle, being 0 at the beginning and 100 at the end:
+{% highlight swift %}
+import UIKit
 
+class ProgressLayer: CAShapeLayer {
+    private struct Constants {
+        static let startAngle = -CGFloat(M_PI_2)
+        static let endAngle: CGFloat = CGFloat(2*M_PI) + startAngle
+    }
+    
+    func computePath(rect: CGRect) {
+        strokeColor = UIColor.whiteColor().CGColor
+        lineWidth = 8
+        lineCap = kCALineCapButt;
+        strokeEnd = 0.00;
+        fillColor = UIColor.clearColor().CGColor
+        
+        let side = rect.width / 2.0
+        let radius = side - lineWidth
+        
+        let path = CGPathCreateMutable()
+        CGPathAddArc(path, nil, side, side, radius, Constants.startAngle, Constants.endAngle, false)
+        self.path = path
+    }
+    
+    func progress(progress: Int) {
+        if strokeEnd >= 1 {
+            strokeStart = (CGFloat(progress)-1)/100.0
+        } else {
+            strokeStart = 0
+        }
+        
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.duration = 0.5
+        animation.fillMode = kCAFillModeForwards
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animation.removedOnCompletion = false
+        strokeEnd = CGFloat(progress)/100.0
 
+        addAnimation(animation, forKey: "strokeEnd animation")
+    }
+}
+{% endhighlight %}
+
+Actually, the code is straightforward.
+Probably the only notable thing is the calculation of the initial and final angle: being the starting angle of a arc in iOS at the right horizontal, and we want to make it start at the central vertical, we need the subtract PI/2.
+
+We then set this layer as the default layer in the _PlayerButton_:
+
+{% highlight swift %}
+class PlayerButton: UIImageView {
+    override class func layerClass() -> AnyClass {
+        return ProgressLayer.self
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        (layer as! ProgressLayer).computePath(bounds)
+    }
+}
+
+extension PlayerButton: PlayerObserver {
+    func progress(progress: Int){
+        (layer as! ProgressLayer).progress(progress)
+    }
+}
+{% endhighlight %}
+
+In the _SpinnableArtwork_ we just need to call the progress function in the playable button:
+{% highlight swift %}
+extension SpinnableArtwork: PlayerObserver {
+    func progress(progress: Int){
+        print("Progress: \(progress)")
+        playerButton.progress(progress)
+    }
+}
+{% endhighlight %}
+
+Et Voilà, we implemented a Circular Progress Bar!
+
+<div class="img--post img--10xLeading" style="background-image: url({{ site.baseurl_posts_img }}/2016-03-01/23_CircularProgressBar.png);">    
+</div>
+
+##Conclusions
+The post was longer than I thought, but it permits to have a clear idea on how to build an interactive custom component.
+We saw how to have a _Designable View_, how implement a layer, and how to animate it.
+The code for this part can be found [here on Github](https://github.com/gscalzo/SpinnigArtwork/tree/CircularProgressBar) 
