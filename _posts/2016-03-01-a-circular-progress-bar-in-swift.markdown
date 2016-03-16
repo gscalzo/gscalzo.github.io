@@ -19,15 +19,15 @@ Few months ago Facebook implemented the feature of sharing a song from an extern
 </div>
 [Facebook Music Stories article on 9TO5Mac](http://9to5mac.com/2015/11/05/facebook-iphone-apple-music-spotify-music-stories/)
 
-Leaving aside all the considerations about what it could mean for sharing music, the thing I liked the most was the smooth animation that transform the artwork in a spinning record-like; also the button presents a circular progress bar to indicate the progress of the song. 
+Leaving aside all the considerations about what it could mean for sharing music, the thing I liked the most was the smooth animation that transforms the artwork in a spinning record-like; also, the button presents a circular progress bar to indicate the progress of the song. 
 
 ##Goal
-We want to replicate in full the Facebook Music Stories animation, and, because it would be too long do it in the same tutorial, we'll split in two blog posts: in the current one we'll implement the skeleton of the app and the circular progress bar, in the next one we'll implement the transformation into a blurred spinning record and back.
+We want to replicate in full the Facebook Music Stories animation, and, because it would be too long do it in the same tutorial, we'll split into two blog posts: in the current one we'll implement the skeleton of the app and the circular progress bar, in the next one we'll implement the transformation into a blurred spinning record and back.
 
 ##Observations
 As said, we'll concentrate in this post to haves a basic app to host the animation and to implement the progress bar.
 <iframe width="853" height="480" src="https://www.youtube.com/embed/_m7gi1wOlgs" frameborder="0" allowfullscreen></iframe>
-As you can see in the video above, the play buttons becomes a pause button and a circular progress grows as the song plays.
+As you can see in the video above, the play buttons become a pause button and a circular progress grows as the song plays.
 
 ##Blueprint
 ###Project Setup
@@ -63,11 +63,11 @@ For the button assets, because they are _pdf_ they can be automatically resized 
 
 ### Blurred Background
 Although not completely related to the component we want to implement, having a blurred background behind the artwork gives an idea of completeness to our example, and it reminds the original component from Facebook.
-Let's start adding an _UIImageView_ as subview of the main view in the Storyboard, and adding the constraints to the it.
+Let's start adding a _UIImageView_ as  a subview of the main view in the Storyboard, and then we configure the constraints to make it big as the mainview.
 The process is quite straightforward, but notably don't forget to:
 
 - add _AbbeyRoadArtwork_ as _Image_ of the _UIImageView_
-- select _Aspect Fill_ in the view mode, otherwise the image will be stretched
+- select _Aspect Fill_ in the view mode, otherwise, the image will be stretched
 - uncheck _Constrain to margins_ to have the image covering the whole _View_
 - add 0 to all of the boundary constraints
 - select _Update Frames: Items of new Constraints_, so that the view in _Interface Builder_ will be updated accordingly to the new layout
@@ -86,10 +86,10 @@ Running the app we have a nice blurred background effect:
 </div>
 
 ### Spinnable Artwork
-Having finally a skeleton of app, let's implement a custom view for our component.
-To make more interesting, we'll make it as _Designable_, which means that it can be seen in Interfece Builder.
+Having finally a skeleton of the app, let's implement a custom view for our component.
+To make more interesting, we'll make it as _Designable_, which means that it can be seen in Interface Builder.
 To make it designable, we need to prepend the keyword _@IBDesignable_ to the class, and because we want to be able to set the image of the artwork interactively in Interface Builder, we create a property _imageName_ and we decorate it with _@IBInspectable_.
-Usually designable means that the view has a way to draw itself in the code, but it can be also be defined using a _nib_ file: to do this, we need to add a view as subview of custom view itself and add some magic to load the class from the _nib_.
+Usually designable means that the view has a way to draw itself in the code, but it can be also be defined using a _nib_ file: to do this, we need to add a view as a subview of custom view itself and add some magic to load the class from the _nib_.
 The following is the public interface of the class:
 
 {% highlight swift %}
@@ -146,7 +146,7 @@ private extension SpinnableArtwork {
 }
 {% endhighlight %}
 
-As you can imaging from the previous code, we need to create a _nib_ file with the same name as the class: _SpinnableArtwork_ in this case.
+As you can imagine from the previous code, we need to create a _nib_ file with the same name as the class: _SpinnableArtwork_ in this case.
 In _Interface Builder_ we then set the _File's Owner_ as the class we have just created:
 <div class="img--post img--5xLeading" style="background-image: url({{ site.baseurl_posts_img }}/2016-03-01/14_NibFileOwner.png);">    
 </div>
@@ -181,7 +181,7 @@ After selecting the _Spinnable Artwork_ as custom class, we can see in the _Attr
 Setting _"AbbeyRoadArtwork"_ as value and running the app, we can see that our new component works as expected.
 However, wasn't _IBDesignable_ supposed to show in the Storyboard?
 Why we still have a white view?
-This is because when the app runs, the image is get from the main bundle, but when the app runs inside _Interface Builder_, it runs in a different bundle.
+This is because when the app runs, the image is retrieved from the main bundle, but when the app runs inside _Interface Builder_, the bundle is different and the image is not found.
 To make it appear in the storyboard we need to add a function int he _SpinnableArtwork_ class, to prepare the view for the storyboard:
 {% highlight swift %}
 extension SpinnableArtwork {
@@ -197,7 +197,7 @@ Now the artwork is visible in the storyboard as well.
 
 ### Play and Pause
 Let's move on and make the button changing when we tap on the view.
-First of all we add the _IBAction_ in the _SpinningArtwork_ class:
+First of all, we add the _IBAction_ in the _SpinningArtwork_ class:
 
 {% highlight swift %}
 @IBDesignable
@@ -315,7 +315,7 @@ class SpinnableArtwork: UIView {
 }
 {% endhighlight %}
 
-In the _SpinningArtworkViewController_ we create a outlet to connect the view in the storyboard, and we set the player in it:
+In the _SpinningArtworkViewController_ we create an outlet to connect the view in the storyboard, and we set the player in it:
 {% highlight swift %}
 class SpinningArtworkViewController: UIViewController {
     @IBOutlet var spinnableArtwork: SpinnableArtwork! {
@@ -333,7 +333,7 @@ Running the app, we can see that tapping on the cover, the button changes and th
 </div>
 
 ##Circular Progress Bar
-FInally, we are set everything for the grand finale.
+Finally, we are set everything for the grand finale.
 Most important class of this first part of the project is the _ProgressLayer_, which is a full circle Shape Layer, and it exposes a _progress()_ function that draws the percentage of the circle, being 0 at the beginning and 100 at the end:
 {% highlight swift %}
 import UIKit
@@ -379,7 +379,7 @@ class ProgressLayer: CAShapeLayer {
 {% endhighlight %}
 
 Actually, the code is straightforward.
-Probably the only notable thing is the calculation of the initial and final angle: being the starting angle of a arc in iOS at the right horizontal, and we want to make it start at the central vertical, we need the subtract PI/2.
+Probably the only notable thing is the calculation of the initial and final angle: being the starting angle of an arc in iOS at the right horizontal, and we want to make it start at the central vertical, we need the subtract PI/2.
 
 We then set this layer as the default layer in the _PlayerButton_:
 
@@ -419,5 +419,5 @@ Et Voilà, we implemented a Circular Progress Bar!
 
 ##Conclusions
 The post was longer than I thought, but it permits to have a clear idea on how to build an interactive custom component.
-We saw how to have a _Designable View_, how implement a layer, and how to animate it.
+We saw how to have a _Designable View_, how to implement a layer, and how to animate it.
 The code for this part can be found [here on Github](https://github.com/gscalzo/SpinnigArtwork/tree/CircularProgressBar) 
