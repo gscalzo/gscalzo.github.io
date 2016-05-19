@@ -21,17 +21,18 @@ Few months ago Facebook implemented the feature of sharing a song from an extern
 
 Leaving aside all the considerations about what it could mean for sharing music, the thing I liked the most was the smooth animation that transforms the artwork in a spinning record-like; also, the button presents a circular progress bar to indicate the progress of the song. 
 
-##Goal
+## Goal
 We want to replicate in full the Facebook Music Stories animation, and, because it would be too long do it in the same tutorial, we'll split into two blog posts: in the current one we'll implement the skeleton of the app and the circular progress bar, in the next one we'll implement the transformation into a blurred spinning record and back.
 
-##Observations
+## Observations
 As said, we'll concentrate in this post to haves a basic app to host the animation and to implement the progress bar.
 <iframe width="853" height="480" src="https://www.youtube.com/embed/_m7gi1wOlgs" frameborder="0" allowfullscreen></iframe>
 As you can see in the video above, the play buttons become a pause button and a circular progress grows as the song plays.
 
-##Blueprint
-###Project Setup
-Let's fire up Xcode and create a new project using the template #Single View Application#:
+## Blueprint
+
+### Project Setup
+Let's fire up Xcode and create a new project using the template **Single View Application**:
 <div class="img--post img--12xLeading" style="background-image: url({{ site.baseurl_posts_img }}/2016-03-01/01_ProjectTemplate.png);">    
 </div>
 After that we give the name, *SpinningArtwork* or whatever you want, without forgetting to select _Swift_ as language:
@@ -46,7 +47,7 @@ To make it clearer, let's rename it as *SpinningArtworkViewController*, and chan
 </div>
 <div class="img--post img--12xLeading" style="background-image: url({{ site.baseurl_posts_img }}/2016-03-01/05_NewViewControllerInStoryboard.png);">    
 </div>
-###Assets
+### Assets
 
 Let's now add the assets to the project: download the zip from [here]({{ site.baseurl_posts_img }}/2016-03-01/Resources/Assets.zip)
 After selecting the _Assets_:
@@ -161,7 +162,7 @@ class PlayerButton: UIImageView {
 {% endhighlight %}
 This will change the image from _play_ to _pause_ and it will contain the circular progress bar.
 
-As you can see in the following image, the custom view is composed by a container view, which is loaded in the _setup()__ function in the code, a full screen image that contains the artwork, and the _Player Button_ in the center:
+As you can see in the following image, the custom view is composed by a container view, which is loaded in the **setup()** function in the code, a full screen image that contains the artwork, and the _Player Button_ in the center:
 <div class="img--post img--10xLeading" style="background-image: url({{ site.baseurl_posts_img }}/2016-03-01/15_SpinningArtworkNib.png);">    
 </div>
 The constraints are really simple: basically all the view are centered in the parent view, and the size is equal to the parent for the container and the artwork image view, and smaller for the button:
@@ -238,7 +239,7 @@ Finally, we add a _TapGesture_ and we connect the action to the function _artwor
 <div class="img--post img--10xLeading" style="background-image: url({{ site.baseurl_posts_img }}/2016-03-01/21_TapGesture.png);">    
 </div>
 
-##Player
+## Player
 A play/pause button is quite useless, so that let's implement a Fake Player that just update the progress every second.
 To be ready to use a real player, we define a protocol _Player_:
 {% highlight swift %}
@@ -332,7 +333,7 @@ Running the app, we can see that tapping on the cover, the button changes and th
 <div class="img--post img--10xLeading" style="background-image: url({{ site.baseurl_posts_img }}/2016-03-01/22_ProgressConsole.png);">    
 </div>
 
-##Circular Progress Bar
+## Circular Progress Bar
 Finally, we are set everything for the grand finale.
 Most important class of this first part of the project is the _ProgressLayer_, which is a full circle Shape Layer, and it exposes a _progress()_ function that draws the percentage of the circle, being 0 at the beginning and 100 at the end:
 {% highlight swift %}
@@ -417,7 +418,7 @@ Et Voilà, we implemented a Circular Progress Bar!
 <div class="img--post img--10xLeading" style="background-image: url({{ site.baseurl_posts_img }}/2016-03-01/23_CircularProgressBar.png);">    
 </div>
 
-##Conclusions
+## Conclusions
 The post was longer than I thought, but it permits to have a clear idea on how to build an interactive custom component.
 We saw how to have a _Designable View_, how to implement a layer, and how to animate it.
 The code for this part can be found [here on Github](https://github.com/gscalzo/SpinnigArtwork/tree/CircularProgressBar) 
