@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Implementing a spinning cover like in Facebook Music"
-date:   2027-04-01 12:00:00
-last_modified_at:  2027-04-01 13:00:00
+date:   2037-04-01 12:00:00
+last_modified_at:  2037-04-01 13:00:00
 excerpt: "Walter Elias Disney was an American entrepreneur, cartoonist, animator, voice actor, and film producer. As a prominent..."
 categories: history
 tags:  swift tutorial
