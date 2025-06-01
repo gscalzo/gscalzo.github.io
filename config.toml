@@ -1,6 +1,6 @@
-baseURL = "https://gscalzo.github.io/"
+baseURL = "https://gio.rocks/"
 languageCode = "en-us"
-title = "Gio Rocks!"
+title = "Gio's Digital Garden"
 theme = "paper"
 
 [[menu.main]]
@@ -22,3 +22,8 @@ theme = "paper"
   name = "Blog"
   url = "/blog/"
   weight = 4
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
