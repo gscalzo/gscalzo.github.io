@@ -28,6 +28,4 @@ Check out some of my recent projects.
 ### Contact
 **Email:** giordano.scalzo at gmail dot com
 
-**Find me on:**  
-[LinkedIn](https://www.linkedin.com/in/giordanoscalzo/)  
-[GitHub](https://github.com/gscalzo) 
+**Find me on:**  [LinkedIn](https://www.linkedin.com/in/giordanoscalzo/)  |  [GitHub](https://github.com/gscalzo) 
