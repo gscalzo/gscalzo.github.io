@@ -16,12 +16,12 @@ draft = false
 ---
 
 ### About Me
-I'm a bah blah blah
+I am passionate about programming as a form of building that allows me to express my creativity and solve real-world problems. As a writer and speaker, I enjoy sharing knowledge and insights with the community. My expertise lies in mobile technologies, and I am deeply interested in artificial intelligence and the rapid evolution it is driving across industries.
 
 ---
 
 ### Projects
-Check out some of my recent projects.
+My recent projects on Mobile and AI. [View projects &rarr;](/projects/)
 
 ---
 
