@@ -20,6 +20,11 @@ I am passionate about programming as a form of building that allows me to expres
 
 ---
 
+### Books
+I wrote several books  Mobile, specifically on Swift and SwiftUI. [View books &rarr;](/books/)
+
+---
+
 ### Projects
 My recent projects on Mobile and AI. [View projects &rarr;](/projects/)
 

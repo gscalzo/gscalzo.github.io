@@ -1,6 +1,6 @@
 baseURL = "https://gio.rocks/"
 languageCode = "en-us"
-title = "Gio's Digital Garden"
+title = "Gio Scalzo"
 theme = "paper"
 
 [[menu.main]]
