@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Gio Scalzo</title><link>https://gscalzo.github.io/</link><description>Recent content on Gio Scalzo</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 01 Jun 2025 20:56:40 +0100</lastBuildDate><atom:link href="https://gscalzo.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Books by Gio Scalzo</title><link>https://gscalzo.github.io/books/</link><pubDate>Sun, 01 Jun 2025 20:56:40 +0100</pubDate><guid>https://gscalzo.github.io/books/</guid><description>&lt;style>
+.book-card-title {
+ font-size: 1.5rem;
+ font-weight: bold;
+ margin: 2.5rem 0 0.5rem 0;
+}
+.book-card-desc {
+ margin-bottom: 1rem;
+}
+.book-card {
+ display: flex;
+ align-items: flex-start;
+ gap: 2rem;
+}
+.book-card:last-child {
+ border-bottom: none;
+}
+.book-card-info {
+ flex: 1;
+ min-width: 0;
+ margin-top: 0;
+ display: flex;
+ flex-direction: column;
+ justify-content: flex-start;
+}
+.book-cover {
+ max-width: 220px;
+ height: auto;
+ box-shadow: 0 4px 16px rgba(0,0,0,0.18), 0 1.5px 6px rgba(0,0,0,0.12);
+ border-radius: 4px;
+ display: block;
+ margin-top: 0;
+}
+&lt;/style>
+&lt;p>It all started when I was watching WWDC 2014 at NSLondon.
+Apple presented Swift and I was shocked.&lt;/p></description></item><item><title>My First Post</title><link>https://gscalzo.github.io/posts/my-first-post/</link><pubDate>Sun, 01 Jun 2025 20:46:52 +0100</pubDate><guid>https://gscalzo.github.io/posts/my-first-post/</guid><description/></item><item><title>Projects</title><link>https://gscalzo.github.io/projects/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://gscalzo.github.io/projects/</guid><description>&lt;h1 id="projects">Projects&lt;/h1>
+&lt;ul>
+&lt;li>&lt;strong>Project Alpha&lt;/strong>: Description coming soon&lt;/li>
+&lt;li>&lt;strong>Project Beta&lt;/strong>: Description coming soon&lt;/li>
+&lt;li>&lt;strong>Project Gamma&lt;/strong>: Description coming soon&lt;/li>
+&lt;/ul></description></item></channel></rss>
