@@ -23,6 +23,11 @@ theme = "paper"
   url = "/blog/"
   weight = 4
 
+[params]
+  github = "gscalzo"
+  linkedin = "giordanoscalzo"
+  twitter = "giordanoscalzo"
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]

@@ -3,6 +3,7 @@ title = "Demystifying AI Coding Agents in Swift"
 date = 2025-10-25T00:00:00+01:00
 draft = false
 tags = ["Swift", "AI", "LLM", "Coding Agents", "OpenAI"]
+description = "Learn how to build your own AI coding agent in Swift. Discover the simple concepts behind tools like Claude Code and Cursor—it's just a loop, some tools, and a language model with opinions."
 +++
 
 ## The Magic Trick That Isn't Magic
@@ -616,27 +617,3 @@ Add a final call-to-action graphic here. Maybe something like:
 
 Keep it on-brand and inviting.
 </GIO_PLACEHOLDER>
-
----
-
-## Social Media Preview
-
-**Title:** Demystifying AI Coding Agents in Swift
-
-**Description:** Ever wondered how AI coding assistants like Claude Code or Cursor actually work? I built a real AI agent in Swift to show you. Spoiler: it's simpler than you think—just a loop, some tools, and a language model with opinions.
-
-In this post, you'll learn:
-- What context windows are and why they matter
-- How agents use tools without being explicitly programmed
-- Why your AI assistant sometimes "forgets" things
-- How to build your own agent in ~300 lines of Swift
-
-No fluff, no magic—just practical code and clear explanations. Perfect for iOS developers curious about AI or anyone wanting to understand how these tools really work under the hood.
-
-Full source code included on GitHub!
-
-**Hashtags for Twitter:** #Swift #AI #LLM #CodingAgents #OpenAI #iOSDev #MachineLearning
-
-**Hashtags for LinkedIn:** #ArtificialIntelligence #SwiftProgramming #SoftwareDevelopment #AIAgents #LLM #TechEducation
-
-**Image suggestion:** Use the hero image (robot reading Swift code) or the architecture diagram for the social preview.
