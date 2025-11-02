@@ -2,6 +2,7 @@ baseURL = "https://gscalzo.github.io/"
 languageCode = "en-us"
 title = "Gio Scalzo"
 theme = "paper"
+googleAnalytics = "G-B6YT2W23QZ"
 
 [[menu.main]]
   name = "Home"
