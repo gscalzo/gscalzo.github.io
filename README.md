@@ -11,6 +11,7 @@ This is a personal blog website built with [Hugo](https://gohugo.io/), a fast an
 - **Theme**: [Paper](https://github.com/nanxiaobei/hugo-paper) - A simple and clean Hugo theme
 - **Hosting**: GitHub Pages
 
+
 ## 📁 Project Structure
 
 ```
