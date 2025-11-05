@@ -9,10 +9,10 @@ googleAnalytics = "G-B6YT2W23QZ"
   url = "/"
   weight = 1
 
-[[menu.main]]
-  name = "Projects"
-  url = "/projects/"
-  weight = 2
+# [[menu.main]]
+#   name = "Projects"
+#   url = "/projects/"
+#   weight = 2
 
 [[menu.main]]
   name = "Books"
