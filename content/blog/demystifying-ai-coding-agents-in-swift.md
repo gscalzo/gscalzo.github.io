@@ -1,10 +1,12 @@
 +++
 title = "Demystifying AI Coding Agents in Swift"
-date = 2025-10-25T00:00:00+01:00
-draft = true
+date = 2025-11-04T00:00:00+01:00
+draft = false
 tags = ["Swift", "AI", "LLM", "Coding Agents", "OpenAI"]
 description = "Learn how to build your own AI coding agent in Swift. Discover the simple concepts behind tools like Claude Code and Cursor—it's just a loop, some tools, and a language model with opinions."
 +++
+
+![Hero Image](/images/blog/nimbo/hero.png)
 
 ## The Magic Trick That Isn't Magic
 
@@ -18,10 +20,6 @@ Today, we're going to build a real AI coding agent in Swift that can read files,
 
 By the end of this post, you'll know exactly how tools like Claude Code, Cursor, or GitHub Copilot Workspace work under the hood. Spoiler: it's simpler than you think.
 
-<GIO_PLACEHOLDER>
-Add a hero image here showing a friendly robot reading Swift code or a visualization of an agent loop. Something fun and approachable.
-</GIO_PLACEHOLDER>
-
 ## What Is an AI Coding Agent, Really?
 
 An AI coding agent is essentially three things:
@@ -30,21 +28,15 @@ An AI coding agent is essentially three things:
 2. **A set of tools** it can call (functions that do real work)
 3. **A loop** that keeps the conversation going
 
-Think of it like hiring a brilliant strategist who can't leave their office. You (the agent loop) keep asking them what to do next, they tell you, you go do it, report back, and they figure out the next step. Rinse and repeat until the job is done.
+![Agent Loop Image](/images/blog/nimbo/agent-loop.png)
+
+Think of it like having a brilliant scientist who can't leave their office. You (the agent loop) keep asking them what to do next, they tell you, you go do it, report back, and they figure out the next step. Rinse and repeat until the job is done.
 
 ### The Context Window: Your Agent's Working Memory
 
 Here's where things get interesting. Language models don't actually "remember" previous conversations in the way humans do. Every time you send a message, you're actually sending the *entire conversation history* along with it.
 
-<GIO_PLACEHOLDER>
-Add a diagram showing:
-1. A conversation array growing with each message
-2. The context window as a container that has a maximum size
-3. Visual representation of how messages get added to the array
-4. What happens when it gets full (either truncation or error)
-
-Style: Keep it colorful and simple, maybe use a stack of papers or blocks visualization
-</GIO_PLACEHOLDER>
+![Context Window](/images/blog/nimbo/context-window.png)
 
 This "working memory" is called the **context window**. Modern models typically have context windows ranging from 128K to 200K tokens (roughly 100K-150K words).
 
@@ -75,12 +67,7 @@ We're going to build **Nimbo**, a Swift-based coding agent that can help you wor
 
 All the code we're discussing lives in the [Nimbo repository](https://github.com/gscalzo/Nimbo). Feel free to clone it and follow along!
 
-<GIO_PLACEHOLDER>
-Add a simple flow diagram showing:
-User Input → Agent → LLM → Decision (Tool Call or Response) → Tool Execution (if needed) → Back to LLM → User Response
-
-Keep it clean with arrows and boxes. Use your brand colors if you have them.
-</GIO_PLACEHOLDER>
+![Agent Interaction](/images/blog/nimbo/agent-interaction.png)
 
 ## Step 1: The Foundation (Building the Chat Loop)
 
@@ -140,15 +127,7 @@ Notice that `history` array? That's our context window filling up. Every message
 
 At this point, we have a basic chat loop but **no tools yet**. The agent can only have conversations. It can't actually do anything with files.
 
-<GIO_PLACEHOLDER>
-**Example to run:** Create a simple version with just the chat loop (no tools).
-```
-You: Hello! What can you do?
-Nimbo: I'm Nimbo, a CLI assistant. I can chat with you, but I don't have access to any tools yet.
-```
-
-Add a screenshot showing this basic interaction. It should demonstrate that the agent responds but can't perform actions yet.
-</GIO_PLACEHOLDER>
+![Nimbo Basic](/images/blog/nimbo/nimbo-1.png)
 
 ## Step 2: Teaching Your Agent to Use Tools
 
@@ -208,16 +187,7 @@ The LLM sees the description and decides: "Oh, the user wants to see a file. I s
 
 Now we've defined our tools! The agent knows **what tools exist** and **when to use them**, but it still can't execute them. If you ask it to read a file, it will try to call the tool, but nothing will happen yet.
 
-<GIO_PLACEHOLDER>
-**Example to run:** Create a version with tools defined but not yet executed.
-```
-You: Can you read the Package.swift file?
-Nimbo: I'll try to call read_file with path "Package.swift"
-[Tool call happens but fails silently or returns empty]
-```
-
-Add a screenshot showing the agent attempting to call a tool. The tool call should be visible in the logs but not producing results yet.
-</GIO_PLACEHOLDER>
+![Nimbo Basic](/images/blog/nimbo/nimbo-3.png)
 
 ## Step 3: The Tool Execution Dance
 
@@ -296,24 +266,75 @@ The model sees this result on the next iteration and can decide what to do next.
 
 Now the agent can **execute a single tool**! It can call `read_file` or `list_files` and actually get a result. But it stops there. It can't chain multiple tools together yet.
 
-<GIO_PLACEHOLDER>
-**Example to run:** Create a version that executes one tool call.
+![Nimbo Basic](/images/blog/nimbo/nimbo-4.png)
+
+### The Other Tools: ListFiles and EditFile
+
+Following the same pattern as `ReadFile`, Nimbo includes two more essential tools that round out its capabilities:
+
+**[ListFiles](https://github.com/gscalzo/Nimbo/blob/main/Sources/NimboCLI/Tools/ListFiles.swift)** - Navigate the directory structure:
+
+```swift
+struct ListFiles: Tool {
+    var name = "list_files"
+
+    var chatTool: ChatCompletionParameters.Tool = {
+        let function = ChatCompletionParameters.ChatFunction(
+            name: "list_files",
+            description: """
+                List files and directories at a given relative path.
+                Use this when you need to inspect the project structure.
+                Defaults to the current working directory when no path is supplied.
+                """,
+            parameters: schema
+        )
+        return .init(function: function)
+    }()
+
+    var exec: (Data?) -> String = { input in
+        let path = input.asPath(defaultPath: ".")
+        return ListFiles.listDirectory(atPath: path.asURL)
+    }
+}
 ```
-You: Read the README.md file
 
-tool: read_file({"path": "README.md"})
+The tool caps results at 200 entries to prevent overwhelming the context window. When a directory has more files, it shows a truncated list with a count of remaining items.
 
-Nimbo: Here's the content of README.md:
-       [displays file contents]
+**[EditFile](https://github.com/gscalzo/Nimbo/blob/main/Sources/NimboCLI/Tools/EditFile.swift)** - Make surgical changes to files:
+
+```swift
+struct EditFile: Tool {
+    var name = "edit_file"
+
+    var chatTool: ChatCompletionParameters.Tool = {
+        let function = ChatCompletionParameters.ChatFunction(
+            name: "edit_file",
+            description: """
+                Make edits to a text file by replacing an exact match of `old_str` with `new_str`.
+                The replacement must be unique and `old_str` must differ from `new_str`.
+                Creates the file when it does not exist and `old_str` is empty.
+                """,
+            parameters: schema  // Expects: path, old_str, new_str
+        )
+        return .init(function: function)
+    }()
+
+    var exec: (Data?) -> String = { data in
+        let arguments = try? JSONDecoder().decode(Arguments.self, from: data)
+        return EditFile.process(arguments)
+    }
+}
 ```
 
-Add a screenshot showing:
-1. The user request
-2. The tool call being logged (tool: read_file...)
-3. The agent's response with the file content
+The `EditFile` tool is clever. It:
+- **Creates new files** when `old_str` is empty
+- **Updates existing files** by replacing exact matches
+- **Validates uniqueness** - the `old_str` must match exactly once in the file
+- **Prevents accidents** - `old_str` and `new_str` must be different
 
-This shows a single tool working, but not chaining yet.
-</GIO_PLACEHOLDER>
+This design forces the agent to be precise. It can't make ambiguous edits or accidentally replace the wrong text. If the pattern matches multiple times, the tool returns an error asking the model to be more specific.
+
+Together, these three tools (`ListFiles`, `ReadFile`, `EditFile`) give the agent everything it needs to explore and modify a codebase. The model decides which tools to use and in what order—all we did was describe what they do.
 
 ## Step 4: Keeping the Conversation Going
 
@@ -377,31 +398,7 @@ At this point, we have a **fully functional agent**. It can:
 - Chain multiple tool calls together
 - Loop until the task is complete
 
-<GIO_PLACEHOLDER>
-**Example to run:** The complete Nimbo agent with tool chaining.
-```
-You: Find all Swift files in the Sources directory and show me the Agent.swift file
-
-tool: list_files({"path": "Sources"})
-
-tool: list_files({"path": "Sources/NimboCLI"})
-
-tool: read_file({"path": "Sources/NimboCLI/Agent.swift"})
-
-Nimbo: I found the Swift files in Sources/NimboCLI. Here's Agent.swift:
-       [displays file content]
-
-       This is the core of the agent system! It manages the conversation
-       loop and coordinates tool execution.
-```
-
-Add a screenshot showing:
-1. A complex multi-step request
-2. Multiple tool calls being logged in sequence
-3. The agent's final synthesized response
-
-This demonstrates the full power of tool chaining and reasoning.
-</GIO_PLACEHOLDER>
+![Nimbo Basic](/images/blog/nimbo/nimbo-5.png)
 
 ## Real-World Considerations
 
@@ -562,13 +559,8 @@ The real magic? **You didn't program any of this logic**. You just:
 - Gave the agent access to them
 - Let the language model figure out the rest
 
-<GIO_PLACEHOLDER>
-Add a screenshot or animated GIF showing Nimbo in action. Capture one of these examples:
-1. The TODO search showing multiple tool calls in sequence
-2. The EmojiGuesser game being created and then modified
-
-Make it look clean—maybe use a nice terminal theme like "Dracula" or "Nord"
-</GIO_PLACEHOLDER>
+![Nimbo Basic](/images/blog/nimbo/nimbo-6.png)
+![Nimbo Basic](/images/blog/nimbo/nimbo-7.png)
 
 ## The Power of Simplicity
 
@@ -608,12 +600,3 @@ And next time you use Claude Code or Cursor, you'll know exactly what's happenin
 - [OpenAI's function calling docs](https://platform.openai.com/docs/guides/function-calling)
 
 **Questions? Thoughts?** Hit me up on [Twitter](https://twitter.com/giordanoscalzo) or [LinkedIn](https://linkedin.com/in/giordanoscalzo). I'd love to see what you build!
-
-<GIO_PLACEHOLDER>
-Add a final call-to-action graphic here. Maybe something like:
-- "Build your own agent!"
-- Links to GitHub, your social profiles
-- A friendly robot waving goodbye
-
-Keep it on-brand and inviting.
-</GIO_PLACEHOLDER>

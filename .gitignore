@@ -1,3 +1,4 @@
 .cursor/
 .cursor/rules/ 
 public/
+.DS_Store
