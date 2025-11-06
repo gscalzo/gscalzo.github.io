@@ -28,6 +28,7 @@ googleAnalytics = "G-B6YT2W23QZ"
   github = "gscalzo"
   linkedin = "giordanoscalzo"
   twitter = "giordanoscalzo"
+  rss = true
 
 [markup]
   [markup.goldmark]
