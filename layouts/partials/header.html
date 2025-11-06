@@ -74,11 +74,43 @@
       class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse"
     >
       {{- range . -}}
+        {{- if eq .URL "/blog/" -}}
+      <div class="flex items-center justify-center gap-2">
+        <a
+          class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+          href="{{- .URL -}}"
+          >{{- .Name -}}</a
+        >
+        <a
+          class="flex h-5 w-5 items-center justify-center"
+          href="{{- "/blog/index.xml" | absURL -}}"
+          target="_blank"
+          rel="alternate"
+          type="application/rss+xml"
+          aria-label="Blog RSS feed"
+          title="Blog RSS"
+        >
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              d="M6 18a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm-4-9.5c5.523 0 10 4.477 10 10h-2c0-4.418-3.582-8-8-8v-2zm0-4.5c8.284 0 15 6.716 15 15h-2a13 13 0 0 0-13-13V4z"
+            />
+          </svg>
+        </a>
+      </div>
+        {{- else -}}
       <a
         class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
         href="{{- .URL -}}"
         >{{- .Name -}}</a
       >
+        {{- end -}}
       {{- end -}}
     </nav>
     {{- end -}}<!---->

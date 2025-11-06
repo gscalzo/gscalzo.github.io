@@ -25,10 +25,10 @@ I wrote several books  Mobile, specifically on Swift and SwiftUI. [View books &r
 
 ---
 
-### Projects
+<!-- ### Projects
 My recent projects on Mobile and AI. [View projects &rarr;](/projects/)
 
----
+--- -->
 
 ### Contact
 **Email:** giordano.scalzo at gmail dot com
