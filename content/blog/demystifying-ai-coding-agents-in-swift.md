@@ -1,6 +1,6 @@
 +++
 title = "Demystifying AI Coding Agents in Swift"
-date = 2025-11-04T00:00:00+01:00
+date = 2025-11-05T00:00:00+01:00
 draft = false
 tags = ["Swift", "AI", "LLM", "Coding Agents", "OpenAI"]
 description = "Learn how to build your own AI coding agent in Swift. Discover the simple concepts behind tools like Claude Code and Cursor - it's just a loop, some tools, and a language model with opinions."
