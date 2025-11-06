@@ -8,42 +8,61 @@
     {{- end -}}
   </div>
 
-  <nav class="flex justify-center space-x-6 items-center dark:invert">
-    {{- if site.Params.github -}}
-    <a
-      class="h-5 w-5 block"
-      style="background: url(/github.svg) center center / cover no-repeat;"
-      href="https://github.com/{{- site.Params.github -}}"
-      target="_blank"
-      rel="me"
-      aria-label="GitHub"
-      title="GitHub"
-    >
-    </a>
+  <nav class="flex items-center justify-center space-x-6 dark:invert">
+    {{- with site.Params.github -}}
+      <a
+        class="block h-5 w-5"
+        href="https://github.com/{{ . }}"
+        target="_blank"
+        rel="me"
+        aria-label="GitHub"
+        title="GitHub"
+      >
+        <img
+          src="{{- `github.svg` | relURL -}}"
+          alt=""
+          width="20"
+          height="20"
+          loading="lazy"
+        />
+      </a>
     {{- end -}}
-    {{- if site.Params.linkedin -}}
-    <a
-      class="h-5 w-5 block"
-      style="background: url(/linkedin.svg) center center / cover no-repeat;"
-      href="https://linkedin.com/in/{{- site.Params.linkedin -}}"
-      target="_blank"
-      rel="me"
-      aria-label="LinkedIn"
-      title="LinkedIn"
-    >
-    </a>
+    {{- with site.Params.linkedin -}}
+      <a
+        class="block h-5 w-5"
+        href="https://linkedin.com/in/{{ . }}"
+        target="_blank"
+        rel="me"
+        aria-label="LinkedIn"
+        title="LinkedIn"
+      >
+        <img
+          src="{{- `linkedin.svg` | relURL -}}"
+          alt=""
+          width="20"
+          height="20"
+          loading="lazy"
+        />
+      </a>
     {{- end -}}
-    {{- if site.Params.twitter -}}
-    <a
-      class="h-5 w-5 block"
-      style="background: url(/twitter.svg) center center / cover no-repeat;"
-      href="https://twitter.com/{{- site.Params.twitter -}}"
-      target="_blank"
-      rel="me"
-      aria-label="Twitter"
-      title="Twitter"
-    >
-    </a>
+    {{- $xHandle := site.Params.x | default site.Params.twitter -}}
+    {{- with $xHandle -}}
+      <a
+        class="block h-5 w-5"
+        href="https://x.com/{{ . }}"
+        target="_blank"
+        rel="me"
+        aria-label="X"
+        title="X"
+      >
+        <img
+          src="{{- (cond (fileExists `static/x.svg`) `x.svg` `twitter.svg`) | relURL -}}"
+          alt=""
+          width="20"
+          height="20"
+          loading="lazy"
+        />
+      </a>
     {{- end -}}
   </nav>
 </footer>
