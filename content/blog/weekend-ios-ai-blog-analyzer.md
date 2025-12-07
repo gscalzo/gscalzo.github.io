@@ -22,7 +22,7 @@ Cue Dave Verwer’s treasure trove: the [iOS Dev Directory](https://iosdevdirect
 I built a small CLI tool that pulls Dave’s blog list, fetches recent posts, and uses a local Ollama model to classify whether each post is actually about AI in a way that matters for iOS developers.
 
 - Repo: [gscalzo/iOS.Blogs.Analyzer](https://github.com/gscalzo/iOS.Blogs.Analyzer)
-- Params: `--months 3` (lookback window), `--sites 200` (how many blogs), `--parallel 8` (threads)
+- Params: `--months 3` (lookback window), `--max-blogs 200` (how many blogs), `--parallel 8` (threads), plus a `--model` flag to choose the Ollama model.
 - Brain: local `ollama` model classifies each post as “AI‑related?”-fast enough, private, good enough.
 - Output: a trimmed list I can drop straight into my Obsidian vault.
 
@@ -31,7 +31,7 @@ I built a small CLI tool that pulls Dave’s blog list, fetches recent posts, an
 ## How it works under the hood
 The architecture is deliberately boring: a small CLI that takes the parameters, pulls a list of sites from Dave’s directory export, and then runs a simple pipeline.
 
-- Fetch: for each site (up to `--sites`), download the RSS/Atom feed.
+- Fetch: for each site (up to `--max-blogs`), download the RSS/Atom feed.
 - Filter: keep only posts from the last `--months` months.
 - Classify: send the title and a short excerpt to a local Ollama model with a tiny prompt: “Is this actually about AI, in a way that matters for an iOS developer?”
 - Concurrency: process feeds in parallel (bounded by `--parallel`) so I’m not accidentally DDoS‑ing Dave’s list.
