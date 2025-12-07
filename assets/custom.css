@@ -1,0 +1,23 @@
+/* Default: square images with depth */
+.prose section img {
+  border-radius: 0;
+  box-shadow: 10px 10px 16px -8px rgba(0, 0, 0, 0.58);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(245, 245, 245, 0.7));
+}
+
+/* Optional opt‑in style: framed card look for images wrapped in class */
+.prose .img-frame img,
+.prose img.img-frame {
+  border-radius: 0;
+  box-shadow: 10px 10px 18px -6px rgba(0, 0, 0, 0.65);
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+/* Hero: rounded, no shadow */
+.prose img.img-hero {
+  border-radius: var(--radius-xl);
+  box-shadow: none;
+  background: none;
+}

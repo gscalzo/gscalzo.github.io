@@ -6,7 +6,7 @@ tags = ["Swift", "AI", "LLM", "Coding Agents", "OpenAI"]
 description = "Learn how to build your own AI coding agent in Swift. Discover the simple concepts behind tools like Claude Code and Cursor - it's just a loop, some tools, and a language model with opinions."
 +++
 
-![Hero Image](/images/blog/nimbo/hero.png)
+<img src="/images/blog/nimbo/hero.png" alt="Hero Image" class="img-hero" />
 
 ## The Magic Trick That Isn't Magic
 
@@ -28,7 +28,7 @@ An AI coding agent boils down to three things:
 2. **A set of tools** it can call (functions that do real work)
 3. **A loop** that keeps the conversation going
 
-![Agent Loop Image](/images/blog/nimbo/agent-loop.png)
+<img src="/images/blog/nimbo/agent-loop.png" alt="Agent Loop Image" class="img-frame" />
 
 Think of it like having a brilliant scientist who can't leave their office. You (the agent loop) keep asking them what to do next, they tell you, you go do it, report back, and they figure out the next step. Rinse and repeat until the job is done.
 
@@ -36,7 +36,7 @@ Think of it like having a brilliant scientist who can't leave their office. You 
 
 Here's where things get interesting. Language models don't actually "remember" previous conversations in the way humans do. Every time you send a message, you're actually sending the *entire conversation history* along with it.
 
-![Context Window](/images/blog/nimbo/context-window.png)
+<img src="/images/blog/nimbo/context-window.png" alt="Context Window" class="img-frame" />
 
 This "working memory" is called the **context window**. Modern models typically have context windows ranging from 128K to 200K tokens (roughly 100,000-150,000 words).
 
@@ -67,7 +67,7 @@ We're going to build **Nimbo**, a Swift-based coding agent that can help you wor
 
 All the code we're discussing lives in the [Nimbo repository](https://github.com/gscalzo/Nimbo). Feel free to clone it and follow along!
 
-![Agent Interaction](/images/blog/nimbo/agent-interaction.png)
+<img src="/images/blog/nimbo/agent-interaction.png" alt="Agent Interaction" class="img-frame" />
 
 ## Step 1: The Foundation (Building the Chat Loop)
 
@@ -127,7 +127,7 @@ Notice that `history` array? That's our context window filling up. Every message
 
 At this point, we have a basic chat loop but **no tools yet**. The agent can only have conversations. It can't actually do anything with files.
 
-![Nimbo Basic](/images/blog/nimbo/nimbo-1.png)
+<img src="/images/blog/nimbo/nimbo-1.png" alt="Nimbo Basic" class="img-frame" />
 
 ## Step 2: Teaching Your Agent to Use Tools
 
@@ -187,7 +187,7 @@ The LLM sees the description and decides, "Oh, the user wants to see a file. I s
 
 Now we've defined our tools! The agent knows **what tools exist** and **when to use them**, but it still can't execute them. If you ask it to read a file, it will try to call the tool, but nothing will happen yet.
 
-![Nimbo Basic](/images/blog/nimbo/nimbo-3.png)
+<img src="/images/blog/nimbo/nimbo-3.png" alt="Nimbo Basic" class="img-frame" />
 
 ## Step 3: The Tool Execution Dance
 
@@ -266,7 +266,7 @@ The model sees this result on the next iteration and can decide what to do next.
 
 Now the agent can **execute a single tool**! It can call `read_file` or `list_files` and actually get a result. But it stops there. It can't chain multiple tools together yet.
 
-![Nimbo Basic](/images/blog/nimbo/nimbo-4.png)
+<img src="/images/blog/nimbo/nimbo-4.png" alt="Nimbo Basic" class="img-frame" />
 
 ### The Other Tools: ListFiles and EditFile
 
@@ -398,7 +398,7 @@ At this point, we have a **fully functional agent**. It can:
 - Chain multiple tool calls together.
 - Loop until the task is complete.
 
-![Nimbo Basic](/images/blog/nimbo/nimbo-5.png)
+<img src="/images/blog/nimbo/nimbo-5.png" alt="Nimbo Basic" class="img-frame" />
 
 ## Real-World Considerations
 
@@ -559,8 +559,8 @@ The real magic? **You didn't program any of this logic**. You just:
 - Gave the agent access to them.
 - Let the language model figure out the rest.
 
-![Nimbo Basic](/images/blog/nimbo/nimbo-6.png)
-![Nimbo Basic](/images/blog/nimbo/nimbo-7.png)
+<img src="/images/blog/nimbo/nimbo-6.png" alt="Nimbo Basic" class="img-frame" />
+<img src="/images/blog/nimbo/nimbo-7.png" alt="Nimbo Basic" class="img-frame" />
 
 ## The Power of Simplicity
 

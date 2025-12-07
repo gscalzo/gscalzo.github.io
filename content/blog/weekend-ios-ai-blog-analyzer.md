@@ -6,7 +6,7 @@ tags = ["AI", "iOS", "automation", "ollama", "copilot"]
 description = "A quick script that scans Dave Verwer's iOS blog directory with a local LLM to surface AI posts from the last few months."
 +++
 
-![Hero Image](/images/blog/blogs-ai-fetcher/hero.png)
+<img src="/images/blog/blogs-ai-fetcher/hero.png" alt="Hero Image" class="img-hero" />
 
 # Weekend Hack: Letting Ollama Sift 1,000 iOS Blogs for AI Gems
 
@@ -26,7 +26,7 @@ I built a small CLI tool that pulls Dave’s blog list, fetches recent posts, an
 - Brain: local `ollama` model classifies each post as “AI‑related?”-fast enough, private, good enough.
 - Output: a trimmed list I can drop straight into my Obsidian vault.
 
-![Terminal Image](/images/blog/blogs-ai-fetcher/terminal.png)
+<img src="/images/blog/blogs-ai-fetcher/terminal.png" alt="Terminal Image" class="img-frame" />
 
 ## How it works under the hood
 The architecture is deliberately boring: a small CLI that takes the parameters, pulls a list of sites from Dave’s directory export, and then runs a simple pipeline.
@@ -42,7 +42,7 @@ Most of the pieces came together through Copilot and Codex‑CLI suggestions: I 
 ## Why it felt magical
 Saturday evening I was at the kitchen table, half keeping an eye on the oven timer, half watching logs scroll by. Copilot and Codex‑CLI handled most of the boring wiring; I mostly nudged, corrected, and decided what the tool should actually do. A year ago this would have been a “maybe next month” project. Now it comfortably fits between checking the roast and arguing about where the lights should go on the tree.
 
-![Obsidian Image](/images/blog/blogs-ai-fetcher/obsidian.png)
+<img src="/images/blog/blogs-ai-fetcher/obsidian.png" alt="Obsidian Image" class="img-frame" />
 
 ## What’s next
 - Swap models to compare local vs hosted.

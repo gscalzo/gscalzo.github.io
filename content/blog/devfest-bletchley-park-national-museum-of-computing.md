@@ -7,7 +7,7 @@ description = "Reflections on Google DevFest hosted by GDG Bletchley inside the 
 images = ["/images/blog/devfest-bletchley/colossus.jpeg"]
 +++
 
-![Colossus at The National Museum of Computing](/images/blog/devfest-bletchley/colossus.jpeg)
+<img src="/images/blog/devfest-bletchley/colossus.jpeg" alt="Colossus at The National Museum of Computing" class="img-hero" />
 
 Walking into the National Museum of Computing at Bletchley Park for Google DevFest felt like stepping through a living timeline, past codebreaking rooms and wartime machines, straight into today’s conversations about AI. It’s hard to imagine a better venue: the place where Alan Turing worked during WWII, the mind behind the Turing Test, makes an AI conference feel perfectly at home.
 
@@ -15,7 +15,7 @@ Huge kudos to GDG Bletchley for organizing a day that balanced hands‑on sessio
 
 ## Welcome & Keynote
 
-![Keynote stage at DevFest Bletchley](/images/blog/devfest-bletchley/keynote.jpeg)
+<img src="/images/blog/devfest-bletchley/keynote.jpeg" alt="Keynote stage at DevFest Bletchley" class="img-frame" />
 
 The GDG Bletchley organizers opened the day with a light, friendly keynote, some playful interactions with Gemini, and, true to live demos, one thing that didn’t quite cooperate. Three speakers framed the day:
 
@@ -25,7 +25,7 @@ The GDG Bletchley organizers opened the day with a light, friendly keynote, some
 
 ## Beyond Chatbots: BigQuery Data Agents with ADK
 
-![Rachael Deacon‑Smith on stage](/images/blog/devfest-bletchley/rachael.jpeg)
+<img src="/images/blog/devfest-bletchley/rachael.jpeg" alt="Rachael Deacon‑Smith on stage" class="img-frame" />
 
 [Rachael Deacon‑Smith](https://www.linkedin.com/in/rachael-ds/) walked through ADK concepts and patterns, with a preview of features shipping in the coming weeks. The framing that clicked for me:
 
@@ -39,7 +39,7 @@ I left with a handful of scenarios to try immediately for data‑driven monitori
 
 ## Supercharging GitHub Copilot Context for accurate results with Agent mode and MCP
 
-![Sergio Sisternes on stage](/images/blog/devfest-bletchley/sergio.jpeg)
+<img src="/images/blog/devfest-bletchley/sergio.jpeg" alt="Sergio Sisternes on stage" class="img-frame" />
 
 [Sergio Sisternes](https://www.linkedin.com/in/sesispla/) ran a highly interactive session on making Copilot genuinely context‑aware. His focus was Copilot Agent Mode + MCP (Model Context Protocol) to standardize how agents pull external context. Highlights I noted:
 
@@ -51,7 +51,7 @@ Lots to apply to my daily Copilot workflow.
 
 ## Multi‑Agent Magic: Build Your First AI Team with Google ADK
 
-![Sonali Goel running the workshop](/images/blog/devfest-bletchley/sonali.jpeg)
+<img src="/images/blog/devfest-bletchley/sonali.jpeg" alt="Sonali Goel running the workshop" class="img-frame" />
 
 This hands‑on session by [Sonali Goel](https://www.linkedin.com/in/sonali-goel-tech/) delivered exactly what you want from a first build with ADK: a working multi‑agent starter you can extend. Using ADK with Gemini API (via `adk web`), Sonali showed an agent that plans tasks and coordinates other agents to complete them. Her repo is a great reference and I plan to adopt parts of it in my experiments:
 
@@ -63,19 +63,19 @@ Repo: https://github.com/goelsonali/study_assistant
 
 ## Lunch, Colossus and the Lorenz break
 
-![Museum volunteer explaining Colossus and Tunny](/images/blog/devfest-bletchley/daniel.jpeg)
+<img src="/images/blog/devfest-bletchley/daniel.jpeg" alt="Museum volunteer explaining Colossus and Tunny" class="img-frame" />
 
 During lunch, a museum volunteer, Daniel, gave a fantastic demo that brought Bletchley Park’s codebreaking history to life. We saw the rebuilt Colossus computer running and heard how it was used to help decipher the German High Command’s Lorenz cipher (nicknamed “Tunny”), a far more complex teleprinter cipher than Enigma. Before Colossus, the team experimented with electromechanical “Heath Robinson” machines; Colossus, packed with thousands of vacuum tubes, replaced the fragile mechanics with high‑speed electronic logic and paper‑tape input, dramatically accelerating the statistical attacks needed to recover Lorenz keys. Standing in front of a working Colossus while discussing modern AI was a surreal full‑circle moment.
 
 ## Ethics of AI - What can we learn from Asimov's Three Laws of Robotics?
 
-![Patty O’Callaghan on stage](/images/blog/devfest-bletchley/patty.jpeg)
+<img src="/images/blog/devfest-bletchley/patty.jpeg" alt="Patty O’Callaghan on stage" class="img-frame" />
 
 I caught the second half of [Patty O’Callaghan](https://www.linkedin.com/in/patty-ocallaghan/)'s talk on responsible AI. It connected Asimov’s Three Laws to today’s AI ethics and regulation, and included an interactive poll with real‑world scenarios. A timely reminder that capability advances should be paired with safety, transparency, and accountability.
 
 ## Eat smarter - Building an AI-powered meal planner with Firebase
 
-![Peter Friese presenting](/images/blog/devfest-bletchley/peter.jpeg)
+<img src="/images/blog/devfest-bletchley/peter.jpeg" alt="Peter Friese presenting" class="img-frame" />
 
 [Peter Friese](https://www.linkedin.com/in/peterfriese/) delivered a technical, fast‑paced session on wiring GenAI into an iOS app using Firebase and Genkit. The takeaways:
 
@@ -89,7 +89,7 @@ This gave me concrete ideas for my own app, Pocket Sommelier (https://www.pocket
 
 ## The AI in Your Pocket: Building Offline Gemini Apps with the Browser
 
-![Olorunfemi Davis on stage](/images/blog/devfest-bletchley/olorunfemi.jpeg)
+<img src="/images/blog/devfest-bletchley/olorunfemi.jpeg" alt="Olorunfemi Davis on stage" class="img-frame" />
 
 An eye‑opening look from [Olorunfemi Davis](https://www.linkedin.com/in/olorunfemidavis/) at running models locally in Chrome, bringing Gemini Nano to the browser for offline‑first apps. He demonstrated the built‑in Prompt, Translator, Language Detector, Summarizer, Writer/Rewriter, and Proofreader APIs and discussed testing and debugging patterns for on‑device AI. The privacy and latency wins make this an attractive default for many use cases.
 
