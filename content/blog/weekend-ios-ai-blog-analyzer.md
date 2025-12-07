@@ -6,11 +6,11 @@ tags = ["AI", "iOS", "automation", "ollama", "copilot"]
 description = "A quick script that scans Dave Verwer's iOS blog directory with a local LLM to surface AI posts from the last few months."
 +++
 
-![Hero Image](/images/blog/nimbo/hero.png)
+![Hero Image](/images/blog/blogs-ai-fetcher/hero.png)
 
 # Weekend Hack: Letting Ollama Sift 1,000 iOS Blogs for AI Gems
 
-Over the last year I’ve had this itch to build again. AI made that possible: suddenly I can ship more small things, faster, and use them to push a long‑term plan forward—go from “mobile expert”, to “mobile + AI expert”, to someone who really understands **AI as product**, not just models.
+Over the last year I’ve had this itch to build again. AI made that possible: suddenly I can ship more small things, faster, and use them to push a long‑term plan forward-go from “mobile expert”, to “mobile + AI expert”, to someone who really understands **AI as product**, not just models.
 
 ## The long game
 That long game means learning how AI is actually being used in mobile development. Not the hype,
@@ -23,12 +23,10 @@ I built a small CLI tool that pulls Dave’s blog list, fetches recent posts, an
 
 - Repo: [gscalzo/iOS.Blogs.Analyzer](https://github.com/gscalzo/iOS.Blogs.Analyzer)
 - Params: `--months 3` (lookback window), `--sites 200` (how many blogs), `--parallel 8` (threads)
-- Brain: local `ollama` model classifies each post as “AI‑related?”—fast enough, private, good enough.
+- Brain: local `ollama` model classifies each post as “AI‑related?”-fast enough, private, good enough.
 - Output: a trimmed list I can drop straight into my Obsidian vault.
 
-<GIO_PLACEHOLDER>
-Screenshot of the CLI chewing through Dave’s feed list on my laptop, while Xcode sulks quietly in the background.
-</GIO_PLACEHOLDER>
+![Hero Image](/images/blog/blogs-ai-fetcher/terminal.png)
 
 ## How it works under the hood
 The architecture is deliberately boring: a small CLI that takes the parameters, pulls a list of sites from Dave’s directory export, and then runs a simple pipeline.
@@ -53,4 +51,4 @@ Obsidian note showing “AI”‑tagged iOS posts, ready for later reading.
 - Add a “spice level” score: AI‑adjacent, AI‑heavy, AI‑marketing.
 - Generate short summaries for each AI‑related post so I can scan themes quickly before deciding what deserves a deep read.
 
-For now, I have a small, living map of AI conversations in the iOS community—and, more importantly, one more tiny brick laid on that long road from mobile to AI‑product work.
+For now, I have a small, living map of AI conversations in the iOS community-and, more importantly, one more tiny brick laid on that long road from mobile to AI‑product work.
