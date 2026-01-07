@@ -1,0 +1,4 @@
+thios year i've had the opportunities to work in paralle with Rob in a few occasions. I would highlight the work the web team have done in term of Observability that it was inspirational for our work in the mobile team. 
+We also shared ideas when discussing the best way of reporting uptime for the services for OpenBanking appreciating his calm approach and thorugoul planning.
+During the discussion ergarding missing increase font for the webviews in iOS related to Turbine migration, he was able to explain the issue and the effort for the web team to the stakehiolders without adding too many technical details that would have been lost in communications and also without trhoughtn work on the mobile team which i appreciated.
+Looking forward to have an even closer collaboration with Rob and his team in 2026 mainly in the implementaiton of a smarter and enahnced WebView componentes in the Mobile Apps.
