@@ -1,7 +1,7 @@
 +++
 title = "How I (Almost) Implemented a Production App in a Weekend"
 date = 2026-02-09T09:00:00+00:00
-draft = true
+draft = false
 tags = ["AI", "iOS", "Android", "React-Native", "mobile-dev"]
 description = "How I went from a shiny weekend AI prototype to a production-ready app, what broke, what worked, and why the boring middle is where the real product gets built."
 +++
