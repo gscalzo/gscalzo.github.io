@@ -6,6 +6,8 @@ tags = ["AI", "iOS", "Android", "React-Native", "mobile-dev"]
 description = "How I went from a shiny weekend AI prototype to a production-ready app, what broke, what worked, and why the boring middle is where the real product gets built."
 +++
 
+<img src="/images/blog/neurona-build/hero.jpg" alt="Neurona app hero image" class="img-hero" style="margin-top:0 !important;margin-bottom:14px !important;" />
+
 <p style="margin:0 0 10px 0 !important;">
   <strong>Shameless plug:</strong> if you want better focus and sleep, download Neurona first, then come back for the build story.
 </p>
@@ -18,8 +20,6 @@ description = "How I went from a shiny weekend AI prototype to a production-read
     <img src="/images/badges/google-play-badge.png" alt="Get it on Google Play" style="height:48px;display:block;" />
   </a>
 </p>
-
-<img src="/images/blog/neurona-build/hero.jpg" alt="Neurona app hero image" class="img-hero" style="margin-top:8px !important;margin-bottom:14px !important;" />
 
 I wanted a simple weekend experiment, specifically to try the Ralph Wiggum technique from Geoffrey Huntley’s original article, [Ralph Wiggum as a "software engineer"](https://ghuntley.com/ralph/). Instead, I got a very honest lesson in modern AI development: getting a prototype is fast, shipping a real app is still work.
 
