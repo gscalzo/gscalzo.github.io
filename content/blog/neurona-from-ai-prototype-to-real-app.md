@@ -9,8 +9,12 @@ description = "How I went from a shiny weekend AI prototype to a production-read
 **Shameless plug:** if you want better focus and sleep, download Neurona first, then come back for the build story.
 
 <p>
-  <a href="https://apps.apple.com/app/neurona" style="display:inline-block;padding:10px 16px;margin-right:8px;border-radius:8px;background:#111;color:#fff;text-decoration:none;font-weight:600;">Download on iOS</a>
-  <a href="https://play.google.com/store/apps/details?id=uk.co.effectivecode.Neurona" style="display:inline-block;padding:10px 16px;border-radius:8px;background:#0f9d58;color:#fff;text-decoration:none;font-weight:600;">Get it on Android</a>
+  <a href="https://apps.apple.com/app/neurona" style="display:inline-block;margin-right:8px;">
+    <img src="/images/badges/app-store-badge.svg" alt="Download on the App Store" style="height:48px;" />
+  </a>
+  <a href="https://play.google.com/store/apps/details?id=uk.co.effectivecode.Neurona" style="display:inline-block;">
+    <img src="/images/badges/google-play-badge.png" alt="Get it on Google Play" style="height:48px;" />
+  </a>
 </p>
 
 <img src="/images/blog/neurona-build/hero.jpg" alt="Neurona app hero image" class="img-hero" />
@@ -44,7 +48,7 @@ I spent around two hours trying to fix it. I tried different prompts, different 
 
 At that point I gave up on that branch. Not because I love quitting, but because shipping requires good decisions, and "keep digging this hole" was a bad one.
 
-<img src="/images/blog/neurona-build/discarded-ios-combined.png" alt="Combined screenshots of the discarded iOS app and related crash screen" class="img-frame" />
+<img src="/images/blog/neurona-build/discarded-ios-combined.jpg" alt="Combined screenshots of the discarded iOS app and related crash screen" class="img-frame" />
 
 ## Pivot: React Native + Expo, but first prove the audio
 
@@ -60,7 +64,7 @@ This was a big lesson: when AI is involved, thin vertical slices beat big-bang i
 
 Once that foundation was stable, the rest of the product moved fast and stayed stable.
 
-<img src="/images/blog/neurona-build/audio-engine-and-design-system.png" alt="Audio engine prototype and design system side by side" class="img-frame" />
+<img src="/images/blog/neurona-build/audio-engine-and-design-system.jpg" alt="Audio engine prototype and design system side by side" class="img-frame" />
 
 ## The part people skip on social media
 
@@ -131,7 +135,7 @@ App Store visuals can quietly eat days. I vibecoded a dedicated screenshot gener
 
 That tool paid for itself immediately.
 
-<img src="/images/blog/neurona-build/final-screenshots-and-tool.png" alt="Placeholder collage with final app screenshots and the tool used to generate them" class="img-frame" />
+<img src="/images/blog/neurona-build/final-screenshots-and-tool.jpg" alt="Placeholder collage with final app screenshots and the tool used to generate them" class="img-frame" />
 
 ## What I actually learned (without the hype)
 
