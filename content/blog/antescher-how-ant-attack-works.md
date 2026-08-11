@@ -6,6 +6,8 @@ tags = ["retrocomputing", "zx-spectrum", "z80", "reverse-engineering", "games"]
 description = "An interactive teardown of Sandy White's Ant Attack (ZX Spectrum, 1983): 4KB of hand-assembled Z80 and a 16KB city you can explore in the browser."
 +++
 
+<img src="/images/blog/antescher/city-isometric.png" alt="The full city of Antescher, rendered isometrically from the original 16KB map data" class="img-hero" />
+
 # Antescher: How Ant Attack Works
 
 In 1983 Sandy White wrote *Ant Attack* by hand, on paper, in Z80 mnemonics. He assembled it himself and typed the hex into an EEPROM emulator. The whole game is 4,096 bytes of code plus a 128×128 isometric city called Antescher, where every column of the world fits in a single byte.
@@ -18,6 +20,10 @@ Quicksilva published *Ant Attack* in November 1983 for the 48K ZX Spectrum, with
 
 White and Sutherland reused the engine for *Zombie Zombie* a year later, and by the end of 1984 Ultimate's *Knight Lore* had turned isometric 3D into a genre of its own. *Ant Attack* got there first.
 
+<img src="/images/blog/antescher/city-closeup.png" alt="Close-up of the north corner of Antescher, with Sandy White's SW signature built into the city wall" class="img-frame" />
+
+White even signed the work: the blocks near the north wall spell out "@SW". That close-up, like every image in this post, is rendered from the 16KB of map data on the original tape, not from an emulator.
+
 ## The teardown
 
 I took the tape image apart and turned the notes into an interactive teardown. Some of what's in there:
@@ -29,6 +35,10 @@ I took the tape image apart and turned the notes into an interactive teardown. S
 - The message printer is also the score display and the sound engine, because it leans on the Spectrum ROM's own character output.
 
 The heightmap is a full volume, so the page can also do things the original never did: rotate the real city data, walk it in first person through a raycaster, and play a small game built on the same rules.
+
+<img src="/images/blog/antescher/engine-demo.png" alt="The playable engine demo: the player figure stands on the city wall while an ant approaches" class="img-frame" />
+
+
 
 [Open the interactive teardown](/antescher/). It works best with a keyboard, but touch is supported too.
 
