@@ -10,6 +10,16 @@ description = "An interactive teardown of Sandy White's Ant Attack (ZX Spectrum,
 
 In 1983 Sandy White wrote *Ant Attack* by hand, on paper, in Z80 mnemonics. He assembled it himself and typed the hex into an EEPROM emulator. The whole game is 4,096 bytes of code plus a 128×128 isometric city called Antescher, where every column of the world fits in a single byte.
 
+## A bit of history
+
+Quicksilva published *Ant Attack* in November 1983 for the 48K ZX Spectrum, with a Commodore 64 port the following year. White had trained as a sculptor, and the game reads like it: the city came first. It is named Antescher after M. C. Escher, and he designed its arches and towers together with Angela Sutherland.
+
+*Ant Attack* is usually credited as the first isometric game on a home computer, and one of the first 3D games of any kind that you could actually walk around in. Arcade cabinets like *Zaxxon* had used the projection a year earlier, but those were scrolling shooters on rails. Here you got a solid city, a camera you could rotate through four views, and the freedom to go anywhere. White called his rendering technique "soft solid" 3D and patented it. The game is also remembered for letting you choose to play the boy rescuing the girl or the girl rescuing the boy, which was close to unheard of in 1983.
+
+White and Sutherland reused the engine for *Zombie Zombie* a year later, and by the end of 1984 Ultimate's *Knight Lore* had turned isometric 3D into a genre of its own. *Ant Attack* got there first.
+
+## The teardown
+
 I took the tape image apart and turned the notes into an interactive teardown. Some of what's in there:
 
 - One byte does three jobs. Bits 0 to 5 describe the blocks in a column, bit 7 marks that someone is standing there. There is no separate collision map anywhere in memory.
