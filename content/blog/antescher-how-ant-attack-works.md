@@ -1,7 +1,7 @@
 +++
 title = "Antescher: How Ant Attack Works"
 date = 2026-08-11T12:00:00+01:00
-draft = false
+draft = true
 tags = ["retrocomputing", "zx-spectrum", "z80", "reverse-engineering", "games"]
 description = "An interactive teardown of Sandy White's Ant Attack (ZX Spectrum, 1983): 4KB of hand-assembled Z80 and a 16KB city you can explore in the browser."
 +++
