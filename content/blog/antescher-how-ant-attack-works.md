@@ -19,6 +19,52 @@ The city below is his too — 16,384 bytes lifted straight out of the tape image
   title="The city of Antescher, rendered from the original 16KB map data, rotatable through four views"
   caption="Rotating does not transform a single coordinate. It changes the order the same array is walked in. That is the whole trick, and you are watching it happen." >}}
 
+## Writing a game with no assembler
+
+That first sentence deserves unpacking, because it describes a way of working that has essentially vanished.
+
+Today you write code, and a chain of programs turns it into something the machine executes. A compiler or assembler converts your text into instruction bytes. A linker decides where everything lands in memory and fills in the addresses. You never see a byte, and you never care what address anything is at.
+
+White had none of that. He did all three jobs himself, with a pen.
+
+{{< antescher src="toolchain" height="239" wide="true"
+  title="Diagram: paper, hand assembly, hex bytes, EPROM emulator, Spectrum, and back to paper when there is a bug"
+  caption="The whole toolchain. The loop at the bottom is the expensive part." >}}
+
+### What "mnemonics" means
+
+A Z80 processor executes numbers. The number `0x7E` tells it "load the accumulator with the byte at the address in HL". Nobody can write a game in numbers, so you write `LD A,(HL)` instead — a *mnemonic*, a human-readable name for one instruction. There is a one-to-one mapping between the two, and it fills a table at the back of the Z80 manual.
+
+An assembler is, at heart, that lookup performed by a machine. White did the lookup by eye, from the table, and wrote the resulting hex in a column down the side of the page.
+
+{{< antescher src="hand-assembly" height="542"
+  title="A worked example: eight Z80 instructions with their addresses, their hex bytes, and what each one does"
+  caption="Eight instructions. Every byte in the second column was looked up or worked out by hand." >}}
+
+### The bit that actually hurts
+
+Opcodes are only a lookup, and lookups are tedious rather than hard. The addresses are the hard part.
+
+Look at the two highlighted rows above. A `JR` — jump relative — doesn't store the address you want to reach. It stores the *distance* to it, as a signed byte, counted from the instruction after the jump. To write those two bytes you have to know exactly how long every instruction between here and there is, add them up, and get the sign right. `0x28 0x04` means "if zero, skip forward four bytes". `0x18 0xF7` means "go back nine".
+
+Get one wrong and the machine jumps into the middle of an instruction, starts reading operands as opcodes, and dies — with no error message, no stack trace, and no way to know which of your 4,096 bytes was the bad one.
+
+Now add the thing that makes it genuinely brutal: insert one instruction anywhere, and every address after it moves.
+
+{{< antescher src="address-shift" height="374"
+  title="Two layouts compared: routines packed tight, where inserting one instruction shifts every later address, versus routines parked on round boundaries with slack between them"
+  caption="The same edit, made twice. This is the entire reason for the padding." >}}
+
+That is the problem he solved by parking each routine at a round address and leaving a gap after it. Give yourself slack and an edit stays local. It costs a few hundred wasted bytes and buys back the ability to change your mind — and it is still visible in the binary today, which is how we can tell how the game was built. [More on that below](#the-hand-assembly-fingerprint).
+
+### And the "EPROM emulator"
+
+A Spectrum loads programs from cassette tape, which takes several minutes and means a rebuild is a coffee break. An EPROM emulator sidesteps that: it is a box of RAM that plugs into a machine and pretends to be a memory chip, so you can load code into it directly and the computer runs it as though it had always been there. Type the bytes in, hit run, watch it crash, edit the paper, type it again.
+
+So "typed the hex into an EEPROM emulator" means keying in four thousand pairs of hexadecimal digits, by hand, and doing it again after every change.
+
+With that in mind, everything in the rest of this post reads differently. The tricks below aren't cleverness for its own sake. Every one of them is a man buying back time and space from a process that charged him for both.
+
 ## A bit of history
 
 <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;margin:1.6rem 0 0.5rem">
@@ -75,7 +121,7 @@ The tape loads a single 32,767-byte block at `0x8000`. Code is the first 4KB and
 
 Tracing forward from the four entry points the BASIC loader calls (`0x8000`, `0x8090`, `0x8097`, `0x8EF2`) reaches 56 routines. Forty-five of them start on a 16-, 32-, 64- or 128-byte boundary, with dead padding in the gaps between.
 
-That is not what an assembler produces. It is what a man produces when he is assembling by hand on paper: park each routine at a round address you can hold in your head, leave slack after it, and then editing routine *n* never forces you to recompute every address downstream. The padding is the price of having no symbol table.
+That is not what an assembler produces. It is the fingerprint of the process described at the top of this post, left in the binary: each routine parked at a round address he could hold in his head, with slack after it, so that editing routine *n* never forced him to recompute every address downstream. The padding is the price of having no symbol table — and forty years on it is still the clearest evidence in the file that no assembler was ever involved.
 
 > **Worth noticing** — Not one instruction writes into `0x8000–0x8FFF`. Zero self-modifying code, in 1983, in a game built for speed — when patching your own operands was the standard trick. He didn't need it, because of what the block stamper does instead.
 

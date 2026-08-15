@@ -193,3 +193,54 @@ canvas.mini{position:absolute;inset:auto 12px auto auto;width:112px;height:112px
   .touchpad{display:flex}
   canvas.mini{width:82px;height:82px}
 }
+
+/* ---------- 00 · hand assembly worked example ---------- */
+.asm{border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  font-family:"IBM Plex Mono",monospace;font-size:.78rem}
+.asmhead,.asmrow{display:grid;grid-template-columns:3.6rem 5.6rem 8.2rem minmax(0,1fr);
+  gap:.6rem;align-items:baseline;padding:.5rem .85rem;border-bottom:1px solid var(--line)}
+.asmhead{background:var(--void-3);color:var(--dim);font-size:.68rem;
+  letter-spacing:.14em;text-transform:uppercase}
+.asmrow{background:var(--void-2)}
+.asmrow:last-child{border-bottom:0}
+.asmrow .ad{color:var(--mag)}
+.asmrow .by{color:var(--cyan)}
+.asmrow .mn{color:var(--text-hi)}
+.asmrow .cm{color:var(--dim);font-family:"IBM Plex Sans";font-size:.82rem}
+.asmrow.hi{background:linear-gradient(90deg,rgba(255,46,136,.11),transparent 70%)}
+@media(max-width:560px){
+  .asmhead,.asmrow{grid-template-columns:3.4rem 5.2rem 1fr;row-gap:.15rem}
+  .asmhead span:last-child,.asmrow .cm{grid-column:1/-1;padding-left:.1rem}
+}
+.asmnote{margin-top:.9rem;padding:.75rem .9rem;border:1px solid var(--line);
+  border-left:2px solid var(--cyan);border-radius:3px;background:rgba(23,214,232,.04);
+  font-family:"IBM Plex Mono",monospace;font-size:.74rem;color:var(--dim);line-height:1.75}
+.asmnote b{color:var(--cyan);font-weight:500}
+.asmcap{font-family:"IBM Plex Mono",monospace;font-size:.7rem;color:var(--dim);
+  letter-spacing:.06em;margin-bottom:.7rem;line-height:1.6}
+
+/* ---------- 00 · why the padding exists ---------- */
+.shift{display:grid;gap:.9rem;grid-template-columns:1fr}
+@media(min-width:600px){.shift{grid-template-columns:1fr 1fr}}
+.shiftcol{border:1px solid var(--line);border-radius:3px;background:var(--void-2);padding:.9rem;
+  display:flex;flex-direction:column}
+.shiftcol h4{margin:0 0 .2rem;font-family:"IBM Plex Mono",monospace;font-size:.72rem;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--dim);font-weight:500}
+.shiftcol .sub{font-size:.75rem;color:var(--mid);margin-bottom:.75rem;
+  font-family:"IBM Plex Sans";line-height:1.5}
+.srow{display:grid;grid-template-columns:3.6rem minmax(0,1fr) 1.4rem;gap:.5rem;align-items:center;
+  font-family:"IBM Plex Mono",monospace;font-size:.75rem;padding:.34rem .45rem;
+  border:1px solid var(--line);border-radius:2px;background:var(--void-3);margin-bottom:.32rem}
+.srow .a{color:var(--mag)}
+.srow .n{color:var(--text-hi)}
+.srow .m{text-align:center;font-size:.8rem}
+.srow.moved{border-color:rgba(255,46,136,.5)}
+.srow.moved .a{color:var(--mag);font-weight:600}
+.srow.moved .m{color:var(--mag)}
+.srow.stays .m{color:var(--cyan)}
+.srow.pad{background:transparent;border-style:dashed;color:var(--dim)}
+.srow.pad .n{color:var(--dim)}
+.shiftfoot{font-family:"IBM Plex Mono",monospace;font-size:.71rem;line-height:1.6;
+  margin-top:auto;padding-top:.7rem;border-top:1px solid var(--line)}
+.shiftfoot.bad{color:var(--mag)}
+.shiftfoot.good{color:var(--cyan)}
