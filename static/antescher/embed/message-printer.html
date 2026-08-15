@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ant Attack — the message printer</title>
+<link rel="stylesheet" href="embed.css">
+</head>
+<body>
+<div class="dia">
+<pre class="mermaid">
+flowchart TD
+  A["message(n)"] --> B["HL = 9000<br/>scan for FF, n times"]
+  B --> C["IY = 5C3A<br/>restore ROM system variables"]
+  C --> D{"next byte"}
+  D -->|"FF"| E["done"]
+  D -->|"&#8805; 80"| F["play sound<br/>id = b &amp; 0F, repeat = b &gt;&gt; 4"]
+  D -->|"7D"| G["recolour the viewport"]
+  D -->|"7E"| H["print memory location<br/>as decimal"]
+  D -->|"else"| I["RST 10h<br/>ROM character output"]
+  F --> D
+  G --> D
+  H --> D
+  I --> D
+</pre>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script src="mermaid-init.js"></script>
+<script src="frame.js"></script>
+</body>
+</html>

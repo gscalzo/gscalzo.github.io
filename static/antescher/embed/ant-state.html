@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ant Attack — ant state</title>
+<link rel="stylesheet" href="embed.css">
+</head>
+<body>
+<div class="dia">
+<pre class="mermaid">
+stateDiagram-v2
+  direction LR
+  [*] --> Roaming
+  Roaming --> Pursuing: player within range
+  Pursuing --> Roaming: player lost
+  Pursuing --> Biting: adjacent to player
+  Biting --> Pursuing: player moved away
+  Roaming --> Stunned: grenade nearby
+  Pursuing --> Stunned: grenade nearby
+  Stunned --> Roaming: sleep counter hits 0
+  Stunned --> Paralysed: sleep set to 255
+  Paralysed --> [*]
+</pre>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script src="mermaid-init.js"></script>
+<script src="frame.js"></script>
+</body>
+</html>

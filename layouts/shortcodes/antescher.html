@@ -1,0 +1,66 @@
+{{- /*
+  Embeds one of the standalone figures from /antescher/embed/ in an iframe.
+
+    {{< antescher src="iso-city" title="…" caption="…" height="520" wide="true" >}}
+
+  src      file basename under static/antescher/embed/ (required)
+  title    iframe title, read out by screen readers (required)
+  caption  optional figcaption, markdown allowed
+  height   initial height in px, replaced once the frame reports its own
+  wide     "true" lets the figure break out of the 680px prose column
+
+  The style/script block is emitted once per page.
+*/ -}}
+{{- $src := .Get "src" -}}
+{{- $title := .Get "title" -}}
+{{- $caption := .Get "caption" -}}
+{{- $height := .Get "height" | default "420" -}}
+{{- $wide := eq (.Get "wide") "true" -}}
+{{- if not (.Page.Store.Get "antescherInit") -}}
+{{- .Page.Store.Set "antescherInit" true -}}
+<style>
+  .ant-embed { margin: 2.2rem 0; }
+  .ant-embed iframe {
+    display: block; width: 100%; border: 0; border-radius: 10px;
+    background: #0b0d12; color-scheme: normal;
+  }
+  .ant-embed figcaption {
+    margin-top: 0.65rem; text-align: center; opacity: 0.62;
+    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.78rem; line-height: 1.5; letter-spacing: 0.02em;
+  }
+  /* the canvas viewers want more room than the prose column gives them */
+  @media (min-width: 960px) {
+    .ant-embed--wide { width: 880px; margin-left: -100px; }
+  }
+  @media (min-width: 1200px) {
+    .ant-embed--wide { width: 1080px; margin-left: -200px; }
+  }
+</style>
+<script>
+  /* each embed measures itself and posts its height up — see embed/frame.js */
+  window.addEventListener('message', function (e) {
+    if (e.origin !== window.location.origin) return;
+    var d = e.data;
+    if (!d || d.antescher !== 'height' || !d.height) return;
+    var frames = document.querySelectorAll('iframe.ant-frame');
+    for (var i = 0; i < frames.length; i++) {
+      if (frames[i].contentWindow === e.source) {
+        frames[i].style.height = d.height + 'px';
+        return;
+      }
+    }
+  });
+</script>
+{{- end -}}
+<figure class="ant-embed{{ if $wide }} ant-embed--wide{{ end }}">
+  <iframe
+    class="ant-frame"
+    src="{{ printf "/antescher/embed/%s.html" $src | relURL }}"
+    title="{{ $title }}"
+    loading="lazy"
+    scrolling="no"
+    style="height:{{ $height }}px"
+  ></iframe>
+  {{- with $caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end -}}
+</figure>

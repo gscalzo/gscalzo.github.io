@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Antescher — one byte, three jobs</title>
+<link rel="stylesheet" href="embed.css">
+</head>
+<body>
+<div class="dia">
+<pre class="mermaid">
+flowchart LR
+  C["city&#91;y*128+x&#93;<br/>one byte"]
+  C -->|"bits 0-5"| R["Renderer<br/>which cubes to stamp"]
+  C -->|"bits 0-5"| T["Terrain collision<br/>can I stand / walk / fall?"]
+  C -->|"bit 7"| E["Entity collision<br/>is someone already here?"]
+  class C prim
+</pre>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script src="mermaid-init.js"></script>
+<script src="frame.js"></script>
+</body>
+</html>
