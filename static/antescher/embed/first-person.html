@@ -213,7 +213,10 @@ Antescher.ready.then(function (CITY) {
     if (k === 'escape') stop();
   };
   const ku = e => { keys[e.key.toLowerCase()] = false; };
-  cv.addEventListener('keydown', kd); cv.addEventListener('keyup', ku);
+  /* on window rather than the canvas: in an iframe, focus slips to the
+     start button or the touch pad and the keys end up scrolling the host
+     page. Both handlers no-op unless we are actually running. */
+  window.addEventListener('keydown', kd); window.addEventListener('keyup', ku);
   window.addEventListener('blur', () => { for (const k in keys) keys[k]=false; });
 
   /* drag to look */

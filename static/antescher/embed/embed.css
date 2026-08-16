@@ -170,6 +170,10 @@ canvas.mini{position:absolute;inset:auto 12px auto auto;width:112px;height:112px
   padding:.95rem 1.9rem;cursor:pointer;transition:transform .14s}
 .bigbtn:hover{transform:translate(-50%,-50%) scale(1.035)}
 .bigbtn[hidden]{display:none}
+/* game-over state: banner and restart button both show at once, so drop the
+   button below the banner instead of stacking two centered elements */
+.bigbtn.stacked{top:auto;bottom:9%;transform:translateX(-50%)}
+.bigbtn.stacked:hover{transform:translateX(-50%) scale(1.035)}
 .hud{position:absolute;left:0;right:0;top:0;display:flex;gap:1.4rem;flex-wrap:wrap;
   padding:.7rem 1rem;background:linear-gradient(180deg,rgba(7,8,12,.9),transparent);
   font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.11em;color:var(--dim)}

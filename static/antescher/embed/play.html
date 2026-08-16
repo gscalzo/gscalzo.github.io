@@ -221,6 +221,10 @@ Antescher.ready.then(function (CITY) {
   }
   function drawAnt(sx, sy, TW, colour, frame, asleep){
     const s = TW/9, sw = (frame&1) ? 1 : -1;
+    /* ant art is squat: vertical scale larger than horizontal so height lands just
+       above the human figure while width stays inside the tile pitch. Transform
+       anchored at the feet so it stays planted on its block. */
+    g.save(); g.translate(sx, sy); g.scale(1.6, 2.6); g.translate(-sx, -sy);
     g.fillStyle = asleep ? '#6A7284' : colour;
     g.beginPath(); g.ellipse(sx+1.6*s, sy-2.6*s, 2.9*s, 2.0*s, 0, 0, 7); g.fill();
     g.beginPath(); g.ellipse(sx-1.4*s, sy-3.0*s, 1.9*s, 1.5*s, 0, 0, 7); g.fill();
@@ -238,6 +242,7 @@ Antescher.ready.then(function (CITY) {
       g.strokeStyle = '#17D6E8'; g.lineWidth = 1.2;
       g.beginPath(); g.moveTo(sx-3.5*s, sy-6.5*s); g.lineTo(sx+3.5*s, sy-6.5*s); g.stroke();
     }
+    g.restore();
   }
 
   function render(){
@@ -340,7 +345,7 @@ Antescher.ready.then(function (CITY) {
   function start(){
     if (!CITY) return;
     reset(); running = true; last = 0; banner.hidden = true;
-    startBtn.hidden = true;
+    startBtn.hidden = true; startBtn.classList.remove('stacked');
     cv.setAttribute('tabindex','0'); cv.focus();
     raf = requestAnimationFrame(tick);
   }
@@ -349,12 +354,16 @@ Antescher.ready.then(function (CITY) {
     banner.innerHTML = title + '<small>' + sub + '</small>';
     banner.hidden = false;
     startBtn.textContent = 'Again';
-    startBtn.hidden = false;
+    startBtn.hidden = false; startBtn.classList.add('stacked');
     say(title + '. ' + sub);
   }
 
   startBtn.addEventListener('click', start);
-  cv.addEventListener('keydown', e => {
+  /* keys go on window, not the canvas: inside an iframe a click on the HUD,
+     the banner or the touch pad pulls focus off the canvas, and the arrow
+     keys then bubble to the host page and scroll it instead of driving the
+     game. Both handlers no-op unless we are actually running. */
+  window.addEventListener('keydown', e => {
     if (!running) return;
     const k = e.key.toLowerCase();
     if (k === ' ' || k === 'spacebar'){
@@ -368,7 +377,7 @@ Antescher.ready.then(function (CITY) {
       keys[k] = true; e.preventDefault();
     }
   });
-  cv.addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
+  window.addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
   window.addEventListener('blur', () => { for (const k in keys) keys[k]=false; });
 
   document.querySelectorAll('#gTouch button').forEach(b => {

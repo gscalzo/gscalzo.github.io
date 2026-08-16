@@ -8,6 +8,9 @@
   caption  optional figcaption, markdown allowed
   height   initial height in px, replaced once the frame reports its own
   wide     "true" lets the figure break out of the 680px prose column
+  kind     "explain" (default, a diagram to read) or "experiment" (live, you
+           drive it) — experiment figures get an accent frame and a Try it chip
+  hint     one short line on the chip saying what you can do in there
 
   The style/script block is emitted once per page.
 */ -}}
@@ -16,6 +19,8 @@
 {{- $caption := .Get "caption" -}}
 {{- $height := .Get "height" | default "420" -}}
 {{- $wide := eq (.Get "wide") "true" -}}
+{{- $kind := .Get "kind" | default "explain" -}}
+{{- $hint := .Get "hint" -}}
 {{- if not (.Page.Store.Get "antescherInit") -}}
 {{- .Page.Store.Set "antescherInit" true -}}
 <style>
@@ -36,6 +41,36 @@
   @media (min-width: 1200px) {
     .ant-embed--wide { width: 1080px; margin-left: -200px; }
   }
+
+  /* an explain figure is a diagram you read; an experiment figure is one you
+     drive, so it gets a frame that says so before you scroll past it */
+  .ant-embed--experiment {
+    padding: 0.6rem 0.6rem 0.75rem;
+    border: 1px solid rgba(37, 99, 235, 0.32);
+    border-radius: 13px;
+    background: rgba(37, 99, 235, 0.05);
+  }
+  .ant-embed--experiment iframe { border-radius: 8px; }
+  .ant-embed__chip {
+    display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
+    margin: 0 0.2rem 0.55rem;
+    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.68rem; letter-spacing: 0.11em; text-transform: uppercase;
+    color: #2563eb;
+  }
+  .ant-embed__chip::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: currentColor; flex: none;
+  }
+  .ant-embed__hint {
+    text-transform: none; letter-spacing: 0.01em;
+    font-size: 0.76rem; opacity: 0.72;
+  }
+  .dark .ant-embed--experiment {
+    border-color: rgba(96, 165, 250, 0.3);
+    background: rgba(96, 165, 250, 0.07);
+  }
+  .dark .ant-embed__chip { color: #60a5fa; }
 </style>
 <script>
   /* each embed measures itself and posts its height up — see embed/frame.js */
@@ -53,7 +88,10 @@
   });
 </script>
 {{- end -}}
-<figure class="ant-embed{{ if $wide }} ant-embed--wide{{ end }}">
+<figure class="ant-embed ant-embed--{{ $kind }}{{ if $wide }} ant-embed--wide{{ end }}">
+  {{- if eq $kind "experiment" }}
+  <p class="ant-embed__chip">Try it{{ with $hint }}<span class="ant-embed__hint">{{ . }}</span>{{ end }}</p>
+  {{- end }}
   <iframe
     class="ant-frame"
     src="{{ printf "/antescher/embed/%s.html" $src | relURL }}"
