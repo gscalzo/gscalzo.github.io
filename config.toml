@@ -20,15 +20,19 @@ googleAnalytics = "G-B6YT2W23QZ"
   weight = 3
 
 [[menu.main]]
-  name = "Blog"
+  name = "Writing"
   url = "/blog/"
   weight = 4
 
 [params]
+  description = "AI, mobile engineering, and the craft of growing people."
   github = "gscalzo"
   linkedin = "giordanoscalzo"
   twitter = "giordanoscalzo"
   rss = true
+
+  [params.author]
+    name = "Giordano Scalzo"
 
 [markup]
   [markup.goldmark]

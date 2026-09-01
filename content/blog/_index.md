@@ -1,8 +1,9 @@
 +++
-title = "Blog"
+title = "Writing"
+description = "Essays and field notes on AI, mobile engineering, software leadership, and the old machines that made me curious."
 draft = false
 +++
 
-# Blog
-
-Welcome to my blog! Here you'll find posts about technology, coding, and more. 
+<p class="section-label">Field notes</p>
+<h1>Writing</h1>
+<p>AI, mobile engineering, software leadership, and the old machines that made me curious.</p>

@@ -1,0 +1,46 @@
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>{{ if not .IsHome }}{{ .Title }} · {{ end }}{{ site.Title }}</title>
+  {{- $siteAuthor := site.Params.author.name | default site.Params.name | default site.Title -}}
+  {{- $description := .Description | default .Summary | default site.Params.description | default "A personal blog about AI, mobile engineering, and growing software teams." -}}
+  <meta name="description" content="{{ $description | plainify }}" />
+  <meta name="author" content="{{ .Params.author | default $siteAuthor }}" />
+  <meta name="theme-color" content="#f5f2ec" />
+
+  <script>
+    (() => {
+      const storedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+
+  {{- $main := resources.Get "main.css" -}}
+  {{- $custom := resources.Get "custom.css" -}}
+  {{- $css := slice $main $custom | resources.Concat "main.css" | minify -}}
+  <link rel="preload stylesheet" as="style" href="{{ $css.Permalink }}" />
+
+  {{- if and .IsPage (not site.Params.disableHLJS) -}}
+  <script defer src="{{ `highlight.min.js` | absURL }}" onload="hljs.initHighlightingOnLoad();"></script>
+  {{- end -}}
+  {{- if or .Params.math site.Params.math -}}{{ partial "math.html" . }}{{- end -}}
+
+  <link rel="icon" href="{{ site.Params.favicon | default `favicon.ico` | absURL }}" />
+  <link rel="apple-touch-icon" href="{{ site.Params.appleTouchIcon | default `apple-touch-icon.png` | absURL }}" />
+  {{ hugo.Generator }}
+
+  {{- if or hugo.IsProduction (eq site.Params.env "production") -}}
+    {{ template "_internal/google_analytics.html" . }}
+    {{ template "_internal/schema.html" . }}
+    {{ template "_internal/opengraph.html" . }}
+    {{ template "_internal/twitter_cards.html" . }}
+    {{- range .AlternativeOutputFormats -}}
+      <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ site.Title }}" />
+    {{- end -}}
+    <link rel="canonical" href="{{ .Permalink }}" />
+  {{- end -}}
+</head>

@@ -1,1 +1,29 @@
-{{ define "main" }} {{ .Content }} {{ end }}
+{{ define "main" }}
+  {{ .Content }}
+
+  {{- $posts := first 5 (where site.RegularPages.ByDate.Reverse "Section" "blog") -}}
+  <section class="home-writing" aria-labelledby="recent-writing-title">
+    <div class="section-heading">
+      <div>
+        <p class="section-label">From the workbench</p>
+        <h2 id="recent-writing-title">Recent writing</h2>
+      </div>
+      <a class="arrow-link" href="/blog/">All writing <span aria-hidden="true">↗</span></a>
+    </div>
+
+    <ol class="writing-list">
+      {{- range $posts -}}
+      <li>
+        <a href="{{ .RelPermalink }}">
+          <time datetime="{{ .Date.Format `2006-01-02` }}">{{ .Date.Format "02 Jan 2006" }}</time>
+          <span class="writing-list__copy">
+            <strong>{{ .Title }}</strong>
+            {{- with .Description }}<span>{{ . }}</span>{{- end }}
+          </span>
+          <span class="writing-list__arrow" aria-hidden="true">↗</span>
+        </a>
+      </li>
+      {{- end -}}
+    </ol>
+  </section>
+{{ end }}

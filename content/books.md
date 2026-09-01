@@ -2,123 +2,97 @@
 date = '2025-06-01T20:56:40+01:00'
 draft = false
 title = 'Books by Gio Scalzo'
+description = 'Books by Giordano Scalzo on AI, Swift, SwiftUI, and software design.'
 +++
 
-<style>
-.book-card-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin: 2.5rem 0 0.5rem 0;
-}
-.book-card-desc {
-  margin-bottom: 1rem;
-}
-.book-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 2rem;
-}
-.book-card:last-child {
-  border-bottom: none;
-}
-.book-card-info {
-  flex: 1;
-  min-width: 0;
-  margin-top: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-.book-cover {
-  max-width: 220px;
-  height: auto;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.18), 0 1.5px 6px rgba(0,0,0,0.12);
-  border-radius: 4px;
-  display: block;
-  margin-top: 0;
-}
-</style>
-
-It all started when I was watching WWDC 2014 at NSLondon.
-Apple presented Swift and I was shocked.
-
-That night, I converted a clone of Flappy Bird I had made into Swift.
-I tweeted it, and after a few weeks, I was invited to present it, along with the rest of the language, to a new meetup group just created: 'Swift London.'
-
-The presentation was a success, and somehow a representative of Packt Publishing contacted me to write a book about Swift.
-I was shocked again, since I was sure I couldn't write a book.
-However, I said to myself, 'Let's give it a try, at least for a chapter.'
-
-And this resulted in six published books!
-
-<div class="book-card-title">Fix the Ladder</div>
-<div class="book-card-desc">Growing Junior Engineers in the Age of AI. A practical field guide for engineering managers and CTOs who want AI speed without losing engineering judgement.</div>
-<div class="book-card">
-  <img src="/images/books/fix-the-ladder.jpg" alt="Fix the Ladder book cover" class="book-cover" />
-  <div class="book-card-info">
-    <div><strong>Status:</strong> Work in progress</div>
-    <div><a href="https://leanpub.com/fixtheladder">Explore the book on Leanpub</a></div>
-  </div>
+<div class="books-intro">
+  <p class="books-intro__lead">It began with a Swift demo at NSLondon and one thought: “Let’s give it a try, at least for a chapter.” Six published books later, I’m still giving it a try.</p>
+  <p class="books-intro__story">I wrote my first book after converting a Flappy Bird clone to Swift on the night Apple announced the language. Writing became another way to learn in public. The subjects have changed, from Swift and software design to engineering in the age of AI, but that part has not.</p>
 </div>
 
-<div class="book-card-title">SwiftUI Cookbook - 2nd Edition</div>
-<div class="book-card-desc">A guide to solving the most common problems and learning best practices while building SwiftUI apps</div>
-<div class="book-card">
-  <img src="/images/books/swiftui-cookbook-v2.jpg" alt="SwiftUI Cookbook" class="book-cover" />
-  <div class="book-card-info">
-    <div><strong>Rating:</strong> 4.2 out of 5 stars (40 reviews)</div>
-    <div><a href="https://amzn.eu/d/0HHnePn" target="_blank">View on Amazon UK</a></div>
-  </div>
-</div>
+<div class="books-grid">
+  <article class="book-entry">
+    <img src="/images/books/fix-the-ladder.jpg" alt="Fix the Ladder book cover" />
+    <div class="book-entry__copy">
+      <p class="section-label">Current project</p>
+      <h2>Fix the Ladder</h2>
+      <p>Growing Junior Engineers in the Age of AI. A practical field guide for engineering managers and CTOs who want AI speed without losing engineering judgement.</p>
+      <div class="book-meta">
+        <span>Work in progress</span>
+        <a href="https://leanpub.com/fixtheladder">Explore on Leanpub ↗</a>
+      </div>
+    </div>
+  </article>
 
-<div class="book-card-title">SwiftUI Cookbook</div>
-<div class="book-card-desc">A guide to solving the most common problems and learning best practices while building SwiftUI apps</div>
-<div class="book-card">
-  <img src="/images/books/swiftui-cookbook.jpg" alt="SwiftUI Cookbook" class="book-cover" />
-  <div class="book-card-info">
-    <div><strong>Rating:</strong> 4.1 out of 5 stars (27 reviews)</div>
-    <div><a href="https://amzn.eu/d/iAMu2T3" target="_blank">View on Amazon UK</a></div>
-  </div>
-</div>
+  <article class="book-entry">
+    <img src="/images/books/swiftui-cookbook-v2.jpg" alt="SwiftUI Cookbook, second edition book cover" />
+    <div class="book-entry__copy">
+      <h2>SwiftUI Cookbook, 2nd Edition</h2>
+      <p>Solutions and best practices for building SwiftUI apps.</p>
+      <div class="book-meta">
+        <span>4.2 · 40 reviews</span>
+        <a href="https://amzn.eu/d/0HHnePn">Amazon UK ↗</a>
+      </div>
+    </div>
+  </article>
 
-<div class="book-card-title">Hands-On Design Patterns with Swift</div>
-<div class="book-card-desc">Master Swift best practices to build modular applications for mobile, desktop, and server platforms</div>
-<div class="book-card">
-  <img src="/images/books/hands-on-design-patterns-swift.jpg" alt="Hands-On Design Patterns with Swift" class="book-cover" />
-  <div class="book-card-info">
-    <div><strong>Rating:</strong> 4.7 out of 5 stars (7 reviews)</div>
-    <div><a href="https://amzn.eu/d/aLdrNJx" target="_blank">View on Amazon UK</a></div>
-  </div>
-</div>
+  <article class="book-entry">
+    <img src="/images/books/swiftui-cookbook.jpg" alt="SwiftUI Cookbook book cover" />
+    <div class="book-entry__copy">
+      <h2>SwiftUI Cookbook</h2>
+      <p>A practical guide to common SwiftUI problems and patterns.</p>
+      <div class="book-meta">
+        <span>4.1 · 27 reviews</span>
+        <a href="https://amzn.eu/d/iAMu2T3">Amazon UK ↗</a>
+      </div>
+    </div>
+  </article>
 
-<div class="book-card-title">Swift: Developing iOS Applications</div>
-<div class="book-card-desc">Unleash the power of Swift and discover the skills required to build incredible robust iOS applications</div>
-<div class="book-card">
-  <img src="/images/books/swift-developing-ios-applications.jpg" alt="Swift: Developing iOS Applications" class="book-cover" />
-  <div class="book-card-info">
-    <div><strong>Rating:</strong> 5 out of 5 stars (1 reviews)</div>
-    <div><a href="https://amzn.eu/d/1QNMtON" target="_blank">View on Amazon UK</a></div>
-  </div>
-</div>
+  <article class="book-entry">
+    <img src="/images/books/hands-on-design-patterns-swift.jpg" alt="Hands-On Design Patterns with Swift book cover" />
+    <div class="book-entry__copy">
+      <h2>Hands-On Design Patterns with Swift</h2>
+      <p>Modular software design for mobile, desktop, and server applications.</p>
+      <div class="book-meta">
+        <span>4.7 · 7 reviews</span>
+        <a href="https://amzn.eu/d/aLdrNJx">Amazon UK ↗</a>
+      </div>
+    </div>
+  </article>
 
-<div class="book-card-title">Swift 2 By Example</div>
-<div class="book-card-desc">Create robust and estensible iOS applications using the advanced Swift 2 features</div>
-<div class="book-card">
-  <img src="/images/books/swift-2-by-example.jpg" alt="Swift 2 By Example" class="book-cover" />
-  <div class="book-card-info">
-    <div><strong>Rating:</strong> 5 out of 5 stars (1 reviews)</div>
-    <div><a href="https://amzn.eu/d/3K0yoLK" target="_blank">View on Amazon UK</a></div>
-  </div>
-</div>
+  <article class="book-entry">
+    <img src="/images/books/swift-developing-ios-applications.jpg" alt="Swift: Developing iOS Applications book cover" />
+    <div class="book-entry__copy">
+      <h2>Swift: Developing iOS Applications</h2>
+      <p>Building robust iOS applications with Swift.</p>
+      <div class="book-meta">
+        <span>5.0 · 1 review</span>
+        <a href="https://amzn.eu/d/1QNMtON">Amazon UK ↗</a>
+      </div>
+    </div>
+  </article>
 
-<div class="book-card-title">Swift By Example</div>
-<div class="book-card-desc">Create funky, impressive applications using Swift</div>
-<div class="book-card">
-  <img src="/images/books/swift-by-example.jpg" alt="Swift By Example" class="book-cover" />
-  <div class="book-card-info">
-    <div><strong>Rating:</strong> 4.0 out of 5 stars (10 reviews)</div>
-    <div><a href="https://amzn.eu/d/aWTQ50L" target="_blank">View on Amazon UK</a></div>
-  </div>
-</div>
+  <article class="book-entry">
+    <img src="/images/books/swift-2-by-example.jpg" alt="Swift 2 By Example book cover" />
+    <div class="book-entry__copy">
+      <h2>Swift 2 By Example</h2>
+      <p>Advanced Swift 2 techniques through practical applications.</p>
+      <div class="book-meta">
+        <span>5.0 · 1 review</span>
+        <a href="https://amzn.eu/d/3K0yoLK">Amazon UK ↗</a>
+      </div>
+    </div>
+  </article>
 
----
+  <article class="book-entry">
+    <img src="/images/books/swift-by-example.jpg" alt="Swift By Example book cover" />
+    <div class="book-entry__copy">
+      <h2>Swift By Example</h2>
+      <p>Learning Swift by building small, concrete applications.</p>
+      <div class="book-meta">
+        <span>4.0 · 10 reviews</span>
+        <a href="https://amzn.eu/d/aWTQ50L">Amazon UK ↗</a>
+      </div>
+    </div>
+  </article>
+</div>

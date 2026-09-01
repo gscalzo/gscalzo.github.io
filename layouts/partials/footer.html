@@ -1,68 +1,16 @@
-<footer
-  class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
->
-  <div class="mr-auto">
-    {{- if site.Copyright -}} {{- site.Copyright -}} {{- else -}} &copy; {{-
-    now.Year }}
-    <a class="link" href="{{- `` | absURL -}}">{{- site.Title -}}</a>
-    {{- end -}}
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div>
+      <a class="site-footer__name" href="{{ `` | absURL }}">Gio Scalzo</a>
+      <p>AI, mobile engineering, and the craft of growing people.</p>
+    </div>
+    <nav class="site-footer__links" aria-label="Social links">
+      {{- with site.Params.linkedin -}}<a href="https://linkedin.com/in/{{ . }}" rel="me">LinkedIn</a>{{- end -}}
+      {{- with site.Params.github -}}<a href="https://github.com/{{ . }}" rel="me">GitHub</a>{{- end -}}
+      {{- $xHandle := site.Params.x | default site.Params.twitter -}}
+      {{- with $xHandle -}}<a href="https://x.com/{{ . }}" rel="me">X</a>{{- end -}}
+      <a href="{{ `/blog/index.xml` | absURL }}">RSS</a>
+    </nav>
+    <p class="site-footer__copyright">© {{ now.Year }} Gio Scalzo</p>
   </div>
-
-  <nav class="flex items-center justify-center space-x-6 dark:invert">
-    {{- with site.Params.github -}}
-      <a
-        class="block h-5 w-5"
-        href="https://github.com/{{ . }}"
-        target="_blank"
-        rel="me"
-        aria-label="GitHub"
-        title="GitHub"
-      >
-        <img
-          src="{{- `github.svg` | relURL -}}"
-          alt=""
-          width="20"
-          height="20"
-          loading="lazy"
-        />
-      </a>
-    {{- end -}}
-    {{- with site.Params.linkedin -}}
-      <a
-        class="block h-5 w-5"
-        href="https://linkedin.com/in/{{ . }}"
-        target="_blank"
-        rel="me"
-        aria-label="LinkedIn"
-        title="LinkedIn"
-      >
-        <img
-          src="{{- `linkedin.svg` | relURL -}}"
-          alt=""
-          width="20"
-          height="20"
-          loading="lazy"
-        />
-      </a>
-    {{- end -}}
-    {{- $xHandle := site.Params.x | default site.Params.twitter -}}
-    {{- with $xHandle -}}
-      <a
-        class="block h-5 w-5"
-        href="https://x.com/{{ . }}"
-        target="_blank"
-        rel="me"
-        aria-label="X"
-        title="X"
-      >
-        <img
-          src="{{- (cond (fileExists `static/x.svg`) `x.svg` `twitter.svg`) | relURL -}}"
-          alt=""
-          width="20"
-          height="20"
-          loading="lazy"
-        />
-      </a>
-    {{- end -}}
-  </nav>
 </footer>

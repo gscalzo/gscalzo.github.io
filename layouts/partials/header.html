@@ -1,118 +1,56 @@
-<header
-  class="mx-auto flex h-[4.5rem] max-w-(--w) px-8 whitespace-nowrap lg:justify-center"
->
-  <div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto">
-    <a
-      class="-translate-y-[1px] text-2xl font-medium"
-      href="{{- `` | absURL -}}"
-      >{{ site.Title }}</a
-    >
-    <div
-      class="btn-dark text-[0px] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer {{ if site.Params.monoDarkIcon }}[background:url(./theme.svg)_left_center/cover_no-repeat] dark:invert{{ else }}[background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)]{{ end }} dark:[background-position:right]"
-      role="button"
-      aria-label="Dark"
-    ></div>
-  </div>
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-brand" href="{{ `` | absURL }}" aria-label="Gio Scalzo, home">
+      <span class="site-brand__mark" aria-hidden="true">GS</span>
+      <span>Gio Scalzo</span>
+    </a>
 
-  <div
-    class="btn-menu relative z-50 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden ltr:-mr-8 rtl:-ml-8"
-    role="button"
-    aria-label="Menu"
-  ></div>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+      <span>Menu</span>
+      <span class="menu-toggle__lines" aria-hidden="true"></span>
+    </button>
 
-  {{- $bg_color := $.Scratch.Get "bg_color" -}}<!---->
-
-  <script>
-    // base
-    const htmlClass = document.documentElement.classList;
-    setTimeout(() => {
-      htmlClass.remove('not-ready');
-    }, 10);
-
-    // mobile menu
-    const btnMenu = document.querySelector('.btn-menu');
-    btnMenu.addEventListener('click', () => {
-      htmlClass.toggle('open');
-    });
-
-    // dark theme
-    const metaTheme = document.querySelector('meta[name="theme-color"]');
-    const lightBg = '{{- $bg_color -}}'.replace(/"/g, '');
-    const setDark = (isDark) => {
-      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
-      htmlClass[isDark ? 'add' : 'remove']('dark');
-      localStorage.setItem('dark', isDark);
-    };
-
-    // init
-    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-    if (htmlClass.contains('dark')) {
-      setDark(true);
-    } else {
-      const darkVal = localStorage.getItem('dark');
-      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
-    }
-
-    // listen system
-    darkScheme.addEventListener('change', (event) => {
-      setDark(event.matches);
-    });
-
-    // manual switch
-    const btnDark = document.querySelector('.btn-dark');
-    btnDark.addEventListener('click', () => {
-      setDark(localStorage.getItem('dark') !== 'true');
-    });
-  </script>
-
-  <div
-    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full flex-col justify-center bg-(--bg) pb-16 duration-200 select-none lg:static lg:h-auto lg:flex-row lg:bg-transparent! lg:pb-0 lg:transition-none"
-  >
-    {{- $url := .RelPermalink -}}<!---->
-    {{- with site.Menus.main -}}
-    <nav
-      class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse"
-    >
-      {{- range . -}}
-        {{- if eq .URL "/blog/" -}}
-      <div class="flex items-center justify-center gap-2">
-        <a
-          class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
-          href="{{- .URL -}}"
-          >{{- .Name -}}</a
-        >
-        <a
-          class="flex h-5 w-5 items-center justify-center"
-          href="{{- "/blog/index.xml" | absURL -}}"
-          target="_blank"
-          rel="alternate"
-          type="application/rss+xml"
-          aria-label="Blog RSS feed"
-          title="Blog RSS"
-        >
-          <svg
-            aria-hidden="true"
-            focusable="false"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-          >
-            <path
-              d="M6 18a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm-4-9.5c5.523 0 10 4.477 10 10h-2c0-4.418-3.582-8-8-8v-2zm0-4.5c8.284 0 15 6.716 15 15h-2a13 13 0 0 0-13-13V4z"
-            />
-          </svg>
-        </a>
-      </div>
-        {{- else -}}
-      <a
-        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
-        href="{{- .URL -}}"
-        >{{- .Name -}}</a
-      >
+    <div class="site-navigation" id="site-navigation">
+      {{- $current := .RelPermalink -}}
+      {{- with site.Menus.main -}}
+      <nav class="site-nav" aria-label="Primary navigation">
+        {{- range . -}}
+          {{- $active := or (eq $current .URL) (and (ne .URL "/") (hasPrefix $current .URL)) -}}
+          <a href="{{ .URL }}"{{ if $active }} class="is-active" aria-current="page"{{ end }}>{{ .Name }}</a>
         {{- end -}}
+      </nav>
       {{- end -}}
-    </nav>
-    {{- end -}}<!---->
+      <a class="rss-link" href="{{ `/blog/index.xml` | absURL }}" aria-label="RSS feed">RSS</a>
+      <button class="theme-toggle" type="button" aria-label="Switch colour theme">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path>
+        </svg>
+        <span>Theme</span>
+      </button>
+    </div>
   </div>
 </header>
+
+<script>
+  (() => {
+    const root = document.documentElement;
+    const menuButton = document.querySelector('.menu-toggle');
+    const themeButton = document.querySelector('.theme-toggle');
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+
+    const updateTheme = (dark) => {
+      root.classList.toggle('dark', dark);
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+      themeMeta?.setAttribute('content', dark ? '#171614' : '#f5f2ec');
+    };
+
+    menuButton?.addEventListener('click', () => {
+      const open = root.classList.toggle('menu-open');
+      menuButton.setAttribute('aria-expanded', String(open));
+    });
+
+    themeButton?.addEventListener('click', () => updateTheme(!root.classList.contains('dark')));
+    setTimeout(() => root.classList.remove('not-ready'), 10);
+  })();
+</script>
