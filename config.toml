@@ -1,5 +1,5 @@
 baseURL = "https://gioscalzo.com/"
-languageCode = "en-us"
+locale = "en-us"
 title = "Gio Scalzo"
 theme = "paper"
 googleAnalytics = "G-B6YT2W23QZ"

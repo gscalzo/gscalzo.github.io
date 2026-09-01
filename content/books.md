@@ -51,6 +51,16 @@ However, I said to myself, 'Let's give it a try, at least for a chapter.'
 
 And this resulted in six published books!
 
+<div class="book-card-title">Fix the Ladder</div>
+<div class="book-card-desc">Growing Junior Engineers in the Age of AI. A practical field guide for engineering managers and CTOs who want AI speed without losing engineering judgement.</div>
+<div class="book-card">
+  <img src="/images/books/fix-the-ladder.jpg" alt="Fix the Ladder book cover" class="book-cover" />
+  <div class="book-card-info">
+    <div><strong>Status:</strong> Work in progress</div>
+    <div><a href="https://leanpub.com/fixtheladder">Explore the book on Leanpub</a></div>
+  </div>
+</div>
+
 <div class="book-card-title">SwiftUI Cookbook - 2nd Edition</div>
 <div class="book-card-desc">A guide to solving the most common problems and learning best practices while building SwiftUI apps</div>
 <div class="book-card">
