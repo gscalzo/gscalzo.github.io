@@ -7,6 +7,8 @@
     <nav class="site-footer__links" aria-label="Social links">
       {{- with site.Params.linkedin -}}<a href="https://linkedin.com/in/{{ . }}" rel="me">LinkedIn</a>{{- end -}}
       {{- with site.Params.github -}}<a href="https://github.com/{{ . }}" rel="me">GitHub</a>{{- end -}}
+      {{- with site.Params.medium -}}<a href="{{ . }}" rel="me">Medium</a>{{- end -}}
+      {{- with site.Params.stackoverflow -}}<a href="{{ . }}" rel="me">Stack Overflow</a>{{- end -}}
       {{- $xHandle := site.Params.x | default site.Params.twitter -}}
       {{- with $xHandle -}}<a href="https://x.com/{{ . }}" rel="me">X</a>{{- end -}}
       <a href="{{ `/blog/index.xml` | absURL }}">RSS</a>

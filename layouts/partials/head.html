@@ -2,11 +2,16 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>{{ if not .IsHome }}{{ .Title }} · {{ end }}{{ site.Title }}</title>
+  <title>{{ if .IsHome }}{{ .Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
   {{- $siteAuthor := site.Params.author.name | default site.Params.name | default site.Title -}}
   {{- $description := .Description | default .Summary | default site.Params.description | default "A personal blog about AI, mobile engineering, and growing software teams." -}}
   <meta name="description" content="{{ $description | plainify }}" />
   <meta name="author" content="{{ .Params.author | default $siteAuthor }}" />
+  {{- if eq .Kind "404" }}
+  <meta name="robots" content="noindex, nofollow" />
+  {{- else }}
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  {{- end }}
   <meta name="theme-color" content="#f5f2ec" />
 
   <script>
@@ -43,4 +48,6 @@
     {{- end -}}
     <link rel="canonical" href="{{ .Permalink }}" />
   {{- end -}}
+
+  {{- partial "structured-data.html" . -}}
 </head>

@@ -1,0 +1,112 @@
+{{- $personID := printf "%s#person" site.BaseURL -}}
+{{- $websiteID := printf "%s#website" site.BaseURL -}}
+{{- $defaultImage := "/images/social/giordano-scalzo.jpg" | absURL -}}
+{{- $sameAs := slice
+  "https://www.linkedin.com/in/giordanoscalzo/"
+  "https://github.com/gscalzo"
+  "https://medium.com/@giordanoscalzo"
+  "https://stackoverflow.com/users/288379/giordano-scalzo"
+  "https://x.com/giordanoscalzo"
+-}}
+
+{{- $person := dict
+  "@type" "Person"
+  "@id" $personID
+  "name" "Giordano Scalzo"
+  "alternateName" "Gio Scalzo"
+  "url" site.BaseURL
+  "image" $defaultImage
+  "jobTitle" "AI and Engineering Leader"
+  "description" site.Params.description
+  "knowsAbout" (slice "Artificial intelligence" "Engineering leadership" "Mobile application development" "Software engineering" "Swift")
+  "sameAs" $sameAs
+-}}
+{{- $website := dict
+  "@type" "WebSite"
+  "@id" $websiteID
+  "url" site.BaseURL
+  "name" "Giordano Scalzo"
+  "description" site.Params.description
+  "publisher" (dict "@id" $personID)
+  "inLanguage" "en-GB"
+-}}
+{{- $graph := slice $person $website -}}
+
+{{- if .IsHome -}}
+  {{- $profilePage := dict
+    "@type" "ProfilePage"
+    "@id" .Permalink
+    "url" .Permalink
+    "name" "Giordano Scalzo | Engineering Leader, AI & Mobile"
+    "description" .Description
+    "mainEntity" (dict "@id" $personID)
+    "isPartOf" (dict "@id" $websiteID)
+    "inLanguage" "en-GB"
+  -}}
+  {{- $currentBook := dict
+    "@type" "Book"
+    "@id" (printf "%s#fix-the-ladder" site.BaseURL)
+    "name" "Fix the Ladder"
+    "alternateName" "Fix the Ladder: Growing Junior Engineers in the Age of AI"
+    "description" "A practical field guide for engineering managers and CTOs who want the speed of AI without losing the judgement and apprenticeship that grow strong engineers."
+    "author" (dict "@id" $personID)
+    "url" "https://leanpub.com/fixtheladder"
+    "image" ("/images/books/fix-the-ladder.jpg" | absURL)
+    "inLanguage" "en"
+  -}}
+  {{- $graph = $graph | append $profilePage $currentBook -}}
+{{- end -}}
+
+{{- if and .IsPage (eq .Section "blog") -}}
+  {{- $articleImage := $defaultImage -}}
+  {{- with .Params.images }}{{ $articleImage = (index . 0) | absURL }}{{ end -}}
+  {{- $articleDescription := .Description | default .Summary | plainify -}}
+  {{- $article := dict
+    "@type" "BlogPosting"
+    "@id" .Permalink
+    "url" .Permalink
+    "headline" .Title
+    "description" $articleDescription
+    "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00")
+    "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")
+    "author" (dict "@id" $personID)
+    "publisher" (dict "@id" $personID)
+    "image" $articleImage
+    "mainEntityOfPage" .Permalink
+    "isPartOf" (dict "@id" $websiteID)
+    "inLanguage" "en-GB"
+  -}}
+  {{- $graph = $graph | append $article -}}
+{{- end -}}
+
+{{- if and .File (eq .File.TranslationBaseName "books") -}}
+  {{- $bookAuthor := dict "@id" $personID -}}
+  {{- $books := slice
+    (dict "@type" "Book" "name" "Fix the Ladder" "author" $bookAuthor "url" "https://leanpub.com/fixtheladder" "image" ("/images/books/fix-the-ladder.jpg" | absURL))
+    (dict "@type" "Book" "name" "SwiftUI Cookbook, 2nd Edition" "author" $bookAuthor "url" "https://amzn.eu/d/0HHnePn")
+    (dict "@type" "Book" "name" "SwiftUI Cookbook" "author" $bookAuthor "url" "https://amzn.eu/d/iAMu2T3")
+    (dict "@type" "Book" "name" "Hands-On Design Patterns with Swift" "author" $bookAuthor "url" "https://amzn.eu/d/aLdrNJx")
+    (dict "@type" "Book" "name" "Swift: Developing iOS Applications" "author" $bookAuthor "url" "https://amzn.eu/d/1QNMtON")
+    (dict "@type" "Book" "name" "Swift 2 By Example" "author" $bookAuthor "url" "https://amzn.eu/d/3K0yoLK")
+    (dict "@type" "Book" "name" "Swift By Example" "author" $bookAuthor "url" "https://amzn.eu/d/aWTQ50L")
+  -}}
+  {{- $bookItems := slice -}}
+  {{- range $index, $book := $books -}}
+    {{- $bookItems = $bookItems | append (dict "@type" "ListItem" "position" (add $index 1) "item" $book) -}}
+  {{- end -}}
+  {{- $collection := dict
+    "@type" "CollectionPage"
+    "@id" .Permalink
+    "url" .Permalink
+    "name" .Title
+    "description" .Description
+    "author" (dict "@id" $personID)
+    "isPartOf" (dict "@id" $websiteID)
+    "mainEntity" (dict "@type" "ItemList" "numberOfItems" (len $bookItems) "itemListElement" $bookItems)
+    "inLanguage" "en-GB"
+  -}}
+  {{- $graph = $graph | append $collection -}}
+{{- end -}}
+
+{{- $structuredData := dict "@context" "https://schema.org" "@graph" $graph -}}
+<script type="application/ld+json">{{ $structuredData | jsonify | safeJS }}</script>

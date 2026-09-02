@@ -294,6 +294,40 @@ button {
 }
 
 /* Home */
+.home-identity {
+  display: flex;
+  margin: 0 clamp(0rem, 2vw, 1.5rem) clamp(3rem, 5vw, 4.5rem);
+  padding: 0 0 1.25rem;
+  border-bottom: 1px solid var(--line);
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.home-identity h1 {
+  margin: 0 !important;
+  color: var(--ink);
+  font-family: var(--display) !important;
+  font-size: clamp(1.65rem, 3vw, 2.35rem) !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.035em !important;
+  line-height: 1;
+}
+
+.home-identity p {
+  max-width: 100%;
+  margin: 0 !important;
+  color: var(--muted) !important;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  font-weight: 650;
+  letter-spacing: 0.055em;
+  line-height: 1.5;
+  text-align: right;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
 .home-book-feature {
   display: grid;
   min-height: 33rem;
@@ -305,10 +339,11 @@ button {
 }
 
 .home-book-copy {
+  min-width: 0;
   max-width: 48rem;
 }
 
-.home-book-feature h1 {
+.home-book-feature h2 {
   max-width: 52rem;
   margin: 0;
   color: var(--ink);
@@ -320,7 +355,7 @@ button {
   text-wrap: balance;
 }
 
-.home-book-feature h1 em {
+.home-book-feature h2 em {
   display: block;
   color: var(--accent);
   font-weight: 400;
@@ -336,6 +371,7 @@ button {
   letter-spacing: 0.055em;
   line-height: 1.45;
   text-transform: uppercase;
+  overflow-wrap: anywhere;
 }
 
 .home-book-summary {
@@ -884,7 +920,7 @@ article > nav {
     gap: 2rem;
   }
 
-  .home-book-feature h1 {
+  .home-book-feature h2 {
     font-size: clamp(3.8rem, 13vw, 6rem);
   }
 
@@ -903,11 +939,23 @@ article > nav {
     padding-top: 3.5rem;
   }
 
+  .home-identity {
+    margin-right: 0;
+    margin-left: 0;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .home-identity p {
+    text-align: left;
+  }
+
   .home-book-feature {
     padding-right: 0;
     padding-bottom: 4.5rem;
     padding-left: 0;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .home-book-cover {

@@ -1,8 +1,9 @@
 +++
 date = '2025-06-01T20:56:40+01:00'
 draft = false
-title = 'Books by Gio Scalzo'
+title = 'Books by Giordano Scalzo'
 description = 'Books by Giordano Scalzo on AI, Swift, SwiftUI, and software design.'
+images = ["/images/books/fix-the-ladder.jpg"]
 +++
 
 <div class="books-intro">

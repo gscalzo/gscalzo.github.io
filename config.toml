@@ -1,8 +1,9 @@
 baseURL = "https://gioscalzo.com/"
 locale = "en-us"
-title = "Gio Scalzo"
+title = "Giordano Scalzo"
 theme = "paper"
 googleAnalytics = "G-B6YT2W23QZ"
+enableRobotsTXT = true
 
 [[menu.main]]
   name = "Home"
@@ -25,10 +26,13 @@ googleAnalytics = "G-B6YT2W23QZ"
   weight = 4
 
 [params]
-  description = "AI, mobile engineering, and the craft of growing people."
+  description = "Giordano Scalzo is a London-based AI and engineering leader, mobile specialist, speaker, and author of six books."
   github = "gscalzo"
   linkedin = "giordanoscalzo"
   twitter = "giordanoscalzo"
+  medium = "https://medium.com/@giordanoscalzo"
+  stackoverflow = "https://stackoverflow.com/users/288379/giordano-scalzo"
+  images = ["/images/social/giordano-scalzo.jpg"]
   rss = true
 
   [params.author]
