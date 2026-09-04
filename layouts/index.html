@@ -1,6 +1,19 @@
 {{ define "main" }}
   {{ .Content }}
 
+  <section class="home-writing" aria-labelledby="start-here-title">
+    <div class="section-heading">
+      <div><p class="section-label">AI engineering in practice</p><h2 id="start-here-title">Start here</h2></div>
+    </div>
+    <ol class="writing-list">
+      {{ range slice "blog/ai-accelerated-mobile-development-nslondon" "blog/neurona-from-ai-prototype-to-real-app" "blog/demystifying-ai-coding-agents-in-swift" }}
+      {{ with site.GetPage . }}
+      <li><a href="{{ .RelPermalink }}"><span class="writing-list__copy"><strong>{{ .Title }}</strong><span>{{ .Description }}</span></span><span class="writing-list__arrow" aria-hidden="true">↗</span></a></li>
+      {{ end }}
+      {{ end }}
+    </ol>
+  </section>
+
   {{- $posts := first 5 (where site.RegularPages.ByDate.Reverse "Section" "blog") -}}
   <section class="home-writing" aria-labelledby="recent-writing-title">
     <div class="section-heading">

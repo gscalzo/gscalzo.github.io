@@ -10,10 +10,15 @@ enableRobotsTXT = true
   url = "/"
   weight = 1
 
-# [[menu.main]]
-#   name = "Projects"
-#   url = "/projects/"
-#   weight = 2
+[[menu.main]]
+  name = "Projects"
+  url = "/projects/"
+  weight = 2
+
+[[menu.main]]
+  name = "Speaking"
+  url = "/speaking/"
+  weight = 5
 
 [[menu.main]]
   name = "Books"
@@ -26,7 +31,7 @@ enableRobotsTXT = true
   weight = 4
 
 [params]
-  description = "Giordano Scalzo is a London-based AI and engineering leader, mobile specialist, speaker, and author of six books."
+  description = "Giordano Scalzo is a London-based AI engineering lead, author and speaker helping teams adopt AI, build reliable software and grow engineering judgement."
   github = "gscalzo"
   linkedin = "giordanoscalzo"
   twitter = "giordanoscalzo"

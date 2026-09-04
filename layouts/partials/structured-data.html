@@ -5,6 +5,8 @@
   "https://www.linkedin.com/in/giordanoscalzo/"
   "https://github.com/gscalzo"
   "https://medium.com/@giordanoscalzo"
+  "https://gioscalzo.substack.com/"
+  "https://leanpub.com/u/giordanoscalzo"
   "https://stackoverflow.com/users/288379/giordano-scalzo"
   "https://x.com/giordanoscalzo"
 -}}
@@ -18,7 +20,7 @@
   "image" $defaultImage
   "jobTitle" "AI and Engineering Leader"
   "description" site.Params.description
-  "knowsAbout" (slice "Artificial intelligence" "Engineering leadership" "Mobile application development" "Software engineering" "Swift")
+  "knowsAbout" (slice "AI engineering" "Agentic coding" "Engineering leadership" "Mentoring software engineers" "Mobile application development" "Swift")
   "sameAs" $sameAs
 -}}
 {{- $website := dict
@@ -37,7 +39,7 @@
     "@type" "ProfilePage"
     "@id" .Permalink
     "url" .Permalink
-    "name" "Giordano Scalzo | Engineering Leader, AI & Mobile"
+    "name" .Title
     "description" .Description
     "mainEntity" (dict "@id" $personID)
     "isPartOf" (dict "@id" $websiteID)
