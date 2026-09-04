@@ -6,7 +6,7 @@ tags = ["Swift", "AI", "LLM", "Coding Agents", "OpenAI"]
 description = "A small AI coding agent in Swift, built from a model, a tool interface and a loop."
 +++
 
-<img src="/images/blog/nimbo/hero.png" alt="Hero Image" class="img-hero" />
+<img src="https://gioscalzo.com/images/blog/nimbo/hero.png" alt="Hero Image" class="img-hero" />
 
 ## The small loop behind an agent
 
@@ -28,7 +28,7 @@ An AI coding agent boils down to three things:
 2. **A set of tools** it can call (functions that do real work)
 3. **A loop** that keeps the conversation going
 
-<img src="/images/blog/nimbo/agent-loop.png" alt="Agent Loop Image" class="img-frame" />
+<img src="https://gioscalzo.com/images/blog/nimbo/agent-loop.png" alt="Agent Loop Image" class="img-frame" />
 
 The model cannot touch the filesystem itself. The agent loop asks what to do next, performs the requested tool call, reports the result and asks again. That continues until the model returns an answer instead of another tool call.
 
@@ -36,7 +36,7 @@ The model cannot touch the filesystem itself. The agent loop asks what to do nex
 
 Language models do not remember a conversation in the way people do. On each request, the application sends the conversation history again.
 
-<img src="/images/blog/nimbo/context-window.png" alt="Context Window" class="img-frame" />
+<img src="https://gioscalzo.com/images/blog/nimbo/context-window.png" alt="Context Window" class="img-frame" />
 
 That working memory is the **context window**. Modern models commonly support between 128K and 200K tokens, roughly 100,000 to 150,000 words.
 
@@ -67,7 +67,7 @@ We will build **Nimbo** in five steps:
 
 All the code is in the [Nimbo repository](https://github.com/gscalzo/Nimbo).
 
-<img src="/images/blog/nimbo/agent-interaction.png" alt="Agent Interaction" class="img-frame" />
+<img src="https://gioscalzo.com/images/blog/nimbo/agent-interaction.png" alt="Agent Interaction" class="img-frame" />
 
 ## Step 1: Build the chat loop
 
@@ -125,7 +125,7 @@ The `history` array holds the context sent to the model. It contains user messag
 
 At this point, Nimbo can hold a conversation but cannot touch files.
 
-<img src="/images/blog/nimbo/nimbo-1.png" alt="Nimbo Basic" class="img-frame" />
+<img src="https://gioscalzo.com/images/blog/nimbo/nimbo-1.png" alt="Nimbo Basic" class="img-frame" />
 
 ## Step 2: Define the tools
 
@@ -181,7 +181,7 @@ Each tool has three parts:
 
 Given that description, the model can return a call such as `read_file` with the path `foo.txt`. We have described the tools, but Nimbo still needs code to execute the calls.
 
-<img src="/images/blog/nimbo/nimbo-3.png" alt="Nimbo Basic" class="img-frame" />
+<img src="https://gioscalzo.com/images/blog/nimbo/nimbo-3.png" alt="Nimbo Basic" class="img-frame" />
 
 ## Step 3: Execute tool calls
 
@@ -256,7 +256,7 @@ The model sees this result on the next iteration and can decide what to do next.
 
 Nimbo can now execute `read_file` or `list_files` and capture the result. The next step is to return that result to the model so it can choose another tool.
 
-<img src="/images/blog/nimbo/nimbo-4.png" alt="Nimbo Basic" class="img-frame" />
+<img src="https://gioscalzo.com/images/blog/nimbo/nimbo-4.png" alt="Nimbo Basic" class="img-frame" />
 
 ### ListFiles and EditFile
 
@@ -383,7 +383,7 @@ At this point Nimbo can:
 - Chain multiple tool calls together.
 - Loop until the task is complete.
 
-<img src="/images/blog/nimbo/nimbo-5.png" alt="Nimbo Basic" class="img-frame" />
+<img src="https://gioscalzo.com/images/blog/nimbo/nimbo-5.png" alt="Nimbo Basic" class="img-frame" />
 
 ## Limits of the example
 
@@ -546,8 +546,8 @@ The application code does not contain the sequence. It only:
 - Gave the agent access to them.
 - Lets the language model choose the next call.
 
-<img src="/images/blog/nimbo/nimbo-6.png" alt="Nimbo Basic" class="img-frame" />
-<img src="/images/blog/nimbo/nimbo-7.png" alt="Nimbo Basic" class="img-frame" />
+<img src="https://gioscalzo.com/images/blog/nimbo/nimbo-6.png" alt="Nimbo Basic" class="img-frame" />
+<img src="https://gioscalzo.com/images/blog/nimbo/nimbo-7.png" alt="Nimbo Basic" class="img-frame" />
 
 ## The whole mechanism
 
