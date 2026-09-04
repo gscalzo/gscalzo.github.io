@@ -1,6 +1,6 @@
 +++
 title = "Demystifying AI Coding Agents in Swift"
-date = 2025-11-05T00:00:00+01:00
+date = 2025-11-05T00:00:00+00:00
 draft = false
 tags = ["Swift", "AI", "LLM", "Coding Agents", "OpenAI"]
 description = "A small AI coding agent in Swift, built from a model, a tool interface and a loop."
@@ -42,15 +42,15 @@ That working memory is the **context window**. Modern models commonly support be
 
 As the agent runs:
 
-Because as your agent runs longer:
 - Every file it reads gets added to the history.
 - Every tool call and result takes up space.
 - The model needs to process more and more text each turn.
 - Eventually, you hit the limit.
 
 When the context fills up:
+
 1. **Performance degrades** because the model struggles to "pay attention" to everything.
-2. **Costs skyrocket** because you're paying per token, remember?
+2. **Costs increase** because each request processes more tokens.
 3. **You hit a hard limit** when the API simply rejects your request.
 
 Production agents manage this with summarisation, selective memory and context pruning. Nimbo keeps the full history because its purpose is to make the loop easy to see.
@@ -328,7 +328,7 @@ Together, `ListFiles`, `ReadFile` and `EditFile` let the agent explore and modif
 
 ## Step 4: Feed results back
 
-Remember our context window discussion? Every tool call adds to it:
+Every tool call adds to the history:
 
 ```
 User: "Can you check what's in the src folder?"
@@ -538,7 +538,7 @@ This time the agent:
 The examples exercise three capabilities:
 
 1. **Tool Chaining**: The agent decides which tools to use and in what order.
-2. **Context Awareness**: It remembers what it did (because it's all in the history!).
+2. **Context awareness**: It can use earlier tool results because they remain in the history.
 3. **Model-generated choices**: It can propose a next step that was not hard-coded into the loop.
 
 The application code does not contain the sequence. It only:
@@ -553,7 +553,7 @@ The application code does not contain the sequence. It only:
 
 Nimbo reduces an agent to four ideas:
 
-1. **Agents are loops**: Just keep asking the model "what next?"
+1. **Agents are loops**: Ask the model for the next action until it returns a final answer.
 2. **Tools are descriptions**: The LLM chooses, you execute.
 3. **Context is precious**: Every message costs tokens and attention.
 4. **Sequences are model-generated**: The loop does not hard-code every possible task.
