@@ -9,9 +9,9 @@ images = ["/images/blog/build-with-ai-imperial-2026/imperial-morning.jpeg"]
 
 <img src="/images/blog/build-with-ai-imperial-2026/imperial-morning.jpeg" alt="Morning session at Build with AI at Imperial College London" class="img-hero" />
 
-I only made it to the morning of [Build with AI](https://buildwithai.gdg.london/) at Imperial College London on Saturday, March 14, 2026, but honestly, that was enough to make the trip worth it.
+I only made it to the morning of [Build with AI](https://buildwithai.gdg.london/) at Imperial College London on Saturday, March 14, 2026. It was enough to make the trip worth it.
 
-The event, put together by GDG London and Women Techmakers at the Blackett Laboratory, had a good balance of energy and substance. What I liked most was the approach: it did not feel like a day about selling AI. It felt like a day about sharing learnings, comparing notes, and being honest about where things are heading.
+GDG London and Women Techmakers held the event at the Blackett Laboratory. It did not feel like a day spent selling AI. People shared what they had learned, compared notes and spoke plainly about where the technology might be heading.
 
 [Rosário Fernandes](https://www.linkedin.com/in/rosariopfernandes/) set that tone well in the keynote. I liked the four angles Rosário used to talk about agents, and how the talks during the morning gave those ideas somewhere concrete to land. It worked as a real map for the day rather than a generic opening.
 
@@ -21,22 +21,22 @@ The event, put together by GDG London and Women Techmakers at the Blackett Labor
 
 <img src="/images/blog/build-with-ai-imperial-2026/shashi-jagtap.jpeg" alt="Shashi Jagtap speaking at Build with AI" class="img-frame" />
 
-[Shashi Jagtap](https://www.linkedin.com/in/shashikantjagtap/)'s session was a strong overview of AI engineering. I appreciated how clearly Shashi broke down the moving parts of agent engineering and, especially, how much evaluation was stressed. It was a good reminder that the interesting work is not just getting something to demo once, but building in a way that will still make sense when the tools and models move again in six months.
+[Shashi Jagtap](https://www.linkedin.com/in/shashikantjagtap/) broke agent engineering into its component parts and kept returning to evaluation. A demo only has to work once. An engineering approach has to survive the tools and models changing again in six months.
 
-That same grounded feeling carried through the morning. It was less "look how magical this is" and more "here is how to think about the next few years without losing your footing." I found that much more useful.
+That tone carried through the morning. There was less "look how magical this is" and more practical discussion of how to work through the next few years. I found that much more useful.
 
 ## The talk that stayed with me
 
 <img src="/images/blog/build-with-ai-imperial-2026/natalia-julio-finnan.jpeg" alt="Natalia Julio-Finnan speaking at Build with AI" class="img-frame" />
 
-[Natalia Julio-Finnan](https://www.linkedin.com/in/nataliajulio/)'s talk on failure was the one that stayed with me the most. It was inspiring without turning into motivational wallpaper. The thread running through it felt almost stoic: AI is changing everything quickly, the future is exciting and a bit scary, and the answer is not to freeze.
+[Natalia Julio-Finnan](https://www.linkedin.com/in/nataliajulio/)'s talk on failure stayed with me most. It was inspiring without turning into motivational wallpaper. The argument felt almost stoic: AI is changing quickly, that is exciting and frightening, and freezing is still a choice.
 
 One line in particular stuck with me: the idea that this might be the most important year of your career. That resonated more than I expected. It made me ask myself a couple of uncomfortable questions, including whether I should slow down my learning and sharing, or whether this is exactly the moment to lean in properly.
 
-I also liked Natalia's point about purpose. Coding is not really the purpose. Leading a team is not the purpose either. Those are just ways it shows up. That landed hard, and it was probably exactly what I needed to hear because I had arrived with a kind of overwhelmed AI fatigue. Natalia's talk gave the whole day a different shape for me. It definitely made my day.
+I also liked Natalia's point about purpose. Coding is not the purpose. Leading a team is not the purpose either. They are ways that purpose can show up. I had arrived tired and overwhelmed by AI, so the point landed harder than I expected. Her talk changed the shape of the day for me.
 
 <img src="/images/blog/build-with-ai-imperial-2026/kasia-dutch.jpeg" alt="Kasia Dutch speaking at Build with AI" class="img-frame" />
 
-[Kasia Dutch](https://www.linkedin.com/in/k-dutch/)'s talk closed my morning on another strong human note. Kasia spoke very openly about how tech is still not a particularly friendly place for many women, and how support and networking are not nice extras but survival tools. A few of the points were simple and very good: show up and be present; being open and vulnerable can actually make you stronger; people connect with people, not perfection; ask what value you can bring to the situation; celebrate wins.
+[Kasia Dutch](https://www.linkedin.com/in/k-dutch/)'s talk closed my morning. Kasia spoke openly about how tech is still not a friendly place for many women, and why support and networking can be survival tools rather than nice extras. Her advice was simple: show up and be present, accept that openness can make you stronger, ask what value you can bring, and celebrate wins. People connect with people, not perfection.
 
-So yes, I was there only for the morning. But it was a very good morning. I left with a few technical reminders, a clearer sense that AI engineering needs more discipline than hype, and, thanks to Natalia in particular, a much better state of mind than the one I arrived with.
+I was there only for the morning, but I left in a better state of mind than the one I arrived with. Natalia's talk did most of that.

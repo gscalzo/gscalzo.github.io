@@ -3,24 +3,24 @@ title = "Demystifying AI Coding Agents in Swift"
 date = 2025-11-05T00:00:00+01:00
 draft = false
 tags = ["Swift", "AI", "LLM", "Coding Agents", "OpenAI"]
-description = "Learn how to build your own AI coding agent in Swift. Discover the simple concepts behind tools like Claude Code and Cursor - it's just a loop, some tools, and a language model with opinions."
+description = "A small AI coding agent in Swift, built from a model, a tool interface and a loop."
 +++
 
 <img src="/images/blog/nimbo/hero.png" alt="Hero Image" class="img-hero" />
 
-## The Magic Trick That Isn't Magic
+## The small loop behind an agent
 
-AI coding agents feel like magic. You type a request, and they search through files, write code, refactor functions, and somehow "know" what to do next. Pretty wild, right?
+AI coding agents can look opaque. You type a request and they search files, write code, refactor functions and decide what to do next.
 
-But here's the secret: **the concept is surprisingly simple**.
+The basic mechanism is much smaller than the behaviour it produces.
 
-I've always believed the best way to truly understand something is to build it yourself. That's exactly what I did after reading Amp's excellent article ["How to Build an Agent"](https://ampcode.com/how-to-build-an-agent). I wanted to see if I could recreate the magic in Swift, and guess what? You absolutely can.
+I tend to understand things by building them, so after reading Amp's article ["How to Build an Agent"](https://ampcode.com/how-to-build-an-agent), I tried the same idea in Swift.
 
-Today, we're going to build a real AI coding agent in Swift that can read files, list directories, and even edit code. No smoke, no mirrors. Just a loop, some tools, and a language model with opinions.
+The result is Nimbo, a small coding agent that can list directories, read files and edit code. Its core is a loop, a few tools and a language model with opinions.
 
-By the end of this post, you'll know exactly how tools like Claude Code, Cursor, or GitHub Copilot Workspace work under the hood. Spoiler: it's simpler than you think.
+It is not a replica of Claude Code, Cursor or GitHub Copilot Workspace, but it exposes the mechanism those products build on.
 
-## What Is an AI Coding Agent, Really?
+## What an AI coding agent needs
 
 An AI coding agent boils down to three things:
 
@@ -30,17 +30,17 @@ An AI coding agent boils down to three things:
 
 <img src="/images/blog/nimbo/agent-loop.png" alt="Agent Loop Image" class="img-frame" />
 
-Think of it like having a brilliant scientist who can't leave their office. You (the agent loop) keep asking them what to do next, they tell you, you go do it, report back, and they figure out the next step. Rinse and repeat until the job is done.
+The model cannot touch the filesystem itself. The agent loop asks what to do next, performs the requested tool call, reports the result and asks again. That continues until the model returns an answer instead of another tool call.
 
-### The Context Window: Your Agent's Working Memory
+### The context window
 
-Here's where things get interesting. Language models don't actually "remember" previous conversations in the way humans do. Every time you send a message, you're actually sending the *entire conversation history* along with it.
+Language models do not remember a conversation in the way people do. On each request, the application sends the conversation history again.
 
 <img src="/images/blog/nimbo/context-window.png" alt="Context Window" class="img-frame" />
 
-This "working memory" is called the **context window**. Modern models typically have context windows ranging from 128K to 200K tokens (roughly 100,000-150,000 words).
+That working memory is the **context window**. Modern models commonly support between 128K and 200K tokens, roughly 100,000 to 150,000 words.
 
-**Why does this matter?**
+As the agent runs:
 
 Because as your agent runs longer:
 - Every file it reads gets added to the history.
@@ -48,32 +48,32 @@ Because as your agent runs longer:
 - The model needs to process more and more text each turn.
 - Eventually, you hit the limit.
 
-When the context fills up, three things can happen:
+When the context fills up:
 1. **Performance degrades** because the model struggles to "pay attention" to everything.
 2. **Costs skyrocket** because you're paying per token, remember?
 3. **You hit a hard limit** when the API simply rejects your request.
 
-This is why production agents use clever tricks like summarization, selective memory, and context pruning. But for our learning journey, we'll keep it simple.
+Production agents manage this with summarisation, selective memory and context pruning. Nimbo keeps the full history because its purpose is to make the loop easy to see.
 
-## The Game Plan: Five Steps to Agent Enlightenment
+## What we are building
 
-We're going to build **Nimbo**, a Swift-based coding agent that can help you work with files. Here's our roadmap:
+We will build **Nimbo** in five steps:
 
-1. **The Foundation:** Set up a basic chat loop.
-2. **Teaching Tools:** Define what our agent can do.
-3. **Tool Execution:** Make those tools actually work.
-4. **The Loop:** Connect everything together.
-5. **The Finish Line:** Handle edge cases and errors.
+1. Set up a basic chat loop.
+2. Define the tools.
+3. Execute tool calls.
+4. Feed each result back to the model.
+5. Handle limits and errors.
 
-All the code we're discussing lives in the [Nimbo repository](https://github.com/gscalzo/Nimbo). Feel free to clone it and follow along!
+All the code is in the [Nimbo repository](https://github.com/gscalzo/Nimbo).
 
 <img src="/images/blog/nimbo/agent-interaction.png" alt="Agent Interaction" class="img-frame" />
 
-## Step 1: The Foundation (Building the Chat Loop)
+## Step 1: Build the chat loop
 
-Every agent needs a conversation loop. In our case, we're building a CLI tool that feels like chatting with a helpful assistant.
+Nimbo starts as a command-line chat client.
 
-Here's the core structure from [main.swift](https://github.com/gscalzo/Nimbo/blob/main/Sources/NimboCLI/main.swift):
+The core structure is in [main.swift](https://github.com/gscalzo/Nimbo/blob/main/Sources/NimboCLI/main.swift):
 
 ```swift
 private func runLoop() async {
@@ -92,13 +92,13 @@ private func runLoop() async {
 }
 ```
 
-Simple, right? We:
+This code does four things:
 1. Create an agent with a system prompt.
 2. Get user input in a loop.
 3. Ask the agent to respond.
 4. Print the response.
 
-The real magic happens inside that `agent.respond()` call. Let's peek under the hood.
+The agent work happens inside `agent.respond()`.
 
 The [Agent class](https://github.com/gscalzo/Nimbo/blob/main/Sources/NimboCLI/Agent.swift) maintains a conversation history:
 
@@ -121,17 +121,15 @@ final class Agent {
 }
 ```
 
-Notice that `history` array? That's our context window filling up. Every message (yours, the model's, and tool results) gets appended to it.
+The `history` array holds the context sent to the model. It contains user messages, model responses and, later, tool results.
 
-### What We Have So Far
-
-At this point, we have a basic chat loop but **no tools yet**. The agent can only have conversations. It can't actually do anything with files.
+At this point, Nimbo can hold a conversation but cannot touch files.
 
 <img src="/images/blog/nimbo/nimbo-1.png" alt="Nimbo Basic" class="img-frame" />
 
-## Step 2: Teaching Your Agent to Use Tools
+## Step 2: Define the tools
 
-Tools are just functions with fancy descriptions. The LLM doesn't actually execute code; it just tells us *which* tool to call and *with what arguments*.
+A tool pairs a function with a description the model can read. The model does not execute the function. It returns the tool name and arguments, and the application decides whether to run it.
 
 In Swift, we define tools using a protocol ([Tool.swift](https://github.com/gscalzo/Nimbo/blob/main/Sources/NimboCLI/Tools/Tool.swift)):
 
@@ -143,7 +141,7 @@ protocol Tool {
 }
 ```
 
-Let's look at a concrete example: the [ReadFile tool](https://github.com/gscalzo/Nimbo/blob/main/Sources/NimboCLI/Tools/ReadFile.swift):
+Here is the [ReadFile tool](https://github.com/gscalzo/Nimbo/blob/main/Sources/NimboCLI/Tools/ReadFile.swift):
 
 ```swift
 struct ReadFile: Tool {
@@ -176,24 +174,18 @@ struct ReadFile: Tool {
 }
 ```
 
-Three key parts:
+Each tool has three parts:
 1. **Name**: What the tool is called.
 2. **Description**: Instructions for the LLM on when to use it.
 3. **Execution**: The actual Swift function that does the work.
 
-The LLM sees the description and decides, "Oh, the user wants to see a file. I should call `read_file` with path `foo.txt`!"
-
-### What We Have So Far
-
-Now we've defined our tools! The agent knows **what tools exist** and **when to use them**, but it still can't execute them. If you ask it to read a file, it will try to call the tool, but nothing will happen yet.
+Given that description, the model can return a call such as `read_file` with the path `foo.txt`. We have described the tools, but Nimbo still needs code to execute the calls.
 
 <img src="/images/blog/nimbo/nimbo-3.png" alt="Nimbo Basic" class="img-frame" />
 
-## Step 3: The Tool Execution Dance
+## Step 3: Execute tool calls
 
-Here's where it gets fun. When the model responds, it might:
-- Return a text answer (we're done!).
-- Request to call one or more tools (keep going!).
+The model can return a text answer or request one or more tools. A text answer ends the loop. A tool request keeps it running.
 
 Our agent needs to detect tool calls and execute them ([Agent.swift](https://github.com/gscalzo/Nimbo/blob/main/Sources/NimboCLI/Agent.swift)):
 
@@ -224,9 +216,9 @@ func respond(_ text: String) async -> String {
 }
 ```
 
-Notice that `maxToolIterations` constant? That's our safety net. Without it, an agent could theoretically loop forever.
+`maxToolIterations` prevents the agent from looping forever.
 
-The `executeToolCalls` method is straightforward:
+The `executeToolCalls` method runs each requested tool:
 
 ```swift
 private func executeToolCalls(_ calls: [ToolCall]) {
@@ -254,7 +246,7 @@ private func perform(_ call: ToolCall) -> ChatCompletionParameters.Message {
 }
 ```
 
-We:
+For each call, Nimbo:
 1. Find the matching tool by name.
 2. Execute it with the provided arguments.
 3. Package the result as a message.
@@ -262,15 +254,13 @@ We:
 
 The model sees this result on the next iteration and can decide what to do next.
 
-### What We Have So Far
-
-Now the agent can **execute a single tool**! It can call `read_file` or `list_files` and actually get a result. But it stops there. It can't chain multiple tools together yet.
+Nimbo can now execute `read_file` or `list_files` and capture the result. The next step is to return that result to the model so it can choose another tool.
 
 <img src="/images/blog/nimbo/nimbo-4.png" alt="Nimbo Basic" class="img-frame" />
 
-### The Other Tools: ListFiles and EditFile
+### ListFiles and EditFile
 
-Following the same pattern as `ReadFile`, Nimbo includes two more essential tools that round out its capabilities:
+Nimbo includes two more tools built with the same protocol:
 
 **[ListFiles](https://github.com/gscalzo/Nimbo/blob/main/Sources/NimboCLI/Tools/ListFiles.swift)** - Navigate the directory structure:
 
@@ -326,17 +316,17 @@ struct EditFile: Tool {
 }
 ```
 
-The `EditFile` tool is clever. It:
+`EditFile`:
 - **Creates new files** when `old_str` is empty.
 - **Updates existing files** by replacing exact matches.
-- **Validates uniqueness** - the `old_str` must match exactly once in the file.
-- **Prevents accidents** - `old_str` and `new_str` must be different.
+- **Validates uniqueness**: `old_str` must match exactly once in the file.
+- **Rejects no-op edits**: `old_str` and `new_str` must be different.
 
 This design forces the agent to be precise. It can't make ambiguous edits or accidentally replace the wrong text. If the pattern matches multiple times, the tool returns an error asking the model to be more specific.
 
-Together, these three tools (`ListFiles`, `ReadFile`, `EditFile`) give the agent everything it needs to explore and modify a codebase. The model decides which tools to use and in what order. All we did was describe what they do.
+Together, `ListFiles`, `ReadFile` and `EditFile` let the agent explore and modify a codebase. The model chooses the order from their descriptions.
 
-## Step 4: Keeping the Conversation Going
+## Step 4: Feed results back
 
 Remember our context window discussion? Every tool call adds to it:
 
@@ -354,12 +344,8 @@ Agent: "Sure! The src folder contains..."
 → History grows by 1 message (the response)
 ```
 
-Four messages for one simple request! Now imagine:
-- Reading a 500-line file.
-- Editing multiple files.
-- Running this back and forth 20 times.
-
-Your context window fills up fast. That's why the [ReadFile tool](https://github.com/gscalzo/Nimbo/blob/main/Sources/NimboCLI/Tools/ReadFile.swift) caps file contents to 100KB:
+One request has already added four messages. Reading a 500-line file, editing several files and repeating the loop twenty times consumes the context quickly.
+That is why the [ReadFile tool](https://github.com/gscalzo/Nimbo/blob/main/Sources/NimboCLI/Tools/ReadFile.swift) caps file contents at 100KB:
 
 ```swift
 let capped = fileData.prefix(100_000)
@@ -368,11 +354,11 @@ if let text = String(data: capped, encoding: .utf8) {
 }
 ```
 
-It's a balance: give the model enough context to be useful, but not so much that we blow through our budget or hit the limit.
+The cap leaves the model enough context to work without allowing one file to consume the whole window.
 
-## Step 5: Putting It All Together
+## Step 5: Put the loop together
 
-Let's trace through a real interaction to see how everything connects:
+Here is one complete interaction:
 
 **User types:** `"Create a hello.txt file with the content 'Hello, Nimbo!'"`
 
@@ -383,15 +369,14 @@ Let's trace through a real interaction to see how everything connects:
 5. **Tool result added to history** - `"<success> File created"`
 6. **Agent calls LLM again** - With the updated history.
 7. **LLM responds** - "Done! I created hello.txt with your message."
-8. **User sees response** - Mission accomplished!
+8. **User sees response** - The loop ends.
 
-Here's the beautiful part: **You never taught the model when to use which tool**. You just described what each tool does, and it figured out the right sequence on its own.
+We did not encode rules for when to use each tool. Their descriptions gave the model enough information to choose a sequence.
 
-This emergent behavior is what makes agents feel magical. The model chains together tools, handles errors, and adjusts its strategy, all from natural language descriptions.
+That is the behaviour people experience as an agent: the model chains tools, reads errors and adjusts its next request.
 
-### What We Have Now: A Complete Agent!
+At this point Nimbo can:
 
-At this point, we have a **fully functional agent**. It can:
 - Chat with users.
 - Understand when to use tools.
 - Execute tools and get results.
@@ -400,37 +385,39 @@ At this point, we have a **fully functional agent**. It can:
 
 <img src="/images/blog/nimbo/nimbo-5.png" alt="Nimbo Basic" class="img-frame" />
 
-## Real-World Considerations
+## Limits of the example
 
-Our Nimbo agent is educational, but production agents need more polish.
+Nimbo is educational. A production agent needs stricter limits and better context management.
 
-### Safety First
+### Limit the loop
 ```swift
 private static let maxToolIterations = 8
 ```
-We limit iterations to prevent infinite loops. Production systems use more sophisticated safety measures:
+Nimbo limits iterations to prevent an infinite loop. Production systems also use measures such as:
 - Token budgets per conversation.
 - Rate limiting on tool calls.
 - Sandboxing for dangerous operations.
 
-### Error Handling
-Notice how our tools return `<error>` strings? The model can actually read these and adjust:
+### Return errors to the model
+
+The tools return `<error>` strings in the same channel as successful results:
 
 ```swift
 return "<error> Could not read file at path: \(path)"
 ```
 
-The LLM sees this and might try a different path or ask the user for clarification.
+The model can then try another path or ask the user for clarification.
 
-### Context Management
-Production agents employ tricks like:
+### Manage context
+
+Production agents may use:
 - **Summarization** - Compress old messages.
 - **Selective forgetting** - Drop less important context.
-- **RAG (Retrieval Augmented Generation)** - Store context in a database, retrieving only what's needed.
+- **RAG (retrieval-augmented generation)** - Store context outside the conversation and retrieve only what is needed.
 
-## Let's See It In Action
+## Run Nimbo
 
-Want to run Nimbo? Here's how:
+Clone the repository, set an API key and run it:
 
 ```bash
 git clone https://github.com/gscalzo/Nimbo.git
@@ -439,11 +426,11 @@ export OPENAI_API_KEY="your-key-here"
 swift run
 ```
 
-Now let's walk through a real example to see how the agent chains tools together.
+The following examples show how the tool chain behaves.
 
-### Example 1: The Curious Case of the Missing TODO
+### Example 1: Find a missing TODO
 
-Let's ask our agent to help us find something in a messy project:
+First, ask Nimbo to find a note in an unfamiliar project:
 
 ```
 You: I think I left a TODO comment somewhere about refactoring the authentication.
@@ -480,18 +467,18 @@ Nimbo: Done! I created AuthManager_v2.swift with the modernized version:
       Much cleaner! No more callback hell.
 ```
 
-Notice what happened? The agent:
+The agent:
 1. **Understood vague intent**: "TODO about authentication" is pretty fuzzy.
 2. **Explored systematically**: Listed directories, then files.
 3. **Actually read the code**: Found the specific TODO comment.
-4. **Offered value**: Suggested creating the refactored version.
-5. **Executed creatively**: Wrote modern Swift code unprompted.
+4. **Suggested a follow-up**: Offered to create the refactored version.
+5. **Made the requested edit**: Wrote the async version after the user agreed.
 
-The agent didn't just find text. It understood context and anticipated your next need.
+The loop did more than search for text. It used the surrounding code to propose a follow-up, then waited for approval before editing.
 
-### Example 2: Building a Silly Game
+### Example 2: Build a small game
 
-Now let's have some fun and ask it to create something from scratch:
+The same three tools can also create and revise a file:
 
 ```
 You: Create a command-line game where I guess a random emoji.
@@ -539,37 +526,37 @@ Nimbo: Updated! Now after 3 wrong guesses, it'll give you a hint like:
       The game tracks attempts and offers encouragement. Much better!
 ```
 
-Even more impressive! The agent:
+This time the agent:
 1. **Got creative**: Added personality to the game without being asked.
 2. **Made good choices**: Picked fun emojis, wrote playful strings.
 3. **Understood iteration**: Read the existing file before modifying.
-4. **Applied the edit correctly**: Replaced the old game logic with the enhanced version.
-5. **Explained the improvement**: Told you what changed.
+4. **Applied the edit**: Replaced the old game logic with the new version.
+5. **Reported the change**: Told the user what it had added.
 
-### What This Shows
+### What the examples show
 
-These examples demonstrate the three key superpowers of AI agents:
+The examples exercise three capabilities:
 
 1. **Tool Chaining**: The agent decides which tools to use and in what order.
 2. **Context Awareness**: It remembers what it did (because it's all in the history!).
-3. **Creative Reasoning**: It doesn't just execute commands; it thinks about what would make the result better.
+3. **Model-generated choices**: It can propose a next step that was not hard-coded into the loop.
 
-The real magic? **You didn't program any of this logic**. You just:
+The application code does not contain the sequence. It only:
 - Described what each tool does.
 - Gave the agent access to them.
-- Let the language model figure out the rest.
+- Lets the language model choose the next call.
 
 <img src="/images/blog/nimbo/nimbo-6.png" alt="Nimbo Basic" class="img-frame" />
 <img src="/images/blog/nimbo/nimbo-7.png" alt="Nimbo Basic" class="img-frame" />
 
-## The Power of Simplicity
+## The whole mechanism
 
-Here's what we learned:
+Nimbo reduces an agent to four ideas:
 
 1. **Agents are loops**: Just keep asking the model "what next?"
 2. **Tools are descriptions**: The LLM chooses, you execute.
 3. **Context is precious**: Every message costs tokens and attention.
-4. **Emergent behavior is real**: Complex actions arise from simple rules.
+4. **Sequences are model-generated**: The loop does not hard-code every possible task.
 
 The entire Nimbo agent is less than 300 lines of Swift. Yet it can:
 - Navigate file systems.
@@ -577,26 +564,24 @@ The entire Nimbo agent is less than 300 lines of Swift. Yet it can:
 - Chain multiple operations.
 - Handle errors gracefully.
 
-That's the power of building on top of a language model. You're not coding every possibility; you're creating a space where the model can think and act.
+The model handles the open-ended choice of what to do next. The Swift code controls what it is allowed to do and when the loop must stop.
 
-## What's Next?
+## Next steps
 
-Now that you understand the fundamentals, you can:
+From here, you can:
 
 - **Add more tools**: Web search, API calls, database queries.
 - **Improve context management**: Implement summarization or RAG.
 - **Build domain-specific agents**: Focus on your particular use case.
 - **Create agent networks**: Have multiple agents collaborate.
 
-The code is all on [GitHub](https://github.com/gscalzo/Nimbo). Fork it, break it, improve it.
+The code is on [GitHub](https://github.com/gscalzo/Nimbo). Fork it, break it and improve it.
 
-And next time you use Claude Code or Cursor, you'll know exactly what's happening under the hood: a loop, some tools, and a very smart intern making decisions.
+The commercial coding agents are much larger systems, but underneath them is the same pattern: a loop, a set of tools and a model choosing the next action.
 
 ---
 
-**Want to dive deeper?** Check out:
+Further reading:
 - [The full Nimbo source code](https://github.com/gscalzo/Nimbo)
 - [Anthropic's guide to tool use](https://docs.anthropic.com/en/docs/build-with-claude/tool-use)
 - [OpenAI's function calling docs](https://platform.openai.com/docs/guides/function-calling)
-
-**Questions? Thoughts?** Hit me up on [Twitter](https://twitter.com/giordanoscalzo) or [LinkedIn](https://linkedin.com/in/giordanoscalzo). I'd love to see what you build!

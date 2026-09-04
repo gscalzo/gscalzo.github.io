@@ -62,7 +62,7 @@ That tiny app was ugly and perfect. It played the right tones, mixed layers corr
 
 At the same time, we built the first version of the design system so the next iterations had consistent UI primitives instead of one-off screens.
 
-This was a big lesson: when AI is involved, thin vertical slices beat big-bang implementation. Prove the risky part first, then scale.
+With AI, thin vertical slices beat a big-bang implementation. Prove the risky part first, then scale.
 
 Once that foundation was stable, the rest of the product moved fast and stayed stable.
 
@@ -101,16 +101,16 @@ Same feature set, different platform expectations, different implementation deta
 
 ## What actually shipped
 
-By the end of the cycle, this was not just an app demo anymore:
+By the end of the cycle, I had shipped:
 - Neurona app for iOS and Android
 - RevenueCat integration
 - marketing website
 - UI direction and visual assets produced with Nano Banana plus a custom skill I embedded in Claude Code
 - podcast-style explainer pills with soothing music and an ASMR-like voice to explain the science behind binaural beats, implemented via Gemini Voice API
 - screenshot pipeline for store assets
-- release-ready flows, not just isolated features
+- release-ready flows across the app
 
-The funniest part? I spent less time typing code and more time validating behavior, reviewing outputs, and deciding what "done" really meant.
+Oddly, I spent less time typing code than I did validating behavior, reviewing outputs, and deciding what "done" meant.
 
 ## Quality check: numbers, not vibes
 

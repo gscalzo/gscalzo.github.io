@@ -9,31 +9,31 @@ images = ["/images/blog/devfest-bletchley/colossus.jpeg"]
 
 <img src="/images/blog/devfest-bletchley/colossus.jpeg" alt="Colossus at The National Museum of Computing" class="img-hero" />
 
-Walking into the National Museum of Computing at Bletchley Park for Google DevFest felt like stepping through a living timeline, past codebreaking rooms and wartime machines, straight into today’s conversations about AI. It’s hard to imagine a better venue: the place where Alan Turing worked during WWII, the mind behind the Turing Test, makes an AI conference feel perfectly at home.
+Google DevFest took place inside the National Museum of Computing at Bletchley Park. Walking past codebreaking rooms and wartime machines on the way to talks about AI made the history unusually hard to ignore. Alan Turing worked at Bletchley Park during the Second World War, and later proposed the test that still bears his name.
 
-Huge kudos to GDG Bletchley for organizing a day that balanced hands‑on sessions with thoughtful talks. The energy in the museum, surrounded by working restorations and the stories of the people who built our field, made every hallway chat and demo feel a little more significant.
+GDG Bletchley mixed hands-on sessions with talks and left enough room for hallway conversations among the museum's working restorations.
 
-## Welcome & Keynote
+## Welcome and keynote
 
 <img src="/images/blog/devfest-bletchley/keynote.jpeg" alt="Keynote stage at DevFest Bletchley" class="img-frame" />
 
 The GDG Bletchley organizers opened the day with a light, friendly keynote, some playful interactions with Gemini, and, true to live demos, one thing that didn’t quite cooperate. Three speakers framed the day:
 
-- [Rachael Deacon‑Smith](https://www.linkedin.com/in/rachael-ds/) (Developer Advocate, Google) introduced Google’s Agents Dev Kit (ADK) and how it integrates with BigQuery. This immediately resonated for me: I’ve been planning to use BigQuery at NewDay for monitoring/alerting, and ADK looks like a strong add‑on for agentic querying and data‑aware workflows.
+- [Rachael Deacon‑Smith](https://www.linkedin.com/in/rachael-ds/) (Developer Advocate, Google) introduced Google’s Agents Dev Kit (ADK) and its BigQuery integration. I’ve been planning to use BigQuery at NewDay for monitoring and alerting, so I immediately wanted to try ADK for querying that data.
 - [Daniela Petruzalek](https://www.linkedin.com/in/petruzalek/) (Developer Relations Engineer, Google) showed how to use Go with GenAI via Genkit, including how flows and tools structure an LLM application in a way that’s testable and production‑friendly in Go.
-- [Peter Friese](https://www.linkedin.com/in/peterfriese/) (Staff Developer Advocate, Firebase) closed the segment with a thoughtful thread on “can machines think?”, looping the conversation back to Alan Turing and the origins of our field.
+- [Peter Friese](https://www.linkedin.com/in/peterfriese/) (Staff Developer Advocate, Firebase) closed the segment by asking “can machines think?”, bringing the conversation back to Alan Turing.
 
 ## Beyond Chatbots: BigQuery Data Agents with ADK
 
 <img src="/images/blog/devfest-bletchley/rachael.jpeg" alt="Rachael Deacon‑Smith on stage" class="img-frame" />
 
-[Rachael Deacon‑Smith](https://www.linkedin.com/in/rachael-ds/) walked through ADK concepts and patterns, with a preview of features shipping in the coming weeks. The framing that clicked for me:
+[Rachael Deacon‑Smith](https://www.linkedin.com/in/rachael-ds/) walked through ADK concepts and patterns, with a preview of features shipping in the coming weeks. The parts I noted were:
 
 - Agents as composable units: tools, memory, orchestration, and guardrails.
 - BigQuery integration as a first‑class capability for data retrieval and enrichment.
-- Sensible path from demo to production (observability, evaluation, and deployment targets).
+- The path from a demo to production, including observability, evaluation and deployment targets.
 
-She emphasized using continuous queries to stream fresh data to agents, and keeping humans‑in‑the‑loop for oversight on high‑impact actions, pushing well beyond “just a chatbot.”
+She showed how continuous queries can stream fresh data to agents, and argued for human oversight of high-impact actions.
 
 I left with a handful of scenarios to try immediately for data‑driven monitoring and alerting.
 
@@ -47,13 +47,13 @@ I left with a handful of scenarios to try immediately for data‑driven monitori
 - Injecting richer project context and domain knowledge so generations land closer to spec.
 - How MCP (Model Context Protocol) and custom tools can expand Copilot beyond the editor.
 
-Lots to apply to my daily Copilot workflow.
+I came away with several changes to try in my daily Copilot workflow.
 
 ## Multi‑Agent Magic: Build Your First AI Team with Google ADK
 
 <img src="/images/blog/devfest-bletchley/sonali.jpeg" alt="Sonali Goel running the workshop" class="img-frame" />
 
-This hands‑on session by [Sonali Goel](https://www.linkedin.com/in/sonali-goel-tech/) delivered exactly what you want from a first build with ADK: a working multi‑agent starter you can extend. Using ADK with Gemini API (via `adk web`), Sonali showed an agent that plans tasks and coordinates other agents to complete them. Her repo is a great reference and I plan to adopt parts of it in my experiments:
+[Sonali Goel](https://www.linkedin.com/in/sonali-goel-tech/) used ADK with the Gemini API (via `adk web`) to build an agent that plans tasks and coordinates other agents. The result was a working starter project rather than a slide-only demo. I plan to borrow parts of its structure for my own experiments:
 
 - Multi‑agent study assistant structure with orchestration and tools
 - Clear separation of flows and capabilities
@@ -65,19 +65,21 @@ Repo: https://github.com/goelsonali/study_assistant
 
 <img src="/images/blog/devfest-bletchley/daniel.jpeg" alt="Museum volunteer explaining Colossus and Tunny" class="img-frame" />
 
-During lunch, a museum volunteer, Daniel, gave a fantastic demo that brought Bletchley Park’s codebreaking history to life. We saw the rebuilt Colossus computer running and heard how it was used to help decipher the German High Command’s Lorenz cipher (nicknamed “Tunny”), a far more complex teleprinter cipher than Enigma. Before Colossus, the team experimented with electromechanical “Heath Robinson” machines; Colossus, packed with thousands of vacuum tubes, replaced the fragile mechanics with high‑speed electronic logic and paper‑tape input, dramatically accelerating the statistical attacks needed to recover Lorenz keys. Standing in front of a working Colossus while discussing modern AI was a surreal full‑circle moment.
+During lunch, a museum volunteer named Daniel demonstrated the rebuilt Colossus computer. He explained how the original helped decipher the German High Command’s Lorenz cipher, nicknamed “Tunny”, a teleprinter cipher more complex than Enigma.
+
+Before Colossus, the team experimented with electromechanical “Heath Robinson” machines. Colossus replaced the fragile mechanics with thousands of vacuum tubes, electronic logic and paper-tape input, making the statistical attacks used to recover Lorenz keys much faster. Later that afternoon we went back to discussing modern AI, with the working reconstruction still nearby.
 
 ## Ethics of AI - What can we learn from Asimov's Three Laws of Robotics?
 
 <img src="/images/blog/devfest-bletchley/patty.jpeg" alt="Patty O’Callaghan on stage" class="img-frame" />
 
-I caught the second half of [Patty O’Callaghan](https://www.linkedin.com/in/patty-ocallaghan/)'s talk on responsible AI. It connected Asimov’s Three Laws to today’s AI ethics and regulation, and included an interactive poll with real‑world scenarios. A timely reminder that capability advances should be paired with safety, transparency, and accountability.
+I caught the second half of [Patty O’Callaghan](https://www.linkedin.com/in/patty-ocallaghan/)'s talk on responsible AI. She connected Asimov’s Three Laws to current AI ethics and regulation, then used an interactive poll to test the ideas against real-world scenarios.
 
 ## Eat smarter - Building an AI-powered meal planner with Firebase
 
 <img src="/images/blog/devfest-bletchley/peter.jpeg" alt="Peter Friese presenting" class="img-frame" />
 
-[Peter Friese](https://www.linkedin.com/in/peterfriese/) delivered a technical, fast‑paced session on wiring GenAI into an iOS app using Firebase and Genkit. The takeaways:
+[Peter Friese](https://www.linkedin.com/in/peterfriese/) showed how to wire GenAI into an iOS app using Firebase and Genkit:
 
 - Use Genkit flows to encapsulate prompts, tools, and safety in server‑side logic.
 - Expose clean APIs from Firebase to the iOS client for predictable, testable integrations.
@@ -85,13 +87,13 @@ I caught the second half of [Patty O’Callaghan](https://www.linkedin.com/in/pa
 
 Covered: secure LLM calls from mobile, multimodal prompts, structured outputs, embeddings for semantic search, RAG over user data, and monitoring token usage.
 
-This gave me concrete ideas for my own app, Pocket Sommelier (https://www.pocketsommelier.app/).
+I want to try some of these ideas in my own app, [Pocket Sommelier](https://www.pocketsommelier.app/).
 
 ## The AI in Your Pocket: Building Offline Gemini Apps with the Browser
 
 <img src="/images/blog/devfest-bletchley/olorunfemi.jpeg" alt="Olorunfemi Davis on stage" class="img-frame" />
 
-An eye‑opening look from [Olorunfemi Davis](https://www.linkedin.com/in/olorunfemidavis/) at running models locally in Chrome, bringing Gemini Nano to the browser for offline‑first apps. He demonstrated the built‑in Prompt, Translator, Language Detector, Summarizer, Writer/Rewriter, and Proofreader APIs and discussed testing and debugging patterns for on‑device AI. The privacy and latency wins make this an attractive default for many use cases.
+[Olorunfemi Davis](https://www.linkedin.com/in/olorunfemidavis/) ran Gemini Nano locally in Chrome for an offline-first app. He demonstrated the built-in Prompt, Translator, Language Detector, Summarizer, Writer/Rewriter and Proofreader APIs, then covered testing and debugging for on-device AI. Keeping work on the device can improve both privacy and latency.
 
 ## Raffle and wrap‑up
 
