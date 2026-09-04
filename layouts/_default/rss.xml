@@ -1,5 +1,5 @@
 {{- $pages := .RegularPages -}}
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+{{ printf "<?xml version=%q encoding=%q standalone=%q?>" "1.0" "utf-8" "yes" | safeHTML }}
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>{{ .Title }} on {{ .Site.Title }}</title>
