@@ -3,14 +3,14 @@ title = "AI-Accelerated Mobile Development at Londroid"
 date = 2025-06-05T19:00:00+01:00
 draft = false
 tags = ["londroid", "mobile-dev", "AI-workflows"]
-description = "Highlights from my June Londroid talk on AI-assisted Android development and the guardrails that keep it resilient."
+description = "Highlights from my May 2025 Londroid talk on AI-assisted Android development and the guardrails that keep it resilient."
 +++
 
 {{< youtube ZjuPGTcUrnc >}}
 
 ## The talk
 
-At Londroid, I spoke to Android developers about using AI in solo and small-team workflows. I opened with a question: _what if a one-person team could deliver like a studio?_ The rest of the talk looked at what changes when AI becomes part of the build chain instead of an IDE novelty.
+At [Londroid at NewDay on 29 May 2025](https://www.meetup.com/android/events/307541693/), I spoke to Android developers about using AI in solo and small-team workflows. I opened with a question: _what if a one-person team could deliver like a studio?_ The rest of the talk looked at what changes when AI becomes part of the build chain instead of an IDE novelty.
 
 ## Four modes of AI assistance
 
