@@ -364,24 +364,109 @@ button {
   gap: 1rem 1.5rem;
 }
 
+/* The original cover is the front face of a lightweight CSS book. */
 .home-book-cover {
+  --book-depth: 1.25rem;
+  position: relative;
   display: block;
+  perspective: 1000px;
   line-height: 0;
-  transform: rotate(1deg);
-  transition: transform 220ms ease;
+  text-decoration: none;
 }
 
-.home-book-cover:hover {
-  transform: rotate(0deg) translateY(-5px);
+.home-book-cover::after {
+  position: absolute;
+  right: -8%;
+  bottom: -1.2rem;
+  left: 4%;
+  height: 1.8rem;
+  border-radius: 50%;
+  background: rgba(26, 19, 12, 0.28);
+  filter: blur(12px);
+  content: "";
+  pointer-events: none;
 }
 
-.prose .home-book-cover img {
+.book-object {
+  position: relative;
+  display: block;
+  transform-style: preserve-3d;
+  transform: rotateX(5deg) rotateY(-22deg) rotateZ(-2deg);
+  transition: transform 250ms ease;
+}
+
+.book-object::before {
+  position: absolute;
+  inset: 0;
+  border-radius: 2px 4px 4px 2px;
+  background: #d4cec2;
+  transform: translateZ(calc(var(--book-depth) / -2));
+  content: "";
+}
+
+.book-object__front {
+  position: relative;
+  display: block;
+  transform: translateZ(calc(var(--book-depth) / 2));
+  backface-visibility: hidden;
+}
+
+.home-book-cover .book-object__front img {
+  display: block;
   width: 100%;
+  height: auto;
   margin: 0;
-  border: 1px solid rgba(26, 25, 23, 0.16);
-  border-radius: 0;
+  border: 1px solid #d8d3c9;
+  border-radius: 2px 4px 4px 2px;
   background: #fff;
-  box-shadow: 1.2rem 1.45rem 2.6rem -1.5rem rgba(55, 42, 30, 0.55);
+  box-shadow: none;
+}
+
+.book-object__front::after {
+  position: absolute;
+  inset: 0;
+  border-radius: 2px 4px 4px 2px;
+  background: linear-gradient(90deg, rgba(0,0,0,.16), transparent 3%, rgba(0,0,0,.07) 5%, transparent 8%, transparent 96%, rgba(0,0,0,.05));
+  content: "";
+  pointer-events: none;
+}
+
+.book-object__pages,
+.book-object__spine {
+  position: absolute;
+  top: 1%;
+  bottom: 1%;
+  width: var(--book-depth);
+  transform-origin: left center;
+}
+
+.book-object__pages {
+  left: 100%;
+  background: repeating-linear-gradient(90deg, #e6dfd1 0, #e6dfd1 1px, #faf7ee 1px, #faf7ee 3px);
+  transform: translateZ(calc(var(--book-depth) / 2)) rotateY(90deg);
+}
+
+.book-object__spine {
+  left: 0;
+  background: linear-gradient(90deg, #c4bcae, #f4eee3 40%, #ded6c8);
+  transform: translateZ(calc(var(--book-depth) / -2)) rotateY(-90deg);
+}
+
+.book-object__top {
+  position: absolute;
+  top: 1%;
+  right: 0;
+  left: 0;
+  height: var(--book-depth);
+  background: repeating-linear-gradient(0deg, #e6dfd1 0, #e6dfd1 1px, #faf7ee 1px, #faf7ee 3px);
+  transform-origin: top center;
+  transform: translateZ(calc(var(--book-depth) / -2)) rotateX(90deg);
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .home-book-cover:hover .book-object {
+    transform: rotateX(3deg) rotateY(-14deg) rotateZ(-1deg) translateY(-3px);
+  }
 }
 
 .home-intro {

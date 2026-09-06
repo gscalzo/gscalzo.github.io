@@ -22,7 +22,12 @@ draft = false
     </div>
   </div>
   <a class="home-book-cover" href="https://leanpub.com/fixtheladder" aria-label="Explore Fix the Ladder on Leanpub">
-    <img src="/images/books/fix-the-ladder.jpg" alt="Fix the Ladder book cover" />
+    <span class="book-object">
+      <span class="book-object__spine" aria-hidden="true"></span>
+      <span class="book-object__pages" aria-hidden="true"></span>
+      <span class="book-object__top" aria-hidden="true"></span>
+      <span class="book-object__front"><img src="/images/books/fix-the-ladder.jpg" alt="Fix the Ladder book cover" /></span>
+    </span>
   </a>
 </section>
 
