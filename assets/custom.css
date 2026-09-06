@@ -463,10 +463,63 @@ button {
   transform: translateZ(calc(var(--book-depth) / -2)) rotateX(90deg);
 }
 
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .book-cover:hover .book-object {
-    transform: rotateX(3deg) rotateY(-14deg) rotateZ(-1deg) translateY(-3px);
-  }
+/* Open at the spine without overflowing narrow mobile book columns. */
+.book-cover.is-open .book-object {
+  transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+
+.book-object__front {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transform-origin: left center;
+  transition: transform 450ms ease;
+}
+
+.book-cover.is-open .book-object__front {
+  transform: translateZ(calc(var(--book-depth) / 2)) rotateY(-85deg);
+}
+
+.book-object__inside {
+  position: absolute;
+  inset: 1% 0;
+  display: flex;
+  padding: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.6rem;
+  border: 1px solid #d8d3c9;
+  background: linear-gradient(90deg, #d6cebd, #faf7ee 12%, #f4efe2);
+  transform: translateZ(calc(var(--book-depth) / 2 - 1px));
+  line-height: 1.4;
+}
+
+.book-object__inside[hidden] { display: none; }
+
+.book-download {
+  padding: 0.45rem 0.55rem;
+  border: 1px solid #a91f1f;
+  color: #a91f1f;
+  font-family: var(--sans);
+  font-size: clamp(0.65rem, 1vw, 0.85rem);
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.book-download:hover {
+  color: #fff;
+  background: #a91f1f;
+}
+
+.book-download__source {
+  color: #68645d;
+  font-family: var(--sans);
+  font-size: 0.6rem;
+  text-align: center;
 }
 
 .home-intro {

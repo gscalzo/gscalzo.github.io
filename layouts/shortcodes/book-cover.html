@@ -1,8 +1,20 @@
-<a class="book-cover{{ with .Get "class" }} {{ . }}{{ end }}" href="{{ .Get "href" }}" aria-label="{{ .Get "alt" }} — view book">
-  <span class="book-object">
+{{- $id := printf "book-%s-%d" .Page.File.UniqueID .Ordinal -}}
+<div class="book-cover{{ with .Get "class" }} {{ . }}{{ end }}">
+  <div class="book-object">
     <span class="book-object__spine" aria-hidden="true"></span>
     <span class="book-object__pages" aria-hidden="true"></span>
     <span class="book-object__top" aria-hidden="true"></span>
-    <span class="book-object__front"><img src="{{ .Get "src" | relURL }}" alt="{{ .Get "alt" }}" /></span>
-  </span>
-</a>
+    <button class="book-object__front" type="button" aria-expanded="false" aria-controls="{{ $id }}" aria-label="Open {{ .Get "alt" }}">
+      <img src="{{ .Get "src" | relURL }}" alt="{{ .Get "alt" }}" />
+    </button>
+    <div class="book-object__inside" id="{{ $id }}" hidden>
+      <a class="book-download" href="{{ .Get "href" }}">Download</a>
+      <span class="book-download__source">{{ if in (.Get "href") "leanpub" }}On Leanpub{{ else }}On Amazon{{ end }}</span>
+    </div>
+  </div>
+</div>
+{{- if not (.Page.Store.Get "bookInteraction") -}}
+{{- .Page.Store.Set "bookInteraction" true -}}
+{{- $script := resources.Get "book-cover.js" | minify | fingerprint -}}
+<script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
+{{- end -}}
