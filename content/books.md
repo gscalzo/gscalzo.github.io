@@ -13,7 +13,7 @@ images = ["/images/books/fix-the-ladder.jpg"]
 
 <div class="books-grid">
   <article class="book-entry">
-    <img src="/images/books/fix-the-ladder.jpg" alt="Fix the Ladder book cover" />
+    {{< book-cover src="/images/books/fix-the-ladder.jpg" alt="Fix the Ladder book cover" href="https://leanpub.com/fixtheladder" >}}
     <div class="book-entry__copy">
       <p class="section-label">Latest book</p>
       <h2>Fix the Ladder</h2>
@@ -26,7 +26,7 @@ images = ["/images/books/fix-the-ladder.jpg"]
   </article>
 
   <article class="book-entry">
-    <img src="/images/books/swiftui-cookbook-v2.jpg" alt="SwiftUI Cookbook, second edition book cover" />
+    {{< book-cover src="/images/books/swiftui-cookbook-v2.jpg" alt="SwiftUI Cookbook, second edition book cover" href="https://amzn.eu/d/0HHnePn" >}}
     <div class="book-entry__copy">
       <h2>SwiftUI Cookbook, 2nd Edition</h2>
       <p>Solutions and best practices for building SwiftUI apps.</p>
@@ -38,7 +38,7 @@ images = ["/images/books/fix-the-ladder.jpg"]
   </article>
 
   <article class="book-entry">
-    <img src="/images/books/swiftui-cookbook.jpg" alt="SwiftUI Cookbook book cover" />
+    {{< book-cover src="/images/books/swiftui-cookbook.jpg" alt="SwiftUI Cookbook book cover" href="https://amzn.eu/d/iAMu2T3" >}}
     <div class="book-entry__copy">
       <h2>SwiftUI Cookbook</h2>
       <p>A practical guide to common SwiftUI problems and patterns.</p>
@@ -50,7 +50,7 @@ images = ["/images/books/fix-the-ladder.jpg"]
   </article>
 
   <article class="book-entry">
-    <img src="/images/books/hands-on-design-patterns-swift.jpg" alt="Hands-On Design Patterns with Swift book cover" />
+    {{< book-cover src="/images/books/hands-on-design-patterns-swift.jpg" alt="Hands-On Design Patterns with Swift book cover" href="https://amzn.eu/d/aLdrNJx" >}}
     <div class="book-entry__copy">
       <h2>Hands-On Design Patterns with Swift</h2>
       <p>Modular software design for mobile, desktop, and server applications.</p>
@@ -62,7 +62,7 @@ images = ["/images/books/fix-the-ladder.jpg"]
   </article>
 
   <article class="book-entry">
-    <img src="/images/books/swift-developing-ios-applications.jpg" alt="Swift: Developing iOS Applications book cover" />
+    {{< book-cover src="/images/books/swift-developing-ios-applications.jpg" alt="Swift: Developing iOS Applications book cover" href="https://amzn.eu/d/1QNMtON" >}}
     <div class="book-entry__copy">
       <h2>Swift: Developing iOS Applications</h2>
       <p>Building robust iOS applications with Swift.</p>
@@ -74,7 +74,7 @@ images = ["/images/books/fix-the-ladder.jpg"]
   </article>
 
   <article class="book-entry">
-    <img src="/images/books/swift-2-by-example.jpg" alt="Swift 2 By Example book cover" />
+    {{< book-cover src="/images/books/swift-2-by-example.jpg" alt="Swift 2 By Example book cover" href="https://amzn.eu/d/3K0yoLK" >}}
     <div class="book-entry__copy">
       <h2>Swift 2 By Example</h2>
       <p>Advanced Swift 2 techniques through practical applications.</p>
@@ -86,7 +86,7 @@ images = ["/images/books/fix-the-ladder.jpg"]
   </article>
 
   <article class="book-entry">
-    <img src="/images/books/swift-by-example.jpg" alt="Swift By Example book cover" />
+    {{< book-cover src="/images/books/swift-by-example.jpg" alt="Swift By Example book cover" href="https://amzn.eu/d/aWTQ50L" >}}
     <div class="book-entry__copy">
       <h2>Swift By Example</h2>
       <p>Learning Swift by building small, concrete applications.</p>

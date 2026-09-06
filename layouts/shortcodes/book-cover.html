@@ -1,0 +1,8 @@
+<a class="book-cover{{ with .Get "class" }} {{ . }}{{ end }}" href="{{ .Get "href" }}" aria-label="{{ .Get "alt" }} — view book">
+  <span class="book-object">
+    <span class="book-object__spine" aria-hidden="true"></span>
+    <span class="book-object__pages" aria-hidden="true"></span>
+    <span class="book-object__top" aria-hidden="true"></span>
+    <span class="book-object__front"><img src="{{ .Get "src" | relURL }}" alt="{{ .Get "alt" }}" /></span>
+  </span>
+</a>

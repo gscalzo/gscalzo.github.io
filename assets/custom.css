@@ -365,7 +365,7 @@ button {
 }
 
 /* The original cover is the front face of a lightweight CSS book. */
-.home-book-cover {
+.book-cover {
   --book-depth: 1.25rem;
   position: relative;
   display: block;
@@ -374,7 +374,7 @@ button {
   text-decoration: none;
 }
 
-.home-book-cover::after {
+.book-cover::after {
   position: absolute;
   right: -8%;
   bottom: -1.2rem;
@@ -411,7 +411,7 @@ button {
   backface-visibility: hidden;
 }
 
-.home-book-cover .book-object__front img {
+.book-cover .book-object__front img {
   display: block;
   width: 100%;
   height: auto;
@@ -464,7 +464,7 @@ button {
 }
 
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .home-book-cover:hover .book-object {
+  .book-cover:hover .book-object {
     transform: rotateX(3deg) rotateY(-14deg) rotateZ(-1deg) translateY(-3px);
   }
 }
@@ -807,12 +807,14 @@ article > nav {
   justify-content: start;
 }
 
-.prose .book-entry img {
-  width: 100%;
-  margin: 0;
-  border-radius: 0;
-  background: #fff;
-  box-shadow: 0.75rem 0.9rem 1.7rem -1.1rem rgba(42, 32, 23, 0.55);
+.book-entry > .book-cover {
+  --book-depth: 0.8rem;
+  align-self: start;
+  margin-bottom: 1rem;
+}
+
+.book-entry:first-child > .book-cover {
+  --book-depth: 1.1rem;
 }
 
 .book-entry__copy h2 {

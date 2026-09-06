@@ -21,14 +21,7 @@ draft = false
       <a class="text-link" href="/blog/">Read the blog</a>
     </div>
   </div>
-  <a class="home-book-cover" href="https://leanpub.com/fixtheladder" aria-label="Explore Fix the Ladder on Leanpub">
-    <span class="book-object">
-      <span class="book-object__spine" aria-hidden="true"></span>
-      <span class="book-object__pages" aria-hidden="true"></span>
-      <span class="book-object__top" aria-hidden="true"></span>
-      <span class="book-object__front"><img src="/images/books/fix-the-ladder.jpg" alt="Fix the Ladder book cover" /></span>
-    </span>
-  </a>
+  {{< book-cover class="home-book-cover" src="/images/books/fix-the-ladder.jpg" alt="Fix the Ladder book cover" href="https://leanpub.com/fixtheladder" >}}
 </section>
 
 <section class="home-intro" aria-labelledby="home-intro-title">
