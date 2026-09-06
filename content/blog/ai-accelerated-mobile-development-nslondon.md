@@ -1,83 +1,47 @@
 +++
-title = "AI-Accelerated Mobile Development: Lessons from My NSLondon Talk"
+title = "What I still had to do when AI built the app"
 date = 2026-09-04T20:00:00+01:00
 draft = false
 tags = ["AI engineering", "agentic coding", "NSLondon", "Swift", "engineering leadership"]
-description = "Giordano Scalzo's NSLondon talk: two app-building demos, a missing entitlement, and practical lessons on planning, testing and leading work with coding agents."
+description = "Two experiments from my NSLondon talk: what I still had to explain, coordinate, and check when coding agents built the apps."
 +++
 
-The QR-code app worked. Text went in, a QR code came out. Then I tried to save it.
+“Yeah, yeah, it works. Now save it. Oops.”
 
-There was the bug. A missing macOS sandbox entitlement, waiting patiently behind the button I had not clicked yet.
+That was me trying the QR-code app in my NSLondon demo. It generated codes from text and links, so I was pleased with it. Then I tried to save one and found a bug.
 
-That moment from my [NSLondon talk at Google London on 26 November 2025](https://www.meetup.com/nslondon/events/311356134/) is a useful summary of AI-assisted development. You can get to something convincing very quickly. You still have to find out whether it works.
+I could copy the stack trace, or even better, take a screenshot because I'm lazy. I gave the agent the screenshot and suggested checking the sandbox. It found a missing entitlement, corrected it, and saving worked too.
 
-The recording is below. It captures the tools and my workflow as they were in November 2025. This is a look back at the lessons from those demos, rather than a guide to the latest versions.
+The fix was quick once I'd found the problem. Finding it still depended on me trying the app, even though the agent had already implemented it and run tests. That became a useful example of what my job looked like in the two experiments I showed at [NSLondon in November 2025](https://www.youtube.com/watch?v=QqHiv3suI6E): explaining what I wanted, helping when something went wrong, and deciding whether the result worked.
 
-{{< youtube QqHiv3suI6E >}}
+## Give it a job it can understand
 
-## From writing code to directing work
+The QR-code app started because I wanted nicer codes for my talks. Most of the online generators I found wanted me to pay or had a watermark. Then I remembered: I'm a vibe coder. Or even better, an AI-accelerated developer. I could make a small app for this, and use the experiment to learn something I could take back to work.
 
-I opened with the progression from autocomplete to chat assistants, coding agents, and orchestrating several agents. As the tools take on more implementation, the developer spends more time explaining the goal, setting boundaries, and checking the result.
+That's why I chose Copilot, the tool we could use at NewDay. I wanted a text field, QR-code generation, export, and a history. Before asking it to implement those features, I created the project in Xcode. I'd made the mistake of starting from an empty directory several times before. The agent can assemble a project, but it spends time and context doing something Xcode can already do for you.
 
-That feels familiar if you have led a team. You cannot personally type every line of code. You need people to understand the requirements, agree on what good looks like, and make their work reviewable.
+With the project ready, I asked it to write the repository instructions, including how to build and run the tests. I wanted tests run before and after changes because I'd already seen agents fix something and then announce that other tests were broken, but unrelated to their change. Excuse me? I can't even do a performance review.
 
-An agent needs those things too. It will happily start implementing before you have finished deciding what you want. Enthusiasm has never been our industry's scarcest resource.
+I reviewed the instructions, then asked for a plan and clarification questions. The agent wanted to know about QR-code size, quality, and history. Answering those questions made me decide what I actually wanted before it started writing code. It felt much like explaining a task to someone new in my team: give them the requirements and agree on how we'll check the work.
 
-## An agent is a loop with tools
+That preparation got me a working first version, including UI tests. It also got me the broken Save button from the opening. I was happy with how much the agent had done, but I still needed to use the app to find out what we'd missed.
 
-Before the demos, I spent a few minutes on what a coding agent actually does. A model receives instructions and context. It requests a tool call, such as reading a file or running a command. The application executes that call and sends the result back. The process repeats.
+## Now try it with several agents
 
-Understanding that loop makes the behaviour less mysterious. The agent can only act through the tools it has. Its decisions depend on the information available in its context.
+For the second experiment, I wanted something with more parts: an app for friends splitting a restaurant bill. It needed to read a receipt, let people assign its items, and calculate what each person owed. That gave me separate pieces of work I could hand to different agents.
 
-For a small, inspectable example, I built [Nimbo, a coding agent in Swift](/blog/demystifying-ai-coding-agents-in-swift/). Listing files, reading them, and making edits is enough to start experimenting. It is an educational project, with plenty left to do before anything resembling a production agent.
+I knew the problem well. A bill splitter was the first app I'd been paid to fix or implement, fifteen years earlier. I found it in an old email; I think it was for the iPhone 4. These days I use it as a sort of kata to try new tools. I'd built versions for Londroid and an internal workshop, so when Antigravity came out I had another excuse to build it. I spent my weekend with it. My wife was super happy.
 
-## Demo one: a macOS QR-code generator
+I used five agents, starting with one to write the repository instructions. After that, an agent built the app with mocked receipt recognition while another proposed icons and a splash screen. The mock mattered because it let me try adding participants and assigning items before connecting the real receipt service.
 
-I wanted a small app with text input, QR-code generation, export, and a history of previous codes. I used Copilot for the demo because I wanted to bring what I learned back into the tooling we used at work.
+Once that flow worked, I could start the OpenAI integration and the layout tweaks as separate jobs. Some work could happen at the same time, while other work needed something finished first. Deciding that order was my responsibility, just as explaining the QR-code requirements had been.
 
-The preparation mattered. I started with an Xcode project rather than asking the agent to assemble everything from an empty directory. Then I asked it to draft repository instructions: how to build, how to run tests, and what standards to follow.
+This prototype took around an hour, with minor layout problems and tweaks. Earlier versions had taken me around a day, so I was kind of impressed. Of course it's anecdotal. The versions and tools were different, and I'd been practising this particular problem for fifteen years.
 
-That draft needed reviewing. Generated instructions are another piece of work to check, especially when the agent has been generous with the word count.
+## The part I still have to learn
 
-Next came a plan. I asked for clarification questions before implementation, including questions about the QR-code output and history. Getting those decisions out of my head gave the agent something more useful than “make me a nice app”.
+Both experiments made me want to use agents more. They also made the work around coding much more obvious to me. With the QR-code app, I had to settle the requirements and investigate a failure. With the bill splitter, I also had to divide the work so the agents could make progress without waiting unnecessarily on each other.
 
-The first implementation generated codes successfully. Saving exposed the missing entitlement. I fed back a screenshot and a suggestion about the sandbox, and the agent corrected it.
+That's familiar work if you've led a team. As a team grows, you can't personally write or follow every line of code. You rely on clear tasks, tests, and ways of checking that the pieces work together. I'm finding I need those same habits when I work with agents, even on a small app of my own.
 
-The lesson is mundane and important: exercise the actual user journey. A successful build and a plausible screen do not prove that exporting a file works.
-
-## Give the agent useful context
-
-The talk also covered keeping build output manageable. Full Xcode logs can consume a lot of context while providing little useful information about a particular failure.
-
-I showed a workflow that condensed build results and kept errors and warnings available. The broader principle is to give the agent enough evidence to diagnose the problem without burying it in unrelated output. When a summary is insufficient, inspect the underlying logs.
-
-Repository instructions help with the same problem. Record the build commands and project conventions where the next session can find them. Keep them accurate as the project changes.
-
-## Demo two: splitting the bill with several agents
-
-For the larger example, I used a bill-splitting app as a familiar exercise. Add participants, read a receipt, assign items, calculate each person's share, and save the event.
-
-I had built versions of this idea before, which made it useful for exploring a new tool. In this experiment, I used Antigravity and divided the work into stages.
-
-First came repository instructions. Then the app itself, using mocked receipt recognition. While that work progressed, another agent proposed icons and a splash screen. Once the mocked flow worked, I separated the real receipt integration from smaller layout changes.
-
-Some tasks ran in parallel; others depended on earlier work. The useful part was deciding which was which. Mocking the receipt recognition let me test the rest of the app before connecting the external service.
-
-In the talk, I compared roughly an hour on that prototype with longer efforts on earlier versions. That was a personal observation, not a controlled benchmark. I knew the problem better each time, the tools changed, and the implementations were different. It would be a poor basis for promising anyone a productivity multiplier.
-
-A demo also leaves production work unfinished. For example, any prototype shortcut involving an API key in a client app needs replacing with an appropriate secure integration before release.
-
-## What this means for engineering teams
-
-The demos made me more interested in the skills around implementation: explaining requirements, choosing sensible boundaries, testing behaviour, and recognising when a result needs investigation.
-
-Those are skills we need to help engineers develop. An agent can produce a lot of code before someone has had time to understand the decisions inside it. Giving that engineer more output does not automatically give them more judgement.
-
-That question has become central to my current work on [Fix the Ladder](https://leanpub.com/fixtheladder), about growing junior engineers in the age of AI. I want teams to benefit from these tools while making time to learn how their software works.
-
-For a later experiment with considerably more production friction, I wrote about [building and shipping Neurona](/blog/neurona-from-ai-prototype-to-real-app/). The weekend prototype was the beginning of that story.
-
-Thanks to Peter Friese for hosting and to the NSLondon organisers. This community welcomed me when I first moved to London, and it was a pleasure to come back with a few experiments and a save button that needed attention.
-
-[Watch the full NSLondon recording on YouTube](https://www.youtube.com/watch?v=QqHiv3suI6E).
+So when I try the next tool, I'll use the bill splitter again. I'll look at how much explaining and checking it needs, as well as how quickly it produces code. Getting an app built in an hour is exciting. Understanding what I've got at the end is what lets me do something useful with it.
