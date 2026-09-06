@@ -15,11 +15,11 @@ images = ["/images/books/fix-the-ladder.jpg"]
   <article class="book-entry">
     <img src="/images/books/fix-the-ladder.jpg" alt="Fix the Ladder book cover" />
     <div class="book-entry__copy">
-      <p class="section-label">Current project</p>
+      <p class="section-label">Latest book</p>
       <h2>Fix the Ladder</h2>
       <p>Growing Junior Engineers in the Age of AI. A practical field guide for engineering managers and CTOs who want AI speed without losing engineering judgement.</p>
       <div class="book-meta">
-        <span>Work in progress</span>
+        <span>Complete · Available on Leanpub</span>
         <a href="https://leanpub.com/fixtheladder">Explore on Leanpub ↗</a>
       </div>
     </div>

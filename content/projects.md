@@ -26,4 +26,4 @@ Two demos from my November 2025 talk: a macOS QR-code generator and an iOS recei
 
 [Watch the talk and read the lessons](/blog/ai-accelerated-mobile-development-nslondon/)
 
-For the people side of AI adoption, see [Fix the Ladder](https://leanpub.com/fixtheladder), my work-in-progress book about growing junior engineers.
+For the people side of AI adoption, see [Fix the Ladder](https://leanpub.com/fixtheladder), my book about growing junior engineers.
