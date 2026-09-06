@@ -24,10 +24,11 @@
     })();
   </script>
 
-  {{- $main := resources.Get "main.css" -}}
-  {{- $custom := resources.Get "custom.css" -}}
-  {{- $css := slice $main $custom | resources.Concat "main.css" | minify -}}
-  <link rel="preload stylesheet" as="style" href="{{ $css.Permalink }}" />
+  {{ if eq .Type "antescher" }}
+  {{- $projectCSS := resources.Get "antescher.css" | minify | fingerprint -}}
+  <link rel="stylesheet" href="{{ $projectCSS.RelPermalink }}" integrity="{{ $projectCSS.Data.Integrity }}" />
+  {{ end }}
+  {{ partial "styles.html" . }}
 
   {{- if and .IsPage (not site.Params.disableHLJS) -}}
   <script defer src="{{ `highlight.min.js` | absURL }}" onload="hljs.initHighlightingOnLoad();"></script>

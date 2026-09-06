@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ant Attack — player state</title>
+<link rel="stylesheet" href="embed.css">
+</head>
+<body>
+<div class="dia">
+<pre class="mermaid">
+stateDiagram-v2
+  direction LR
+  [*] --> Standing
+  Standing --> Walking: direction key
+  Walking --> Standing: key released
+  Walking --> Jumping: blocked &amp; auto-jump bit
+  Standing --> Jumping: jump key
+  Jumping --> Falling: apex
+  Walking --> Falling: no block below
+  Falling --> Standing: block found
+  Falling --> Hurt: fall depth &gt; threshold
+  Hurt --> Standing
+  Standing --> Throwing: fire key
+  Throwing --> Standing: grenade handed to entity 7
+</pre>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script src="mermaid-init.js"></script>
+<script src="frame.js"></script>
+</body>
+</html>

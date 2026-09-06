@@ -1,0 +1,5 @@
+{{- $main := resources.Get "main.css" -}}
+{{- $base := resources.Get "theme-base.css" -}}
+{{- $custom := resources.Get "custom.css" -}}
+{{- $css := slice $main $base $custom | resources.Concat "css/site.css" | minify | fingerprint -}}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />

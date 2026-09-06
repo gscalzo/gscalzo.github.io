@@ -1,0 +1,48 @@
+:root {
+  color-scheme: light;
+  --paper: #f5f2ec;
+  --paper-deep: #ebe6dc;
+  --ink: #1a1917;
+  --muted: #68645d;
+  --line: rgba(26, 25, 23, 0.18);
+  --soft-line: rgba(26, 25, 23, 0.1);
+  --accent: #c82c2c;
+  --accent-dark: #a91f1f;
+  --display: "Iowan Old Style", Baskerville, Georgia, "Times New Roman", serif;
+  --sans: "Avenir Next", Avenir, "Segoe UI", Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --wide: 70rem;
+  --reading: 46rem;
+}
+
+html.dark {
+  color-scheme: dark;
+  --paper: #171614;
+  --paper-deep: #211f1c;
+  --ink: #f2eee7;
+  --muted: #aaa49a;
+  --line: rgba(242, 238, 231, 0.2);
+  --soft-line: rgba(242, 238, 231, 0.1);
+  --accent: #ef5a55;
+  --accent-dark: #ff746f;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-skip-ink: auto;
+}
+
+a:hover {
+  color: var(--accent-dark);
+  text-decoration-thickness: 2px;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+

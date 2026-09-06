@@ -1,0 +1,5 @@
+{{- $base := resources.Get "theme-base.css" -}}
+{{- $figures := resources.Get "antescher-figures.css" -}}
+{{- $css := slice $figures $base | resources.Concat "css/figures.css" | minify | fingerprint -}}
+{{- $source := resources.Get (printf "antescher/figures/%s" .Params.figure) -}}
+{{- replace $source.Content `href="embed.css"` (printf `href="%s"` $css.RelPermalink) | safeHTML -}}

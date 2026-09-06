@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ant Attack — the frame pipeline</title>
+<link rel="stylesheet" href="embed.css">
+</head>
+<body>
+<div class="dia">
+<pre class="mermaid">
+flowchart TD
+  K["Read keys<br/><span>ROM KEY-SCAN at 028E</span>"] --> U
+  U["Update 8 entities<br/><span>IX walks B480</span>"] --> C
+  C["Cull to window<br/><span>16KB &#8594; 672 B at B180</span>"] --> B
+  B["Stamp blocks far &#8594; near<br/><span>into buffer at A000</span>"] --> S
+  S["Blit sprites masked<br/><span>into the same buffer</span>"] --> F
+  F["LDIR buffer &#8594; screen<br/><span>A000 &#8594; 4000, one shot</span>"] --> K
+</pre>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script src="mermaid-init.js"></script>
+<script src="frame.js"></script>
+</body>
+</html>
