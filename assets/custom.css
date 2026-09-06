@@ -53,8 +53,16 @@ body.site-body::before {
 }
 
 a {
-  color: inherit;
-  text-underline-offset: 0.18em;
+  color: var(--accent);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-skip-ink: auto;
+}
+
+a:hover {
+  color: var(--accent-dark);
+  text-decoration-thickness: 2px;
 }
 
 a:focus-visible,
@@ -149,6 +157,12 @@ button {
   text-decoration: none;
 }
 
+.site-nav a,
+.rss-link {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
 .site-nav a::after {
   position: absolute;
   right: 0;
@@ -169,7 +183,7 @@ button {
 }
 
 .rss-link {
-  color: var(--muted);
+  color: var(--accent);
   font-family: var(--mono);
   font-size: 0.68rem;
   letter-spacing: 0.08em;
@@ -228,9 +242,15 @@ button {
 }
 
 .prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
-  color: inherit;
-  text-decoration-color: var(--accent);
+  color: var(--accent);
+  text-decoration-line: underline;
+  text-decoration-color: currentColor;
   text-decoration-thickness: 1px;
+}
+
+.prose :where(a:hover):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  color: var(--accent-dark);
+  text-decoration-thickness: 2px;
 }
 
 .prose :where(h1, h2, h3, h4):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
@@ -554,12 +574,20 @@ button {
 }
 
 .writing-list__copy strong {
-  color: inherit !important;
+  color: var(--accent) !important;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
   font-family: var(--display);
   font-size: clamp(1.35rem, 2.8vw, 1.8rem);
   font-weight: 500;
   letter-spacing: -0.025em;
   line-height: 1.15;
+}
+
+.writing-list a:hover .writing-list__copy strong {
+  color: var(--accent-dark) !important;
+  text-decoration-thickness: 2px;
 }
 
 .writing-list__copy > span {
