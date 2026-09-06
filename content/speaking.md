@@ -1,5 +1,5 @@
 +++
-title = "Giordano Scalzo | Talks on AI Engineering and Leadership"
+title = "Talks"
 draft = false
 description = "Talks and recordings from Giordano Scalzo on agentic coding, AI-assisted mobile development, and growing engineering teams in the age of AI."
 +++

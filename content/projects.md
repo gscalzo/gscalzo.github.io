@@ -1,5 +1,5 @@
 +++
-title = "AI Engineering Projects by Giordano Scalzo"
+title = "Projects"
 draft = false
 description = "Practical AI engineering projects by Giordano Scalzo: a Swift coding agent, a shipped mobile app, and experiments in agent-assisted development."
 +++
