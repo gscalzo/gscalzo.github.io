@@ -422,6 +422,7 @@ button {
 
 .home-intro__links {
   display: flex;
+  flex-wrap: wrap;
   margin-top: 1.75rem;
   gap: 1.5rem;
 }
@@ -1057,3 +1058,17 @@ article > nav {
 .site-custom h2 { font-size: clamp(1.7rem, 4vw, 2.5rem); }
 .site-custom a { border-bottom: 0; }
 .site-custom .site-header { background: var(--paper); }
+
+/* Featured reading has no date column, at any viewport width. */
+.writing-list--featured a {
+  grid-template-columns: minmax(0, 1fr) 1.5rem;
+}
+
+.writing-list--featured .writing-list__copy {
+  min-width: 0;
+}
+
+.writing-list--featured .writing-list__arrow {
+  grid-column: 2;
+  grid-row: 1;
+}
