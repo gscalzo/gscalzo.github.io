@@ -6,6 +6,12 @@ description = "Talks and recordings from Giordano Scalzo on agentic coding, AI-a
 
 I speak about AI engineering, agentic coding, and growing teams. My talks draw on experiments with real software, including the parts that went wrong.
 
+## Topics I’m working on
+
+- Adopting coding agents while keeping ownership of the software they produce.
+- Growing junior engineers and strengthening engineering judgement in the age of AI.
+- Moving from an impressive AI prototype to a product people can use.
+
 ## Upcoming talks
 
 ### LDX3 New York, 15–16 September 2026
@@ -24,7 +30,14 @@ The feature is almost done, so you ask for one more thing. Then another. This ke
 
 [Talk and speaker details](https://www.nextappcon.com/agentic-codingcon-new-speakers/gio-scalzo) · [Conference](https://www.nextappcon.com/agentic-coding-con)
 
-## Recent recordings
+## Recent talks and recordings
+
+### The Guardian, 2 September 2026
+
+**Tackling the junior developer crisis in the age of AI**
+
+Presented at The Guardian’s internal engineering tech talk, exploring how we help junior developers grow in the age of AI.
+
 
 ### NSLondon, November 2025
 
@@ -85,11 +98,5 @@ These decks cover Swift, iOS, JavaScript, testing, and agile development. Years 
 | 2009 | [Scrum in an hour](https://www.slideshare.net/slideshow/scrum-in-an-hour/1742808) | — |
 
 [Browse my SlideShare profile](https://www.slideshare.net/giordano) · [Earlier server-side Swift deck](https://www.slideshare.net/slideshow/the-joy-of-serverside-swift-development/67493948)
-
-## Topics I’m working on
-
-- Adopting coding agents while keeping ownership of the software they produce.
-- Growing junior engineers and strengthening engineering judgement in the age of AI.
-- Moving from an impressive AI prototype to a product people can use.
 
 For speaking enquiries, [contact me on LinkedIn](https://www.linkedin.com/in/giordanoscalzo/).

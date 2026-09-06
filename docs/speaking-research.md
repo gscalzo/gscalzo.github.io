@@ -4,10 +4,14 @@ Researched 5 September 2026. Public archive: `content/speaking.md`.
 
 ## Verified appearances
 
+The Guardian entry was confirmed by Giordano on 6 September 2026; it was an internal engineering tech talk, with no public event link supplied.
+
+
 | Date | Event | Talk | Evidence |
 | --- | --- | --- | --- |
 | 15–16 September 2026 (conference dates) | LDX3 New York | Tackling the junior developer crisis in the age of AI | [Official agenda](https://leaddev.com/leaddev-new-york/agenda/) |
 | 7–9 October 2026 (conference dates) | agentic codingCon, Berlin | Just One More Prompt: Why Agentic Coding Hooks Us — keynote | [Official speaker page](https://www.nextappcon.com/agentic-codingcon-new-speakers/gio-scalzo) |
+| 2 September 2026 | The Guardian, internal engineering tech talk | Tackling the junior developer crisis in the age of AI | Speaker confirmation |
 | 26 November 2025 | NSLondon at Google | AI-Accelerated Mobile Development: From idea to build, faster than ever | [Meetup](https://www.meetup.com/nslondon/events/311356134/) · [Video](https://www.youtube.com/watch?v=QqHiv3suI6E) |
 | 29 May 2025 | Londroid at NewDay | AI-Accelerated Mobile Development | [Meetup](https://www.meetup.com/android/events/307541693/) · [Video](https://www.youtube.com/watch?v=ZjuPGTcUrnc) |
 | 6 November 2015 | Italian Agile Days | Snapshot Testing su iOS, with Andrea Francia | [Workshop listing](https://joind.in/event/italian-agile-days-2015/snapshot-testing-su-ios) |
