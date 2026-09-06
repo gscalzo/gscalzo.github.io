@@ -31,6 +31,8 @@ enableRobotsTXT = true
   weight = 4
 
 [params]
+  favicon = "favicon.ico?v=avatar-20260906"
+  appleTouchIcon = "apple-touch-icon.png?v=avatar-20260906"
   description = "Giordano Scalzo is a London-based AI engineering lead, author and speaker helping teams adopt AI, build reliable software and grow engineering judgement."
   github = "gscalzo"
   linkedin = "giordanoscalzo"
