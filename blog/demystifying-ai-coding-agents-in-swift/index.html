@@ -1,0 +1,259 @@
+<!doctype html><html class=not-ready lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Demystifying AI Coding Agents in Swift · Giordano Scalzo</title><meta name=description content="A small AI coding agent in Swift, built from a model, a tool interface and a loop."><meta name=author content="Giordano Scalzo"><meta name=robots content="index, follow, max-image-preview:large"><meta name=theme-color content="#f5f2ec"><script>(()=>{const e=localStorage.getItem("theme"),t=window.matchMedia("(prefers-color-scheme: dark)").matches;(e==="dark"||!e&&t)&&document.documentElement.classList.add("dark")})()</script><link rel=stylesheet href=/css/site.min.6734b1b22b47094323dce478d3824e1ac4297811311b7c7b4dd4f86fa8be6c8e.css integrity="sha256-ZzSxsitHCUMj3OR404JOGsQpeBExG3x7TdT4b6i+bI4="><script defer src=https://gioscalzo.com/highlight.min.js onload=hljs.initHighlightingOnLoad()></script><link rel=icon href="https://gioscalzo.com/favicon.ico?v=avatar-20260906"><link rel=apple-touch-icon href="https://gioscalzo.com/apple-touch-icon.png?v=avatar-20260906"><meta name=generator content="Hugo 0.165.0"><script async src="https://www.googletagmanager.com/gtag/js?id=G-B6YT2W23QZ"></script><script>var doNotTrack=!1,dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes";if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-B6YT2W23QZ")}</script><meta itemprop=name content="Demystifying AI Coding Agents in Swift"><meta itemprop=description content="A small AI coding agent in Swift, built from a model, a tool interface and a loop."><meta itemprop=datePublished content="2025-11-05T00:00:00+00:00"><meta itemprop=dateModified content="2025-11-05T00:00:00+00:00"><meta itemprop=wordCount content="2635"><meta itemprop=image content="https://gioscalzo.com/images/social/giordano-scalzo.jpg"><meta itemprop=keywords content="Swift,AI,LLM,Coding Agents,OpenAI"><meta property="og:url" content="https://gioscalzo.com/blog/demystifying-ai-coding-agents-in-swift/"><meta property="og:site_name" content="Giordano Scalzo"><meta property="og:title" content="Demystifying AI Coding Agents in Swift"><meta property="og:description" content="A small AI coding agent in Swift, built from a model, a tool interface and a loop."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="blog"><meta property="article:published_time" content="2025-11-05T00:00:00+00:00"><meta property="article:modified_time" content="2025-11-05T00:00:00+00:00"><meta property="article:tag" content="Swift"><meta property="article:tag" content="AI"><meta property="article:tag" content="LLM"><meta property="article:tag" content="Coding Agents"><meta property="article:tag" content="OpenAI"><meta property="og:image" content="https://gioscalzo.com/images/social/giordano-scalzo.jpg"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://gioscalzo.com/images/social/giordano-scalzo.jpg"><meta name=twitter:title content="Demystifying AI Coding Agents in Swift"><meta name=twitter:description content="A small AI coding agent in Swift, built from a model, a tool interface and a loop."><link rel=canonical href=https://gioscalzo.com/blog/demystifying-ai-coding-agents-in-swift/><script type=application/ld+json>{"@context":"https://schema.org","@graph":[{"@id":"https://gioscalzo.com/#person","@type":"Person","alternateName":"Gio Scalzo","description":"Giordano Scalzo is a London-based AI engineering lead, author and speaker helping teams adopt AI, build reliable software and grow engineering judgement.","image":"https://gioscalzo.com/images/social/giordano-scalzo.jpg","jobTitle":"AI and Engineering Leader","knowsAbout":["AI engineering","Agentic coding","Engineering leadership","Mentoring software engineers","Mobile application development","Swift"],"name":"Giordano Scalzo","sameAs":["https://www.linkedin.com/in/giordanoscalzo/","https://github.com/gscalzo","https://medium.com/@giordanoscalzo","https://gioscalzo.substack.com/","https://leanpub.com/u/giordanoscalzo","https://stackoverflow.com/users/288379/giordano-scalzo","https://x.com/giordanoscalzo"],"url":"https://gioscalzo.com/"},{"@id":"https://gioscalzo.com/#website","@type":"WebSite","description":"Giordano Scalzo is a London-based AI engineering lead, author and speaker helping teams adopt AI, build reliable software and grow engineering judgement.","inLanguage":"en-GB","name":"Giordano Scalzo","publisher":{"@id":"https://gioscalzo.com/#person"},"url":"https://gioscalzo.com/"},{"@id":"https://gioscalzo.com/blog/demystifying-ai-coding-agents-in-swift/","@type":"BlogPosting","author":{"@id":"https://gioscalzo.com/#person"},"dateModified":"2025-11-05T00:00:00Z","datePublished":"2025-11-05T00:00:00Z","description":"A small AI coding agent in Swift, built from a model, a tool interface and a loop.","headline":"Demystifying AI Coding Agents in Swift","image":"https://gioscalzo.com/images/social/giordano-scalzo.jpg","inLanguage":"en-GB","isPartOf":{"@id":"https://gioscalzo.com/#website"},"mainEntityOfPage":"https://gioscalzo.com/blog/demystifying-ai-coding-agents-in-swift/","publisher":{"@id":"https://gioscalzo.com/#person"},"url":"https://gioscalzo.com/blog/demystifying-ai-coding-agents-in-swift/"}]}</script></head><body class="site-body page-kind-page page-type-blog page-demystifying-ai-coding-agents-in-swift"><a class=skip-link href=#main-content>Skip to content</a><header class=site-header><div class=site-header__inner><a class=site-brand href=https://gioscalzo.com/ aria-label="Gio Scalzo, home"><span class=site-brand__mark aria-hidden=true>GS</span>
+<span>Gio Scalzo</span>
+</a><button class=menu-toggle type=button aria-expanded=false aria-controls=site-navigation>
+<span>Menu</span>
+<span class=menu-toggle__lines aria-hidden=true></span></button><div class=site-navigation id=site-navigation><nav class=site-nav aria-label="Primary navigation"><a href=/>Home</a><a href=/projects/>Projects</a><a href=/books/>Books</a><a href=/blog/ class=is-active aria-current=page>Writing</a><a href=/speaking/>Speaking</a></nav><a class=rss-link href=https://gioscalzo.com/blog/index.xml aria-label="RSS feed">RSS</a>
+<button class=theme-toggle type=button aria-label="Switch colour theme">
+<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/></svg>
+<span>Theme</span></button></div></div></header><script>(()=>{const e=document.documentElement,t=document.querySelector(".menu-toggle"),n=document.querySelector(".theme-toggle"),s=document.querySelector('meta[name="theme-color"]'),o=t=>{e.classList.toggle("dark",t),localStorage.setItem("theme",t?"dark":"light"),s?.setAttribute("content",t?"#171614":"#f5f2ec")};t?.addEventListener("click",()=>{const n=e.classList.toggle("menu-open");t.setAttribute("aria-expanded",String(n))}),n?.addEventListener("click",()=>o(!e.classList.contains("dark"))),setTimeout(()=>e.classList.remove("not-ready"),10)})()</script><main id=main-content class=site-main><div class=content-shell><article><header class=mb-14><h1 class="my-0! pb-2.5">Demystifying AI Coding Agents in Swift</h1><div class="text-xs antialiased opacity-60"><time>Nov 5, 2025</time><span class=mx-1>&#183;</span>
+<span>Giordano Scalzo</span></div></header><section><img src=https://gioscalzo.com/images/blog/nimbo/hero.png alt="Hero Image" class=img-hero><h2 id=the-small-loop-behind-an-agent>The small loop behind an agent</h2><p>AI coding agents can look opaque. You type a request and they search files, write code, refactor functions and decide what to do next.</p><p>The basic mechanism is much smaller than the behaviour it produces.</p><p>I tend to understand things by building them, so after reading Amp&rsquo;s article <a href=https://ampcode.com/how-to-build-an-agent>&ldquo;How to Build an Agent&rdquo;</a>, I tried the same idea in Swift.</p><p>The result is Nimbo, a small coding agent that can list directories, read files and edit code. Its core is a loop, a few tools and a language model with opinions.</p><p>It is not a replica of Claude Code, Cursor or GitHub Copilot Workspace, but it exposes the mechanism those products build on.</p><h2 id=what-an-ai-coding-agent-needs>What an AI coding agent needs</h2><p>An AI coding agent boils down to three things:</p><ol><li><strong>A language model</strong> (like GPT-5, Claude, or Gemini)</li><li><strong>A set of tools</strong> it can call (functions that do real work)</li><li><strong>A loop</strong> that keeps the conversation going</li></ol><img src=https://gioscalzo.com/images/blog/nimbo/agent-loop.png alt="Agent Loop Image" class=img-frame><p>The model cannot touch the filesystem itself. The agent loop asks what to do next, performs the requested tool call, reports the result and asks again. That continues until the model returns an answer instead of another tool call.</p><h3 id=the-context-window>The context window</h3><p>Language models do not remember a conversation in the way people do. On each request, the application sends the conversation history again.</p><img src=https://gioscalzo.com/images/blog/nimbo/context-window.png alt="Context Window" class=img-frame><p>That working memory is the <strong>context window</strong>. Modern models commonly support between 128K and 200K tokens, roughly 100,000 to 150,000 words.</p><p>As the agent runs:</p><ul><li>Every file it reads gets added to the history.</li><li>Every tool call and result takes up space.</li><li>The model needs to process more and more text each turn.</li><li>Eventually, you hit the limit.</li></ul><p>When the context fills up:</p><ol><li><strong>Performance degrades</strong> because the model struggles to &ldquo;pay attention&rdquo; to everything.</li><li><strong>Costs increase</strong> because each request processes more tokens.</li><li><strong>You hit a hard limit</strong> when the API simply rejects your request.</li></ol><p>Production agents manage this with summarisation, selective memory and context pruning. Nimbo keeps the full history because its purpose is to make the loop easy to see.</p><h2 id=what-we-are-building>What we are building</h2><p>We will build <strong>Nimbo</strong> in five steps:</p><ol><li>Set up a basic chat loop.</li><li>Define the tools.</li><li>Execute tool calls.</li><li>Feed each result back to the model.</li><li>Handle limits and errors.</li></ol><p>All the code is in the <a href=https://github.com/gscalzo/Nimbo>Nimbo repository</a>.</p><img src=https://gioscalzo.com/images/blog/nimbo/agent-interaction.png alt="Agent Interaction" class=img-frame><h2 id=step-1-build-the-chat-loop>Step 1: Build the chat loop</h2><p>Nimbo starts as a command-line chat client.</p><p>The core structure is in <a href=https://github.com/gscalzo/Nimbo/blob/main/Sources/NimboCLI/main.swift>main.swift</a>:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-swift data-lang=swift><span style=display:flex><span><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>func</span> <span style=color:#a6e22e>runLoop</span>() async {
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>Chat with Nimbo (use &#39;ctrl-c&#39; to quit)</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> agent = Agent(
+</span></span><span style=display:flex><span>        apiKey: apiKey,
+</span></span><span style=display:flex><span>        system: <span style=color:#e6db74>&#34;You are Nimbo, a concise CLI assistant.&#34;</span>
+</span></span><span style=display:flex><span>    )
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> <span style=color:#66d9ef>let</span> line = input() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> line.isEmpty { <span style=color:#66d9ef>continue</span> }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> answer = await agent.respond(line)
+</span></span><span style=display:flex><span>        print(<span style=color:#e6db74>&#34;</span><span style=color:#e6db74>\(</span>display<span style=color:#e6db74>(</span><span style=color:#e6db74>&#34;Nimbo&#34;</span>, <span style=color:#66d9ef>in</span>: .green<span style=color:#e6db74>))</span><span style=color:#e6db74>: </span><span style=color:#e6db74>\(</span>answer<span style=color:#e6db74>)</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>This code does four things:</p><ol><li>Create an agent with a system prompt.</li><li>Get user input in a loop.</li><li>Ask the agent to respond.</li><li>Print the response.</li></ol><p>The agent work happens inside <code>agent.respond()</code>.</p><p>The <a href=https://github.com/gscalzo/Nimbo/blob/main/Sources/NimboCLI/Agent.swift>Agent class</a> maintains a conversation history:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-swift data-lang=swift><span style=display:flex><span><span style=color:#66d9ef>final</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Agent</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>let</span> client: OpenAIService
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>var</span> history: [ChatCompletionParameters.Message]
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>let</span> tools: [Tool]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>init</span>(apiKey: String, system: String) {
+</span></span><span style=display:flex><span>        client = OpenAIServiceFactory.service(apiKey: apiKey)
+</span></span><span style=display:flex><span>        history = [.<span style=color:#66d9ef>init</span>(role: .system, content: .text(system))]
+</span></span><span style=display:flex><span>        tools = [ListFiles(), ReadFile(), EditFile()]
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>func</span> <span style=color:#a6e22e>respond</span>(<span style=color:#66d9ef>_</span> text: String) async -&gt; String {
+</span></span><span style=display:flex><span>        history.append(.<span style=color:#66d9ef>init</span>(role: .user, content: .text(text)))
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// ... magic happens here ...</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>The <code>history</code> array holds the context sent to the model. It contains user messages, model responses and, later, tool results.</p><p>At this point, Nimbo can hold a conversation but cannot touch files.</p><img src=https://gioscalzo.com/images/blog/nimbo/nimbo-1.png alt="Nimbo Basic" class=img-frame><h2 id=step-2-define-the-tools>Step 2: Define the tools</h2><p>A tool pairs a function with a description the model can read. The model does not execute the function. It returns the tool name and arguments, and the application decides whether to run it.</p><p>In Swift, we define tools using a protocol (<a href=https://github.com/gscalzo/Nimbo/blob/main/Sources/NimboCLI/Tools/Tool.swift>Tool.swift</a>):</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-swift data-lang=swift><span style=display:flex><span><span style=color:#66d9ef>protocol</span> <span style=color:#a6e22e>Tool</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> name: String { <span style=color:#66d9ef>get</span> }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> chatTool: ChatCompletionParameters.Tool { <span style=color:#66d9ef>get</span> }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> exec: (Data?) -&gt; String { <span style=color:#66d9ef>get</span> }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Here is the <a href=https://github.com/gscalzo/Nimbo/blob/main/Sources/NimboCLI/Tools/ReadFile.swift>ReadFile tool</a>:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-swift data-lang=swift><span style=display:flex><span><span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>ReadFile</span>: Tool {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> name = <span style=color:#e6db74>&#34;read_file&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> chatTool: ChatCompletionParameters.Tool = {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> schema = JSONSchema(
+</span></span><span style=display:flex><span>            type: .object,
+</span></span><span style=display:flex><span>            properties: [<span style=color:#e6db74>&#34;path&#34;</span>: JSONSchema(type: .string)]
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> function = ChatCompletionParameters.ChatFunction(
+</span></span><span style=display:flex><span>            name: <span style=color:#e6db74>&#34;read_file&#34;</span>,
+</span></span><span style=display:flex><span>            description: <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                Read the contents of a given relative file path.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                Use this when you want to see what&#39;s inside a file.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                &#34;&#34;&#34;</span>,
+</span></span><span style=display:flex><span>            parameters: schema
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> .<span style=color:#66d9ef>init</span>(function: function)
+</span></span><span style=display:flex><span>    }()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> exec: (Data?) -&gt; String = { input <span style=color:#66d9ef>in</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>guard</span> <span style=color:#66d9ef>let</span> path = input.asPath(defaultPath: <span style=color:#66d9ef>nil</span>) <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;&lt;error&gt; Invalid JSON arguments&#34;</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> ReadFile.readFile(atPath: path)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Each tool has three parts:</p><ol><li><strong>Name</strong>: What the tool is called.</li><li><strong>Description</strong>: Instructions for the LLM on when to use it.</li><li><strong>Execution</strong>: The actual Swift function that does the work.</li></ol><p>Given that description, the model can return a call such as <code>read_file</code> with the path <code>foo.txt</code>. We have described the tools, but Nimbo still needs code to execute the calls.</p><img src=https://gioscalzo.com/images/blog/nimbo/nimbo-3.png alt="Nimbo Basic" class=img-frame><h2 id=step-3-execute-tool-calls>Step 3: Execute tool calls</h2><p>The model can return a text answer or request one or more tools. A text answer ends the loop. A tool request keeps it running.</p><p>Our agent needs to detect tool calls and execute them (<a href=https://github.com/gscalzo/Nimbo/blob/main/Sources/NimboCLI/Agent.swift>Agent.swift</a>):</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-swift data-lang=swift><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>respond</span>(<span style=color:#66d9ef>_</span> text: String) async -&gt; String {
+</span></span><span style=display:flex><span>    history.append(.<span style=color:#66d9ef>init</span>(role: .user, content: .text(text)))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>do</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> <span style=color:#66d9ef>_</span> <span style=color:#66d9ef>in</span> <span style=color:#ae81ff>0.</span>.&lt;Agent.maxToolIterations {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>let</span> response = <span style=color:#66d9ef>try</span> await requestCompletion()
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>let</span> assistantMessage = <span style=color:#66d9ef>try</span> firstAssistantMessage(from: response)
+</span></span><span style=display:flex><span>            appendAssistantMessage(assistantMessage)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// Check if the model wants to use tools</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> <span style=color:#66d9ef>let</span> calls = assistantMessage.toolCalls, <span style=color:#f92672>!</span>calls.isEmpty {
+</span></span><span style=display:flex><span>                executeToolCalls(calls)
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>continue</span>  <span style=color:#75715e>// Loop back and ask the model again</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// No tools requested, we have our answer!</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> assistantMessage.content ?? <span style=color:#e6db74>&#34;&#34;</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>throw</span> AgentError.toolIterationLimitReached
+</span></span><span style=display:flex><span>    } <span style=color:#66d9ef>catch</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;&lt;error&gt; </span><span style=color:#e6db74>\(</span>error.localizedDescription<span style=color:#e6db74>)</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><code>maxToolIterations</code> prevents the agent from looping forever.</p><p>The <code>executeToolCalls</code> method runs each requested tool:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-swift data-lang=swift><span style=display:flex><span><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>func</span> <span style=color:#a6e22e>executeToolCalls</span>(<span style=color:#66d9ef>_</span> calls: [ToolCall]) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> call <span style=color:#66d9ef>in</span> calls {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> toolMessage = perform(call)
+</span></span><span style=display:flex><span>        history.append(toolMessage)  <span style=color:#75715e>// Add result to history!</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>func</span> <span style=color:#a6e22e>perform</span>(<span style=color:#66d9ef>_</span> call: ToolCall) -&gt; ChatCompletionParameters.Message {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> toolName = call.function.name ?? <span style=color:#e6db74>&#34;&lt;nil&gt;&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> rawArgs = call.function.arguments
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>&#34;tool: </span><span style=color:#e6db74>\(</span>toolName<span style=color:#e6db74>)</span><span style=color:#e6db74>(</span><span style=color:#e6db74>\(</span>rawArgs<span style=color:#e6db74>)</span><span style=color:#e6db74>)&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> result = {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#66d9ef>let</span> tool = tools.first(<span style=color:#66d9ef>where</span>: { $0.name == toolName }) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> tool.exec(rawArgs.data(using: .utf8))
+</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;&lt;error&gt; Unknown tool: </span><span style=color:#e6db74>\(</span>toolName<span style=color:#e6db74>)</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> .<span style=color:#66d9ef>init</span>(role: .tool, content: .text(result), toolCallID: call.id)
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>For each call, Nimbo:</p><ol><li>Find the matching tool by name.</li><li>Execute it with the provided arguments.</li><li>Package the result as a message.</li><li>Add it to the history.</li></ol><p>The model sees this result on the next iteration and can decide what to do next.</p><p>Nimbo can now execute <code>read_file</code> or <code>list_files</code> and capture the result. The next step is to return that result to the model so it can choose another tool.</p><img src=https://gioscalzo.com/images/blog/nimbo/nimbo-4.png alt="Nimbo Basic" class=img-frame><h3 id=listfiles-and-editfile>ListFiles and EditFile</h3><p>Nimbo includes two more tools built with the same protocol:</p><p><strong><a href=https://github.com/gscalzo/Nimbo/blob/main/Sources/NimboCLI/Tools/ListFiles.swift>ListFiles</a></strong> - Navigate the directory structure:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-swift data-lang=swift><span style=display:flex><span><span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>ListFiles</span>: Tool {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> name = <span style=color:#e6db74>&#34;list_files&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> chatTool: ChatCompletionParameters.Tool = {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> function = ChatCompletionParameters.ChatFunction(
+</span></span><span style=display:flex><span>            name: <span style=color:#e6db74>&#34;list_files&#34;</span>,
+</span></span><span style=display:flex><span>            description: <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                List files and directories at a given relative path.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                Use this when you need to inspect the project structure.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                Defaults to the current working directory when no path is supplied.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                &#34;&#34;&#34;</span>,
+</span></span><span style=display:flex><span>            parameters: schema
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> .<span style=color:#66d9ef>init</span>(function: function)
+</span></span><span style=display:flex><span>    }()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> exec: (Data?) -&gt; String = { input <span style=color:#66d9ef>in</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> path = input.asPath(defaultPath: <span style=color:#e6db74>&#34;.&#34;</span>)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> ListFiles.listDirectory(atPath: path.asURL)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>The tool caps results at 200 entries to prevent overwhelming the context window. When a directory has more files, it shows a truncated list with a count of remaining items.</p><p><strong><a href=https://github.com/gscalzo/Nimbo/blob/main/Sources/NimboCLI/Tools/EditFile.swift>EditFile</a></strong> - Make surgical changes to files:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-swift data-lang=swift><span style=display:flex><span><span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>EditFile</span>: Tool {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> name = <span style=color:#e6db74>&#34;edit_file&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> chatTool: ChatCompletionParameters.Tool = {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> function = ChatCompletionParameters.ChatFunction(
+</span></span><span style=display:flex><span>            name: <span style=color:#e6db74>&#34;edit_file&#34;</span>,
+</span></span><span style=display:flex><span>            description: <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                Make edits to a text file by replacing an exact match of `old_str` with `new_str`.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                The replacement must be unique and `old_str` must differ from `new_str`.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                Creates the file when it does not exist and `old_str` is empty.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                &#34;&#34;&#34;</span>,
+</span></span><span style=display:flex><span>            parameters: schema  <span style=color:#75715e>// Expects: path, old_str, new_str</span>
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> .<span style=color:#66d9ef>init</span>(function: function)
+</span></span><span style=display:flex><span>    }()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> exec: (Data?) -&gt; String = { data <span style=color:#66d9ef>in</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> arguments = <span style=color:#66d9ef>try</span>? JSONDecoder().decode(Arguments.<span style=color:#66d9ef>self</span>, from: data)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> EditFile.process(arguments)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><code>EditFile</code>:</p><ul><li><strong>Creates new files</strong> when <code>old_str</code> is empty.</li><li><strong>Updates existing files</strong> by replacing exact matches.</li><li><strong>Validates uniqueness</strong>: <code>old_str</code> must match exactly once in the file.</li><li><strong>Rejects no-op edits</strong>: <code>old_str</code> and <code>new_str</code> must be different.</li></ul><p>This design forces the agent to be precise. It can&rsquo;t make ambiguous edits or accidentally replace the wrong text. If the pattern matches multiple times, the tool returns an error asking the model to be more specific.</p><p>Together, <code>ListFiles</code>, <code>ReadFile</code> and <code>EditFile</code> let the agent explore and modify a codebase. The model chooses the order from their descriptions.</p><h2 id=step-4-feed-results-back>Step 4: Feed results back</h2><p>Every tool call adds to the history:</p><pre tabindex=0><code>User: &#34;Can you check what&#39;s in the src folder?&#34;
+→ History grows by 1 message
+
+Agent: (calls list_files tool)
+→ History grows by 1 message (the tool call)
+
+Tool result: [long list of files]
+→ History grows by 1 message (the result)
+
+Agent: &#34;Sure! The src folder contains...&#34;
+→ History grows by 1 message (the response)
+</code></pre><p>One request has already added four messages. Reading a 500-line file, editing several files and repeating the loop twenty times consumes the context quickly.
+That is why the <a href=https://github.com/gscalzo/Nimbo/blob/main/Sources/NimboCLI/Tools/ReadFile.swift>ReadFile tool</a> caps file contents at 100KB:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-swift data-lang=swift><span style=display:flex><span><span style=color:#66d9ef>let</span> capped = fileData.<span style=color:#66d9ef>prefix</span>(<span style=color:#ae81ff>100_000</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> <span style=color:#66d9ef>let</span> text = String(data: capped, encoding: .utf8) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> text
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>The cap leaves the model enough context to work without allowing one file to consume the whole window.</p><h2 id=step-5-put-the-loop-together>Step 5: Put the loop together</h2><p>Here is one complete interaction:</p><p><strong>User types:</strong> <code>"Create a hello.txt file with the content 'Hello, Nimbo!'"</code></p><ol><li><strong>Input is added to history</strong> - <code>history.append(userMessage)</code></li><li><strong>Agent calls LLM</strong> - Sends entire history with tool definitions.</li><li><strong>LLM responds</strong> - &ldquo;I&rsquo;ll use the <code>edit_file</code> tool.&rdquo;</li><li><strong>Agent executes tool</strong> - Creates the file.</li><li><strong>Tool result added to history</strong> - <code>"&lt;success> File created"</code></li><li><strong>Agent calls LLM again</strong> - With the updated history.</li><li><strong>LLM responds</strong> - &ldquo;Done! I created hello.txt with your message.&rdquo;</li><li><strong>User sees response</strong> - The loop ends.</li></ol><p>We did not encode rules for when to use each tool. Their descriptions gave the model enough information to choose a sequence.</p><p>That is the behaviour people experience as an agent: the model chains tools, reads errors and adjusts its next request.</p><p>At this point Nimbo can:</p><ul><li>Chat with users.</li><li>Understand when to use tools.</li><li>Execute tools and get results.</li><li>Chain multiple tool calls together.</li><li>Loop until the task is complete.</li></ul><img src=https://gioscalzo.com/images/blog/nimbo/nimbo-5.png alt="Nimbo Basic" class=img-frame><h2 id=limits-of-the-example>Limits of the example</h2><p>Nimbo is educational. A production agent needs stricter limits and better context management.</p><h3 id=limit-the-loop>Limit the loop</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-swift data-lang=swift><span style=display:flex><span><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>let</span> maxToolIterations = <span style=color:#ae81ff>8</span>
+</span></span></code></pre></div><p>Nimbo limits iterations to prevent an infinite loop. Production systems also use measures such as:</p><ul><li>Token budgets per conversation.</li><li>Rate limiting on tool calls.</li><li>Sandboxing for dangerous operations.</li></ul><h3 id=return-errors-to-the-model>Return errors to the model</h3><p>The tools return <code>&lt;error></code> strings in the same channel as successful results:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-swift data-lang=swift><span style=display:flex><span><span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;&lt;error&gt; Could not read file at path: </span><span style=color:#e6db74>\(</span>path<span style=color:#e6db74>)</span><span style=color:#e6db74>&#34;</span>
+</span></span></code></pre></div><p>The model can then try another path or ask the user for clarification.</p><h3 id=manage-context>Manage context</h3><p>Production agents may use:</p><ul><li><strong>Summarization</strong> - Compress old messages.</li><li><strong>Selective forgetting</strong> - Drop less important context.</li><li><strong>RAG (retrieval-augmented generation)</strong> - Store context outside the conversation and retrieve only what is needed.</li></ul><h2 id=run-nimbo>Run Nimbo</h2><p>Clone the repository, set an API key and run it:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>git clone https://github.com/gscalzo/Nimbo.git
+</span></span><span style=display:flex><span>cd Nimbo
+</span></span><span style=display:flex><span>export OPENAI_API_KEY<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;your-key-here&#34;</span>
+</span></span><span style=display:flex><span>swift run
+</span></span></code></pre></div><p>The following examples show how the tool chain behaves.</p><h3 id=example-1-find-a-missing-todo>Example 1: Find a missing TODO</h3><p>First, ask Nimbo to find a note in an unfamiliar project:</p><pre tabindex=0><code>You: I think I left a TODO comment somewhere about refactoring the authentication.
+     Can you help me find it?
+
+tool: list_files({&#34;path&#34;: &#34;.&#34;})
+
+Nimbo: I&#39;ll search through your Swift files. Let me check the Sources directory.
+
+tool: list_files({&#34;path&#34;: &#34;Sources&#34;})
+
+tool: read_file({&#34;path&#34;: &#34;Sources/AuthManager.swift&#34;})
+
+Nimbo: Found it! In AuthManager.swift, line 42:
+
+      // TODO: Refactor this to use async/await instead of completion handlers
+      func login(email: String, password: String, completion: @escaping (Result&lt;User, Error&gt;) -&gt; Void) {
+          // ... old-style callback code ...
+      }
+
+      Looks like you wanted to modernize this to use Swift concurrency. Want me
+      to create a new version using async/await?
+
+You: Yes, please! Show me what that would look like.
+
+tool: edit_file({&#34;path&#34;: &#34;AuthManager_v2.swift&#34;, &#34;old_content&#34;: &#34;&#34;, &#34;new_content&#34;: &#34;...&#34;})
+
+Nimbo: Done! I created AuthManager_v2.swift with the modernized version:
+
+      func login(email: String, password: String) async throws -&gt; User {
+          // ... clean async/await code ...
+      }
+
+      Much cleaner! No more callback hell.
+</code></pre><p>The agent:</p><ol><li><strong>Understood vague intent</strong>: &ldquo;TODO about authentication&rdquo; is pretty fuzzy.</li><li><strong>Explored systematically</strong>: Listed directories, then files.</li><li><strong>Actually read the code</strong>: Found the specific TODO comment.</li><li><strong>Suggested a follow-up</strong>: Offered to create the refactored version.</li><li><strong>Made the requested edit</strong>: Wrote the async version after the user agreed.</li></ol><p>The loop did more than search for text. It used the surrounding code to propose a follow-up, then waited for approval before editing.</p><h3 id=example-2-build-a-small-game>Example 2: Build a small game</h3><p>The same three tools can also create and revise a file:</p><pre tabindex=0><code>You: Create a command-line game where I guess a random emoji.
+     Make it playful!
+
+tool: edit_file({&#34;path&#34;: &#34;EmojiGuesser.swift&#34;, &#34;old_content&#34;: &#34;&#34;, &#34;new_content&#34;: &#34;...&#34;})
+
+Nimbo: Created EmojiGuesser.swift! Here&#39;s your game:
+
+      import Foundation
+
+      let emojiSet = [&#34;🎸&#34;, &#34;🦖&#34;, &#34;🌮&#34;, &#34;🚀&#34;, &#34;🎨&#34;, &#34;🎪&#34;, &#34;🦄&#34;, &#34;🌈&#34;]
+
+      func playEmojiGame() {
+          let secret = emojiSet.randomElement()!
+          print(&#34;🎮 I&#39;m thinking of an emoji from this set: \(emojiSet.joined())&#34;)
+          print(&#34;Can you guess which one? Type it!&#34;)
+
+          while let guess = readLine() {
+              if guess == secret {
+                  print(&#34;🎉 YES! You found it! You&#39;re an emoji whisperer!&#34;)
+                  break
+              } else if emojiSet.contains(guess) {
+                  print(&#34;❌ Nope! Try again, detective!&#34;)
+              } else {
+                  print(&#34;🤔 That&#39;s not even in the set! Pick from: \(emojiSet.joined())&#34;)
+              }
+          }
+      }
+
+      playEmojiGame()
+
+      Try running it with: swift EmojiGuesser.swift
+
+You: This is fun, but can you add a hint system after 3 wrong guesses?
+
+tool: read_file({&#34;path&#34;: &#34;EmojiGuesser.swift&#34;})
+
+tool: edit_file({&#34;path&#34;: &#34;EmojiGuesser.swift&#34;, &#34;old_content&#34;: &#34;...&#34;, &#34;new_content&#34;: &#34;...&#34;})
+
+Nimbo: Updated! Now after 3 wrong guesses, it&#39;ll give you a hint like:
+      &#34;🕵️ Hint: It rhymes with... just kidding, emojis don&#39;t rhyme!
+       But it starts with 🎯 category: Fun!&#34;
+
+      The game tracks attempts and offers encouragement. Much better!
+</code></pre><p>This time the agent:</p><ol><li><strong>Got creative</strong>: Added personality to the game without being asked.</li><li><strong>Made good choices</strong>: Picked fun emojis, wrote playful strings.</li><li><strong>Understood iteration</strong>: Read the existing file before modifying.</li><li><strong>Applied the edit</strong>: Replaced the old game logic with the new version.</li><li><strong>Reported the change</strong>: Told the user what it had added.</li></ol><h3 id=what-the-examples-show>What the examples show</h3><p>The examples exercise three capabilities:</p><ol><li><strong>Tool Chaining</strong>: The agent decides which tools to use and in what order.</li><li><strong>Context awareness</strong>: It can use earlier tool results because they remain in the history.</li><li><strong>Model-generated choices</strong>: It can propose a next step that was not hard-coded into the loop.</li></ol><p>The application code does not contain the sequence. It only:</p><ul><li>Described what each tool does.</li><li>Gave the agent access to them.</li><li>Lets the language model choose the next call.</li></ul><img src=https://gioscalzo.com/images/blog/nimbo/nimbo-6.png alt="Nimbo Basic" class=img-frame>
+<img src=https://gioscalzo.com/images/blog/nimbo/nimbo-7.png alt="Nimbo Basic" class=img-frame><h2 id=the-whole-mechanism>The whole mechanism</h2><p>Nimbo reduces an agent to four ideas:</p><ol><li><strong>Agents are loops</strong>: Ask the model for the next action until it returns a final answer.</li><li><strong>Tools are descriptions</strong>: The LLM chooses, you execute.</li><li><strong>Context is precious</strong>: Every message costs tokens and attention.</li><li><strong>Sequences are model-generated</strong>: The loop does not hard-code every possible task.</li></ol><p>The entire Nimbo agent is less than 300 lines of Swift. Yet it can:</p><ul><li>Navigate file systems.</li><li>Read and modify files.</li><li>Chain multiple operations.</li><li>Handle errors gracefully.</li></ul><p>The model handles the open-ended choice of what to do next. The Swift code controls what it is allowed to do and when the loop must stop.</p><h2 id=next-steps>Next steps</h2><p>From here, you can:</p><ul><li><strong>Add more tools</strong>: Web search, API calls, database queries.</li><li><strong>Improve context management</strong>: Implement summarization or RAG.</li><li><strong>Build domain-specific agents</strong>: Focus on your particular use case.</li><li><strong>Create agent networks</strong>: Have multiple agents collaborate.</li></ul><p>The code is on <a href=https://github.com/gscalzo/Nimbo>GitHub</a>. Fork it, break it and improve it.</p><p>The commercial coding agents are much larger systems, but underneath them is the same pattern: a loop, a set of tools and a model choosing the next action.</p><hr><p>Further reading:</p><ul><li><a href=https://github.com/gscalzo/Nimbo>The full Nimbo source code</a></li><li><a href=https://docs.anthropic.com/en/docs/build-with-claude/tool-use>Anthropic&rsquo;s guide to tool use</a></li><li><a href=https://platform.openai.com/docs/guides/function-calling>OpenAI&rsquo;s function calling docs</a></li></ul></section><footer class="mt-12 flex flex-wrap"><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://gioscalzo.com/tags/swift>Swift</a><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://gioscalzo.com/tags/ai>AI</a><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://gioscalzo.com/tags/llm>LLM</a><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://gioscalzo.com/tags/coding-agents>Coding Agents</a><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://gioscalzo.com/tags/openai>OpenAI</a></footer></article></div></main><footer class=site-footer><div class=site-footer__inner><div><a class=site-footer__name href=https://gioscalzo.com/>Gio Scalzo</a><p>AI, mobile engineering, and the craft of growing people.</p></div><nav class=site-footer__links aria-label="Social links"><a href=https://linkedin.com/in/giordanoscalzo rel=me>LinkedIn</a><a href=https://github.com/gscalzo rel=me>GitHub</a><a href=https://medium.com/@giordanoscalzo rel=me>Medium</a><a href=https://stackoverflow.com/users/288379/giordano-scalzo rel=me>Stack Overflow</a><a href=https://x.com/giordanoscalzo rel=me>X</a><a href=https://gioscalzo.com/blog/index.xml>RSS</a></nav><p class=site-footer__copyright>© 2026 Gio Scalzo</p></div></footer></body></html>

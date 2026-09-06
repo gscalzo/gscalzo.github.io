@@ -1,0 +1,28 @@
+<!doctype html><html class=dark lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Ant Attack — how the pieces talk</title><link rel=stylesheet href=/css/figures.min.b3cbd169f613308f64644cca703f3d1afa900310f10da2196afb0c2d061c1e7b.css></head><body><div class=dia><pre class=mermaid>
+flowchart TB
+  KB["Keyboard<br>ROM 028E"] --> PL
+  PL["Player engine<br>80D3 / 8D9A"]
+  AN["Ant engine<br>8BD1"]
+  GR["Grenade<br>entity 7"]
+
+  PL <--> CITY
+  AN <--> CITY
+  GR <--> CITY
+  PL -.->|"position"| AN
+  PL -->|"throw"| GR
+  GR -->|"sleep = 255"| AN
+  AN -->|"bite"| MSG
+
+  CITY[("City map<br>C000 · 16 KB")]
+  CITY --> CULL["Cull &#8594; window<br>B180 · 672 B"]
+  CULL --> BLK["Stamp blocks"]
+  ENT[("Entities<br>B480 · 8 × 16 B")] --> SPR["Blit sprites"]
+  PL --> ENT
+  AN --> ENT
+  BLK --> BUF
+  SPR --> BUF
+  BUF[("Buffer<br>A000 · 4 KB")] -->|"LDIR"| SCR["Screen<br>4000"]
+  MSG["Message printer<br>8E02"] --> SCR
+  VAR[("Score &amp; ammo<br>B420")] -->|"code 7E"| MSG
+  GR --> VAR
+</pre></div><script src=https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js></script><script src=mermaid-init.js></script><script src=frame.js></script></body></html>
