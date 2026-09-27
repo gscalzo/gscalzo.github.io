@@ -6,6 +6,8 @@ description = "Talks and recordings from Giordano Scalzo on agentic coding, AI-a
 
 I speak about AI engineering, agentic coding, and growing teams. My talks draw on experiments with real software, including the parts that went wrong.
 
+[Photos from talks and events](/event-photos/).
+
 ## Topics I’m working on
 
 - Adopting coding agents while keeping ownership of the software they produce.

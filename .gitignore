@@ -1,5 +1,6 @@
 .cursor/
 .cursor/rules/ 
 public/
+resources/
 .DS_Store
 local-docs/

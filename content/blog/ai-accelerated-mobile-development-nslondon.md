@@ -45,3 +45,5 @@ Both experiments made me want to use agents more. They also made the work around
 That's familiar work if you've led a team. As a team grows, you can't personally write or follow every line of code. You rely on clear tasks, tests, and ways of checking that the pieces work together. I'm finding I need those same habits when I work with agents, even on a small app of my own.
 
 So when I try the next tool, I'll use the bill splitter again. I'll look at how much explaining and checking it needs, as well as how quickly it produces code. Getting an app built in an hour is exciting. Understanding what I've got at the end is what lets me do something useful with it.
+
+[Photos from this event](/event-photos/#nslondon-at-google-london--26-november-2025).

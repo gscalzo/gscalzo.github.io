@@ -102,3 +102,5 @@ The day ended with a fun raffle (I won a Google hat and two Google Cloud sports 
 ## My biggest takeaway
 
 Agents Dev Kit. Between Rachael’s talk and Sonali’s workshop, ADK shot to the top of my exploration list. Combined with BigQuery, it feels like the missing piece for a few monitoring and alerting ideas I’ve been sketching.
+
+[Photos from this event](/event-photos/#devfest-bletchley-park--15-november-2025).

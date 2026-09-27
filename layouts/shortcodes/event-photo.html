@@ -1,0 +1,12 @@
+{{- $source := resources.Get (.Get "src") -}}
+{{- if not $source -}}
+  {{- errorf "Missing event photo: %s" (.Get "src") -}}
+{{- else -}}
+  {{- $preview := $source.Resize "1200x jpg q85" -}}
+<figure class="event-photo">
+  <a href="{{ .Get "href" }}">
+    <img src="{{ $preview.RelPermalink }}" alt="{{ .Get "alt" }}" width="{{ $preview.Width }}" height="{{ $preview.Height }}" loading="lazy" decoding="async" />
+  </a>
+  <figcaption>{{ .Get "caption" }}</figcaption>
+</figure>
+{{- end -}}

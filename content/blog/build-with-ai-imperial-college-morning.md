@@ -40,3 +40,5 @@ I also liked Natalia's point about purpose. Coding is not the purpose. Leading a
 [Kasia Dutch](https://www.linkedin.com/in/k-dutch/)'s talk closed my morning. Kasia spoke openly about how tech is still not a friendly place for many women, and why support and networking can be survival tools rather than nice extras. Her advice was simple: show up and be present, accept that openness can make you stronger, ask what value you can bring, and celebrate wins. People connect with people, not perfection.
 
 I was there only for the morning, but I left in a better state of mind than the one I arrived with. Natalia's talk did most of that.
+
+[Photos from this event](/event-photos/#build-with-ai-imperial-college-london--14-march-2026).

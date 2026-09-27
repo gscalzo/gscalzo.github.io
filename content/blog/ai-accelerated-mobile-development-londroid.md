@@ -53,3 +53,5 @@ Android teams still have to ship across phones, wearables, cars, and other form 
 The full recording includes every prompt, tool, and trade-off I covered on stage.
 
 [Watch the talk on YouTube](https://youtu.be/ZjuPGTcUrnc).
+
+[Photos from this event](/event-photos/#londroid-at-newday--29-may-2025).

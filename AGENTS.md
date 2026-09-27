@@ -19,3 +19,12 @@ Follow the short, imperative style visible in recent commits (for example, `add 
 
 ## Content Workflow Tips
 Draft new pieces with `draft = true` until ready; publish by flipping to `false` and setting a future-friendly `date`. When adding media, place files in `static/images/` and reference them with absolute paths (`/images/...`). Use descriptive alt text to maintain accessibility. After publishing, verify the GitHub Pages deployment reflects the latest `public/` snapshot.
+
+## Event photos workflow
+
+- When adding an event to `content/speaking.md` or creating a blog post, check Giordano's Flickr albums for relevant photos, matching the event name, date, and venue. For posts unrelated to events, check whether any existing photos genuinely fit; do not force a photo connection.
+- When matching public photos exist, add or update the event's entry on `content/event-photos.md`, including a descriptive caption and a link to its Flickr album. Add a discreet link from the relevant blog post when useful. Keep Speaking focused on talks, with one link to the separate event-photo page rather than embedding galleries there.
+- Gallery previews live in `assets/event-photos/` and use the `event-photo` shortcode, which produces resized images with alt text and visible captions. Use stable, descriptive filenames and link each preview to its Flickr photo.
+- Check Flickr titles, descriptions, and tags for useful event context. Name Giordano in captions only when he is pictured; credit him as photographer only when authorship is known. Preserve existing credits and avoid duplicate uploads.
+- Preserve photo privacy. Never link or embed private photos, and keep Resegone private. An event or post update alone does not authorize changing Flickr visibility or publishing new photos.
+- If there are no matching photos, or Flickr is unavailable, record that in the work summary and continue the content update without inventing images or claiming the photo check succeeded. Build the site and verify the photo page and links before publishing.
