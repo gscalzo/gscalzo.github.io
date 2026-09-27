@@ -16,14 +16,6 @@ I speak about AI engineering, agentic coding, and growing teams. My talks draw o
 
 ## Upcoming talks
 
-### LDX3 New York, 15–16 September 2026
-
-**Tackling the junior developer crisis in the age of AI**
-
-How do we help junior engineers build judgement when AI can produce convincing code before they understand it? I'll share mentoring exercises that develop debugging, explanation, and critical thinking while keeping AI in the workflow.
-
-[Conference agenda and session details](https://leaddev.com/leaddev-new-york/agenda/)
-
 ### agentic codingCon, Berlin, 7–9 October 2026
 
 **Just One More Prompt: Why Agentic Coding Hooks Us** · Keynote
@@ -33,6 +25,16 @@ The feature is almost done, so you ask for one more thing. Then another. This ke
 [Talk and speaker details](https://www.nextappcon.com/agentic-codingcon-new-speakers/gio-scalzo) · [Conference](https://www.nextappcon.com/agentic-coding-con)
 
 ## Recent talks and recordings
+
+### LDX3 New York, 15–16 September 2026
+
+**Tackling the junior developer crisis in the age of AI**
+
+How do we help junior engineers build judgement when AI can produce convincing code before they understand it? I shared mentoring exercises that develop debugging, explanation, and critical thinking while keeping AI in the workflow.
+
+[Conference agenda and session details](https://leaddev.com/leaddev-new-york/agenda/)
+
+Video coming soon.
 
 ### The Guardian, 2 September 2026
 
